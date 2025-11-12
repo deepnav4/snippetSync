@@ -1,0 +1,65 @@
+import express, { Application } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import rateLimit from 'express-rate-limit';
+
+// Routes
+import authRoutes from './routes/authRoutes';
+import snippetRoutes from './routes/snippetRoutes';
+import upvoteRoutes from './routes/upvoteRoutes';
+import commentRoutes from './routes/commentRoutes';
+
+// Middleware
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+
+export const createApp = (): Application => {
+  const app = express();
+
+  // Security middleware
+  app.use(helmet());
+
+  // CORS configuration
+  app.use(
+    cors({
+      origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+      credentials: true,
+    })
+  );
+
+  // Rate limiting
+  const limiter = rateLimit({
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'), // 15 minutes
+    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'),
+    message: 'Too many requests from this IP, please try again later.',
+  });
+  app.use('/api', limiter);
+
+  // Body parsing middleware
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser());
+
+  // Logging middleware
+  if (process.env.NODE_ENV !== 'production') {
+    app.use(morgan('dev'));
+  }
+
+  // Health check endpoint
+  app.get('/health', (_req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
+  // API routes
+  app.use('/api/auth', authRoutes);
+  app.use('/api/snippets', snippetRoutes);
+  app.use('/api/snippets', upvoteRoutes);
+  app.use('/api/snippets', commentRoutes);
+
+  // Error handling
+  app.use(notFoundHandler);
+  app.use(errorHandler);
+
+  return app;
+};

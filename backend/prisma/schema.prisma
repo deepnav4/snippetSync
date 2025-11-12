@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // Change to "postgresql" for production
+  url      = env("DATABASE_URL")
+}
+
+// User Model - Stores user information and authentication details
+model User {
+  id              String    @id @default(uuid())
+  username        String    @unique
+  email           String    @unique
+  passwordHash    String
+  profilePicture  String?   // Optional profile picture URL
+  bio             String?   // Optional user bio
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Relations
+  snippets        Snippet[] // Snippets created by this user
+  comments        Comment[] // Comments made by this user
+  upvotes         Upvote[]  // Upvotes given by this user
+  refreshTokens   RefreshToken[]
+  
+  @@map("users")
+}
+
+// RefreshToken Model - Stores refresh tokens for JWT authentication
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique @db.VarChar(500)
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// Snippet Model - Stores code snippets with visibility settings
+model Snippet {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text // Optional description of the snippet
+  language    String   // Programming language (e.g., "javascript", "python", "typescript")
+  code        String   @db.Text // The actual code content
+  visibility  Visibility @default(PUBLIC) // PUBLIC or PRIVATE
+  shareSlug   String   @unique @default(uuid()) // Unique slug for sharing private snippets
+  authorId    String
+  upvotesCount Int     @default(0) // Denormalized count for performance
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments    Comment[]
+  upvotes     Upvote[]
+  tags        Tag[]    @relation("SnippetTags")
+  
+  @@index([authorId])
+  @@index([visibility])
+  @@index([shareSlug])
+  @@index([createdAt])
+  @@map("snippets")
+}
+
+// Visibility Enum - Defines snippet visibility options
+enum Visibility {
+  PUBLIC
+  PRIVATE
+}
+
+// Comment Model - Stores comments on snippets
+model Comment {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  snippetId String
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  snippet   Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  @@index([snippetId])
+  @@index([authorId])
+  @@map("comments")
+}
+
+// Upvote Model - Tracks upvotes on snippets (one upvote per user per snippet)
+model Upvote {
+  id        String   @id @default(uuid())
+  snippetId String
+  userId    String
+  createdAt DateTime @default(now())
+  
+  // Relations
+  snippet   Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Unique constraint to prevent duplicate upvotes
+  @@unique([snippetId, userId])
+  @@index([snippetId])
+  @@index([userId])
+  @@map("upvotes")
+}
+
+// Tag Model - For categorizing snippets (optional feature for future)
+model Tag {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  snippets Snippet[] @relation("SnippetTags")
+  
+  @@map("tags")
+}

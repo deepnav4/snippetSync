@@ -1,0 +1,2630 @@
+% ============================================
+% SNIPPETSYNC PROJECT REPORT
+% A Comprehensive Code Snippet Management Platform
+% ============================================
+
+\documentclass[12pt,a4paper]{report}
+
+% ============================================
+% PACKAGES
+% ============================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% ============================================
+% PAGE SETUP
+% ============================================
+\geometry{
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+% ============================================
+% COLOR DEFINITIONS
+% ============================================
+\definecolor{primarycolor}{RGB}{0,123,255}
+\definecolor{secondarycolor}{RGB}{108,117,125}
+\definecolor{successcolor}{RGB}{40,167,69}
+\definecolor{codebackground}{RGB}{245,245,245}
+\definecolor{commentcolor}{RGB}{0,128,0}
+\definecolor{keywordcolor}{RGB}{0,0,255}
+\definecolor{stringcolor}{RGB}{163,21,21}
+
+% ============================================
+% CODE LISTING SETUP
+% ============================================
+\lstset{
+    backgroundcolor=\color{codebackground},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    commentstyle=\color{commentcolor}\itshape,
+    stringstyle=\color{stringcolor},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{black!30},
+    captionpos=b,
+    tabsize=2
+}
+
+% ============================================
+% HYPERLINK SETUP
+% ============================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primarycolor,
+    filecolor=primarycolor,
+    urlcolor=primarycolor,
+    citecolor=primarycolor,
+    pdftitle={SnippetSync Project Report},
+    pdfauthor={Your Name},
+    pdfsubject={Code Snippet Management Platform},
+    pdfkeywords={Code Snippets, VS Code Extension, React, Node.js}
+}
+
+% ============================================
+% HEADER AND FOOTER
+% ============================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{SnippetSync Project Report}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ============================================
+% TITLE FORMATTING
+% ============================================
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\color{primarycolor}}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{primarycolor}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{secondarycolor}}
+{\thesubsection}{1em}{}
+
+% ============================================
+% TIKZ LIBRARIES
+% ============================================
+\usetikzlibrary{shapes.geometric, arrows, positioning, shadows, calc}
+
+% Define styles for diagrams
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+\tikzstyle{database} = [cylinder, shape border rotate=90, aspect=0.25, minimum height=2cm, minimum width=2cm, draw=black, fill=green!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{component} = [rectangle, rounded corners, minimum width=4cm, minimum height=1.5cm, text centered, draw=black, fill=orange!20, drop shadow]
+
+% ============================================
+% DOCUMENT BEGIN
+% ============================================
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\bfseries SnippetSync\par}
+    \vspace{0.5cm}
+    {\Large A Comprehensive Code Snippet Management Platform\par}
+    \vspace{2cm}
+    
+    {\Large\itshape Project Report\par}
+    \vspace{3cm}
+    
+    {\large Submitted by:\par}
+    {\Large\bfseries Your Name\par}
+    \vspace{0.5cm}
+    
+    {\large Course: Full Stack Development\par}
+    \vspace{0.3cm}
+    {\large Institution: Your Institution\par}
+    \vspace{3cm}
+    
+    {\large Date: \today\par}
+    
+    \vfill
+    
+    {\large A comprehensive platform for managing, sharing, and syncing code snippets across multiple environments including web platform and VS Code extension.\par}
+    
+\end{titlepage}
+
+% ============================================
+% DECLARATION
+% ============================================
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+
+I hereby declare that this project report titled \textbf{"SnippetSync: A Comprehensive Code Snippet Management Platform"} is my own work and has been carried out under proper guidance. All the information presented in this report has been obtained through legitimate sources and properly referenced wherever applicable.
+
+\vspace{2cm}
+
+\noindent
+\begin{tabular}{@{}ll}
+Date: \today & \\[3cm]
+ & Signature \\
+ & (Your Name)
+\end{tabular}
+
+% ============================================
+% ACKNOWLEDGEMENT
+% ============================================
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+I would like to express my sincere gratitude to all those who have contributed to the successful completion of this project.
+
+First and foremost, I would like to thank my project guide for their invaluable guidance, continuous support, and encouragement throughout the development of this project. Their expertise and insights have been instrumental in shaping this work.
+
+I am grateful to the faculty members of the Computer Science department for providing the necessary resources and infrastructure that made this project possible.
+
+I would also like to acknowledge the open-source community for providing excellent tools and frameworks such as React, Node.js, Express, Prisma, and TypeScript, which formed the backbone of this project.
+
+Special thanks to my family and friends for their moral support and patience during the development phase.
+
+Lastly, I extend my appreciation to all the beta testers who provided valuable feedback that helped improve the platform's usability and functionality.
+
+\vspace{1cm}
+
+\begin{flushright}
+\textbf{Your Name}
+\end{flushright}
+
+% ============================================
+% ABSTRACT
+% ============================================
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\textbf{SnippetSync} is a comprehensive code snippet management platform designed to address the common challenges developers face in organizing, sharing, and accessing reusable code fragments. In modern software development, developers frequently encounter repetitive coding patterns and solutions that they wish to reuse across different projects. However, managing these snippets efficiently across multiple development environments remains a significant challenge.
+
+This project presents a full-stack solution that includes:
+
+\begin{itemize}
+    \item A \textbf{web-based platform} built with React and TypeScript for creating, browsing, and managing code snippets
+    \item A \textbf{RESTful API backend} powered by Node.js, Express, and Prisma ORM with MySQL database
+    \item A \textbf{VS Code extension} that integrates seamlessly with the developer's workflow, enabling instant import and export of snippets
+\end{itemize}
+
+The platform supports essential features including user authentication, public and private snippets, tagging system, search and filtering capabilities, upvoting mechanism, commenting system, and real-time synchronization between the web platform and VS Code editor.
+
+The system architecture follows modern best practices including JWT-based authentication, RESTful API design, responsive UI/UX, type-safe development with TypeScript, and secure data handling. Performance optimizations and error handling mechanisms ensure a smooth user experience.
+
+This report provides comprehensive documentation of the problem analysis, system design, implementation details, testing procedures, and deployment strategies. It also discusses the challenges encountered during development and the solutions implemented to overcome them.
+
+\textbf{Keywords:} Code Snippets, VS Code Extension, React, Node.js, TypeScript, REST API, Full Stack Development, Developer Tools
+
+% ============================================
+% TABLE OF CONTENTS
+% ============================================
+\tableofcontents
+
+% ============================================
+% LIST OF FIGURES
+% ============================================
+\listoffigures
+
+% ============================================
+% LIST OF TABLES
+% ============================================
+\listoftables
+
+% ============================================
+% CHAPTER 1: INTRODUCTION
+% ============================================
+\chapter{Introduction}
+
+\section{Overview}
+
+In the modern software development landscape, developers constantly encounter recurring patterns, utility functions, and code solutions that they wish to reuse across different projects. Code snippets—small, reusable pieces of code—have become an essential part of a developer's toolkit. However, managing these snippets efficiently across multiple projects, environments, and team members poses significant challenges.
+
+\textbf{SnippetSync} addresses these challenges by providing a comprehensive, integrated platform for managing code snippets. The platform consists of three major components:
+
+\begin{enumerate}
+    \item \textbf{Web Application}: A full-featured React-based frontend for browsing, creating, and managing snippets
+    \item \textbf{Backend API}: A robust Node.js/Express server with MySQL database for data persistence
+    \item \textbf{VS Code Extension}: A seamless integration with Visual Studio Code for instant snippet access
+\end{enumerate}
+
+\section{Motivation}
+
+The motivation behind developing SnippetSync stems from several pain points commonly experienced by developers:
+
+\subsection{Problem 1: Scattered Snippet Storage}
+Developers often store code snippets in various locations—text files, note-taking apps, emails, or rely on memory. This fragmentation makes it difficult to:
+\begin{itemize}
+    \item Find snippets when needed
+    \item Maintain version history
+    \item Share with team members
+    \item Access across different machines
+\end{itemize}
+
+\subsection{Problem 2: Context Switching}
+When developers need a snippet, they must:
+\begin{itemize}
+    \item Leave their IDE
+    \item Search through documentation or personal notes
+    \item Copy the code manually
+    \item Return to the IDE
+    \item Paste and adapt the code
+\end{itemize}
+
+This context switching breaks the development flow and reduces productivity.
+
+\subsection{Problem 3: Limited Sharing Capabilities}
+Existing solutions lack robust features for:
+\begin{itemize}
+    \item Secure sharing with specific users or teams
+    \item Public vs. private snippet management
+    \item Community feedback through comments and upvotes
+    \item Version control and snippet evolution
+\end{itemize}
+
+\subsection{Problem 4: IDE Integration Gap}
+Most snippet management tools are web-only, requiring developers to:
+\begin{itemize}
+    \item Manually copy-paste between browser and IDE
+    \item Maintain separate snippet collections in IDE
+    \item Lack synchronization between different environments
+\end{itemize}
+
+\section{Objectives}
+
+The primary objectives of the SnippetSync project are:
+
+\begin{enumerate}
+    \item \textbf{Centralized Management}: Provide a single, unified platform for storing and organizing all code snippets
+    
+    \item \textbf{Seamless IDE Integration}: Enable developers to import and export snippets directly from VS Code without leaving their development environment
+    
+    \item \textbf{Collaborative Features}: Implement social features like commenting, upvoting, and public sharing to foster community learning
+    
+    \item \textbf{Secure Access Control}: Implement robust authentication and authorization to protect private snippets
+    
+    \item \textbf{Rich Search and Filtering}: Provide powerful search capabilities by language, tags, and content
+    
+    \item \textbf{Modern Technology Stack}: Utilize contemporary web technologies for performance, scalability, and maintainability
+    
+    \item \textbf{User-Friendly Interface}: Design an intuitive UI that requires minimal learning curve
+    
+    \item \textbf{Cross-Platform Compatibility}: Ensure the platform works across different operating systems and browsers
+\end{enumerate}
+
+\section{Scope}
+
+\subsection{In Scope}
+
+The SnippetSync platform includes the following features and functionalities:
+
+\begin{itemize}
+    \item \textbf{User Management}
+    \begin{itemize}
+        \item User registration and authentication
+        \item JWT-based secure session management
+        \item Profile management
+    \end{itemize}
+    
+    \item \textbf{Snippet Management}
+    \begin{itemize}
+        \item Create, read, update, and delete (CRUD) operations
+        \item Public and private visibility options
+        \item Multi-language support
+        \item Syntax highlighting
+        \item Tag-based categorization
+    \end{itemize}
+    
+    \item \textbf{Social Features}
+    \begin{itemize}
+        \item Upvoting system
+        \item Commenting on snippets
+        \item View snippet authors and contributors
+    \end{itemize}
+    
+    \item \textbf{Search and Discovery}
+    \begin{itemize}
+        \item Search by title, description, and content
+        \item Filter by programming language
+        \item Filter by tags
+        \item Browse public snippets
+    \end{itemize}
+    
+    \item \textbf{VS Code Integration}
+    \begin{itemize}
+        \item Authentication within VS Code
+        \item Import snippets using share slug
+        \item Export selected code as snippets
+        \item Browse user's snippet library
+        \item Direct code insertion into editor
+    \end{itemize}
+    
+    \item \textbf{API}
+    \begin{itemize}
+        \item RESTful API endpoints
+        \item Comprehensive error handling
+        \item Request validation
+        \item Rate limiting
+    \end{itemize}
+\end{itemize}
+
+\subsection{Out of Scope}
+
+The following features are not included in the current version:
+
+\begin{itemize}
+    \item Real-time collaborative editing
+    \item Mobile application
+    \item Integration with other IDEs (IntelliJ, Eclipse, etc.)
+    \item Git version control integration
+    \item Snippet execution environment
+    \item AI-powered snippet suggestions
+    \item Team/organization management
+    \item Advanced analytics and usage statistics
+\end{itemize}
+
+\section{Report Organization}
+
+This report is organized into the following chapters:
+
+\begin{description}
+    \item[Chapter 1: Introduction] Provides an overview of the project, motivation, objectives, and scope
+    
+    \item[Chapter 2: Literature Review] Discusses existing solutions, technologies used, and related work
+    
+    \item[Chapter 3: System Analysis] Details the requirements analysis, feasibility study, and system specifications
+    
+    \item[Chapter 4: System Design] Presents the architecture, database schema, API design, and UI/UX mockups
+    
+    \item[Chapter 5: Implementation] Describes the development process, coding standards, and technology stack
+    
+    \item[Chapter 6: Results and Discussion] Presents the final product, features demonstration, and performance analysis
+    
+    \item[Chapter 7: Conclusion and Future Work] Summarizes achievements, limitations, and potential enhancements
+\end{description}
+
+\section{Project Workflow Overview}
+
+The development of SnippetSync followed a systematic approach from problem identification to final implementation. The following diagram illustrates the complete project workflow:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2.5cm, auto]
+    % Nodes
+    \node[process] (problem) {Problem\\Identification};
+    \node[process, right of=problem] (analysis) {Requirements\\Analysis};
+    \node[process, right of=analysis] (design) {System\\Design};
+    \node[process, below of=design] (implement) {Implementation};
+    \node[process, left of=implement] (testing) {Testing \&\\Validation};
+    \node[process, left of=testing] (deploy) {Deployment \&\\Documentation};
+    
+    % Arrows
+    \draw[arrow] (problem) -- (analysis);
+    \draw[arrow] (analysis) -- (design);
+    \draw[arrow] (design) -- (implement);
+    \draw[arrow] (implement) -- (testing);
+    \draw[arrow] (testing) -- (deploy);
+    
+    % Feedback loops
+    \draw[arrow, dashed, bend left=45] (testing) to node[above] {Fixes} (implement);
+    \draw[arrow, dashed, bend left=45] (implement) to node[above] {Refinement} (design);
+    
+\end{tikzpicture}
+\caption{Project development workflow}
+\label{fig:workflow}
+\end{figure}
+
+\section{System Components Overview}
+
+SnippetSync consists of three interconnected components that work together to provide a seamless experience:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+    % Components
+    \node[component] (web) {Web Application\\
+        \rule{4cm}{0.4pt}\\
+        \small React + TypeScript\\
+        \small User Interface\\
+        \small Browser-based Access};
+    
+    \node[component, right=3cm of web] (backend) {Backend API\\
+        \rule{4cm}{0.4pt}\\
+        \small Node.js + Express\\
+        \small Business Logic\\
+        \small Data Management};
+    
+    \node[component, below=2cm of web, xshift=3cm] (extension) {VS Code Extension\\
+        \rule{4cm}{0.4pt}\\
+        \small TypeScript\\
+        \small IDE Integration\\
+        \small Developer Workflow};
+    
+    \node[database, right=3cm of backend] (db) {MySQL\\Database};
+    
+    % Connections
+    \draw[arrow, <->] (web) -- node[above] {REST API} (backend);
+    \draw[arrow, <->] (extension) -- node[below, sloped] {REST API} (backend);
+    \draw[arrow, <->] (backend) -- node[above] {Prisma ORM} (db);
+    
+\end{tikzpicture}
+\caption{SnippetSync system components}
+\label{fig:components}
+\end{figure}
+
+% ============================================
+% CHAPTER 2: LITERATURE REVIEW
+% ============================================
+\chapter{Literature Review}
+
+\section{Introduction}
+
+This chapter reviews existing code snippet management solutions, analyzes the technology landscape, and identifies gaps that SnippetSync aims to fill. We examine both commercial and open-source platforms, as well as the fundamental technologies that enable modern web applications.
+
+\section{Existing Code Snippet Management Solutions}
+
+\subsection{GitHub Gist}
+
+\textbf{GitHub Gist} is one of the most popular snippet-sharing platforms, offering:
+
+\begin{itemize}
+    \item \textbf{Strengths}:
+    \begin{itemize}
+        \item Git-based version control
+        \item Public and private gists
+        \item Embedded gists in web pages
+        \item Large user community
+        \item Integration with GitHub ecosystem
+    \end{itemize}
+    
+    \item \textbf{Limitations}:
+    \begin{itemize}
+        \item No built-in IDE integration (requires third-party extensions)
+        \item Limited search and filtering capabilities
+        \item No upvoting or commenting system
+        \item Primarily designed for code sharing, not personal snippet management
+        \item Cluttered interface for managing multiple snippets
+    \end{itemize}
+\end{itemize}
+
+\subsection{StackOverflow and Code Q\&A Platforms}
+
+Platforms like \textbf{StackOverflow} serve as community-driven code repositories:
+
+\begin{itemize}
+    \item \textbf{Strengths}:
+    \begin{itemize}
+        \item Massive community and knowledge base
+        \item Voting system ensures quality
+        \item Excellent search engine optimization
+        \item Discussion threads provide context
+    \end{itemize}
+    
+    \item \textbf{Limitations}:
+    \begin{itemize}
+        \item Not designed for personal snippet management
+        \item Cannot mark snippets as private
+        \item No IDE integration
+        \item Question-answer format not ideal for snippet storage
+    \end{itemize}
+\end{itemize}
+
+\subsection{Pastebin and Similar Services}
+
+\textbf{Pastebin}, \textbf{Hastebin}, and similar services offer quick code sharing:
+
+\begin{itemize}
+    \item \textbf{Strengths}:
+    \begin{itemize}
+        \item Simple, fast interface
+        \item Syntax highlighting
+        \item Expiration options
+        \item No registration required
+    \end{itemize}
+    
+    \item \textbf{Limitations}:
+    \begin{itemize}
+        \item Temporary storage focus
+        \item No user accounts or organization
+        \item No collaboration features
+        \item No IDE integration
+        \item Limited to text sharing
+    \end{itemize}
+\end{itemize}
+
+\subsection{IDE Built-in Snippet Managers}
+
+Most IDEs include native snippet functionality:
+
+\begin{itemize}
+    \item \textbf{VS Code User Snippets}:
+    \begin{itemize}
+        \item Local JSON-based storage
+        \item IntelliSense integration
+        \item No cloud synchronization by default
+        \item Limited to single machine
+    \end{itemize}
+    
+    \item \textbf{Limitations}:
+    \begin{itemize}
+        \item Not accessible outside the IDE
+        \item No web interface
+        \item No sharing capabilities
+        \item Manual synchronization required
+    \end{itemize}
+\end{itemize}
+
+\subsection{Cacher and Snippet Management Apps}
+
+Dedicated snippet managers like \textbf{Cacher}, \textbf{SnippetsLab}, and \textbf{massCode}:
+
+\begin{itemize}
+    \item \textbf{Strengths}:
+    \begin{itemize}
+        \item Designed specifically for snippet management
+        \item IDE plugins available
+        \item Team collaboration features (paid)
+        \item Tags and organization
+    \end{itemize}
+    
+    \item \textbf{Limitations}:
+    \begin{itemize}
+        \item Often requires paid subscription
+        \item Closed-source proprietary platforms
+        \item Limited free tiers
+        \item Not integrated with development workflow
+        \item Desktop application required
+    \end{itemize}
+\end{itemize}
+
+\section{Technology Background}
+
+\subsection{Frontend Technologies}
+
+\subsubsection{React}
+
+\textbf{React} (developed by Meta) is a declarative JavaScript library for building user interfaces:
+
+\begin{itemize}
+    \item \textbf{Component-Based Architecture}: Encapsulates UI logic into reusable components
+    \item \textbf{Virtual DOM}: Optimizes rendering performance by minimizing direct DOM manipulations
+    \item \textbf{Hooks}: Modern state management with \texttt{useState}, \texttt{useEffect}, \texttt{useContext}
+    \item \textbf{Ecosystem}: Vast ecosystem of libraries (React Router, React Query, etc.)
+\end{itemize}
+
+React is chosen for SnippetSync due to its:
+\begin{itemize}
+    \item Excellent TypeScript support
+    \item Strong community and documentation
+    \item Performance optimizations
+    \item Component reusability
+\end{itemize}
+
+\subsubsection{TypeScript}
+
+\textbf{TypeScript} is a superset of JavaScript that adds static typing:
+
+\begin{itemize}
+    \item \textbf{Type Safety}: Catch errors at compile-time rather than runtime
+    \item \textbf{IntelliSense}: Enhanced IDE autocompletion
+    \item \textbf{Refactoring}: Safer code refactoring with type checking
+    \item \textbf{Documentation}: Types serve as inline documentation
+\end{itemize}
+
+\subsubsection{Vite}
+
+\textbf{Vite} is a modern frontend build tool:
+
+\begin{itemize}
+    \item \textbf{Fast Development}: Uses native ES modules for instant server start
+    \item \textbf{Hot Module Replacement}: Lightning-fast HMR
+    \item \textbf{Optimized Build}: Rollup-based production builds
+    \item \textbf{Plugin Ecosystem}: Rich plugin system
+\end{itemize}
+
+\subsection{Backend Technologies}
+
+\subsubsection{Node.js}
+
+\textbf{Node.js} is a JavaScript runtime built on Chrome's V8 engine:
+
+\begin{itemize}
+    \item \textbf{Event-Driven}: Non-blocking I/O model for scalability
+    \item \textbf{Single Language}: JavaScript/TypeScript on both frontend and backend
+    \item \textbf{npm Ecosystem}: Largest package repository
+    \item \textbf{Performance}: Excellent for I/O-heavy applications
+\end{itemize}
+
+\subsubsection{Express.js}
+
+\textbf{Express} is a minimal and flexible Node.js web application framework:
+
+\begin{itemize}
+    \item \textbf{Middleware}: Robust middleware system for request processing
+    \item \textbf{Routing}: Simple and powerful routing mechanism
+    \item \textbf{HTTP Utilities}: Simplified HTTP request/response handling
+    \item \textbf{Template Engines}: Support for various view engines
+\end{itemize}
+
+\subsubsection{Prisma ORM}
+
+\textbf{Prisma} is a next-generation ORM for Node.js and TypeScript:
+
+\begin{itemize}
+    \item \textbf{Type-Safe}: Auto-generated TypeScript types
+    \item \textbf{Schema Migration}: Declarative schema with migration tools
+    \item \textbf{Query Builder}: Intuitive and type-safe query API
+    \item \textbf{Multi-Database}: Supports MySQL, PostgreSQL, SQLite, etc.
+\end{itemize}
+
+Example Prisma schema:
+\begin{lstlisting}[language=JavaScript]
+model Snippet {
+  id          Int       @id @default(autoincrement())
+  title       String
+  code        String    @db.Text
+  language    String
+  visibility  String
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  tags        Tag[]
+  comments    Comment[]
+  upvotes     Upvote[]
+  createdAt   DateTime  @default(now())
+}
+\end{lstlisting}
+
+\subsection{Database Technology}
+
+\subsubsection{MySQL}
+
+\textbf{MySQL} is an open-source relational database management system:
+
+\begin{itemize}
+    \item \textbf{ACID Compliance}: Ensures data integrity
+    \item \textbf{Performance}: Optimized for read-heavy workloads
+    \item \textbf{Scalability}: Supports replication and clustering
+    \item \textbf{Maturity}: Decades of production use
+\end{itemize}
+
+\subsection{Authentication Technology}
+
+\subsubsection{JSON Web Tokens (JWT)}
+
+\textbf{JWT} is an open standard (RFC 7519) for secure token-based authentication:
+
+\begin{itemize}
+    \item \textbf{Stateless}: No server-side session storage required
+    \item \textbf{Self-Contained}: Token contains all user information
+    \item \textbf{Compact}: URL-safe and easily transmitted
+    \item \textbf{Secure}: Digitally signed to prevent tampering
+\end{itemize}
+
+JWT structure:
+\begin{verbatim}
+Header.Payload.Signature
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJ1c2VySWQiOjEyMywiaWF0IjoxNjE2MjM5MDIyfQ.
+SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+\end{verbatim}
+
+\subsection{VS Code Extension API}
+
+The \textbf{VS Code Extension API} enables third-party integrations:
+
+\begin{itemize}
+    \item \textbf{Commands}: Register custom commands in command palette
+    \item \textbf{Secret Storage}: Secure credential storage
+    \item \textbf{Webview}: Embedded web content within VS Code
+    \item \textbf{TextEditor}: Programmatic text manipulation
+    \item \textbf{Language Features}: IntelliSense, diagnostics, formatting
+\end{itemize}
+
+\section{Gap Analysis}
+
+Based on the literature review, the following gaps exist in current solutions:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Gap} & \textbf{SnippetSync Solution} \\
+\hline
+Lack of IDE integration & Native VS Code extension with seamless import/export \\
+\hline
+No unified platform & Web app + API + VS Code extension working together \\
+\hline
+Limited collaboration & Upvoting, commenting, and public sharing features \\
+\hline
+Poor organization & Tag-based system with search and filtering \\
+\hline
+Expensive solutions & Free and open-source platform \\
+\hline
+No share links & Unique share slugs for easy snippet sharing \\
+\hline
+Complex interfaces & Simple, intuitive UI with minimal learning curve \\
+\hline
+\end{tabular}
+\caption{Gap analysis and SnippetSync solutions}
+\label{tab:gap-analysis}
+\end{table}
+
+\section{Summary}
+
+The literature review reveals that while numerous snippet management solutions exist, each has significant limitations. SnippetSync combines the best features from existing platforms while addressing their shortcomings through:
+
+\begin{itemize}
+    \item Deep IDE integration via VS Code extension
+    \item Modern, type-safe technology stack
+    \item Social and collaborative features
+    \item Free and accessible platform
+    \item Comprehensive API for future extensibility
+\end{itemize}
+
+\subsection{Technology Stack Comparison}
+
+The following diagram compares different technology choices for each layer of the application:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    % Frontend Options
+    \node[component, fill=blue!30] (react) {React};
+    \node[process, right=0.5cm of react] (vue) {Vue.js};
+    \node[process, right=0.5cm of vue] (angular) {Angular};
+    \node[above=0.2cm of react] {\textbf{Frontend}};
+    
+    % Backend Options
+    \node[component, fill=blue!30, below=1.5cm of react] (express) {Express};
+    \node[process, right=0.5cm of express] (nestjs) {NestJS};
+    \node[process, right=0.5cm of nestjs] (fastify) {Fastify};
+    \node[above=0.2cm of express] {\textbf{Backend}};
+    
+    % Database Options
+    \node[component, fill=blue!30, below=1.5cm of express] (mysql) {MySQL};
+    \node[process, right=0.5cm of mysql] (postgres) {PostgreSQL};
+    \node[process, right=0.5cm of postgres] (mongo) {MongoDB};
+    \node[above=0.2cm of mysql] {\textbf{Database}};
+    
+    % ORM Options
+    \node[component, fill=blue!30, below=1.5cm of mysql] (prisma) {Prisma};
+    \node[process, right=0.5cm of prisma] (typeorm) {TypeORM};
+    \node[process, right=0.5cm of typeorm] (sequelize) {Sequelize};
+    \node[above=0.2cm of prisma] {\textbf{ORM}};
+    
+    % Legend
+    \node[component, fill=blue!30, right=4cm of angular, yshift=-3cm] (chosen) {Chosen};
+    \node[process, right=0.5cm of chosen] (alternative) {Alternative};
+    
+\end{tikzpicture}
+\caption{Technology stack comparison - chosen vs alternatives}
+\label{fig:tech-comparison}
+\end{figure}
+
+\subsection{Authentication Flow Diagram}
+
+The JWT-based authentication mechanism is illustrated below:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=3cm, auto]
+    % Actors
+    \node[component] (client) {Client\\(Browser/Extension)};
+    \node[component, right=4cm of client] (server) {Backend Server};
+    \node[database, right=3cm of server] (db) {Database};
+    
+    % Flow
+    \draw[arrow] (client) -- ++(0,-1) -- node[above] {1. POST /login (email, password)} ++(4,0) -- (server);
+    \draw[arrow] (server) -- ++(0,-0.5) -- node[above, sloped] {2. Verify credentials} ++(3,0) -- (db);
+    \draw[arrow] (db) -- ++(0,-0.5) -- node[below, sloped] {3. User data} ++(-3,0) -- (server);
+    \draw[arrow] (server) -- ++(0,-0.5) -- node[below] {4. JWT token + user info} ++(-4,0) -- (client);
+    \draw[arrow] (client) -- ++(0,-1) -- node[above] {5. Request with Bearer token} ++(4,0) -- (server);
+    \draw[arrow] (server) -- ++(0,-0.5) -- node[below] {6. Validate \& respond} ++(-4,0) -- (client);
+    
+\end{tikzpicture}
+\caption{JWT authentication flow}
+\label{fig:auth-flow}
+\end{figure}
+
+The next chapter will detail the system analysis and requirements specification for SnippetSync.
+
+% ============================================
+% CHAPTER 3: SYSTEM ANALYSIS
+% ============================================
+\chapter{System Analysis}
+
+\section{Introduction}
+
+This chapter presents a comprehensive analysis of the SnippetSync system, including requirements specification, feasibility study, and system modeling. We identify both functional and non-functional requirements and establish the foundation for system design.
+
+\section{Requirements Analysis}
+
+\subsection{Requirements Overview}
+
+The system requirements are categorized into functional and non-functional requirements, as illustrated in the following diagram:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=6cm, level distance=2cm},
+    level 2/.style={sibling distance=3cm, level distance=2cm},
+    every node/.style={component, align=center}
+]
+
+\node {System\\Requirements}
+    child {node {Functional\\Requirements}
+        child {node[fill=green!20] {User\\Management}}
+        child {node[fill=green!20] {Snippet\\CRUD}}
+        child {node[fill=green!20] {Social\\Features}}
+    }
+    child {node {Non-Functional\\Requirements}
+        child {node[fill=orange!20] {Performance}}
+        child {node[fill=orange!20] {Security}}
+        child {node[fill=orange!20] {Usability}}
+    };
+
+\end{tikzpicture}
+\caption{Requirements hierarchy}
+\label{fig:requirements-tree}
+\end{figure}
+
+\subsection{Functional Requirements}
+
+Functional requirements define what the system should do:
+
+\subsubsection{User Management Requirements}
+
+\begin{enumerate}
+    \item \textbf{FR1.1 - User Registration}
+    \begin{itemize}
+        \item Users shall register with username, email, and password
+        \item Email addresses must be unique
+        \item Passwords must be securely hashed
+    \end{itemize}
+    
+    \item \textbf{FR1.2 - User Authentication}
+    \begin{itemize}
+        \item Users shall login with email and password
+        \item System shall generate JWT access tokens
+        \item Sessions shall expire after 15 minutes of inactivity
+    \end{itemize}
+    
+    \item \textbf{FR1.3 - User Profile}
+    \begin{itemize}
+        \item Users shall view their profile information
+        \item Users shall see their snippet statistics
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Snippet Management Requirements}
+
+\begin{enumerate}
+    \item \textbf{FR2.1 - Create Snippet}
+    \begin{itemize}
+        \item Users shall create snippets with title, code, language, description
+        \item Users shall assign tags to snippets
+        \item Users shall set visibility (public/private)
+        \item System shall auto-generate unique share slug
+    \end{itemize}
+    
+    \item \textbf{FR2.2 - View Snippet}
+    \begin{itemize}
+        \item Users shall view public snippets from any user
+        \item Users shall view their own private snippets
+        \item System shall display syntax-highlighted code
+        \item System shall show upvote count and comments
+    \end{itemize}
+    
+    \item \textbf{FR2.3 - Edit Snippet}
+    \begin{itemize}
+        \item Users shall edit their own snippets
+        \item All fields except share slug shall be editable
+        \item Changes shall be saved immediately
+    \end{itemize}
+    
+    \item \textbf{FR2.4 - Delete Snippet}
+    \begin{itemize}
+        \item Users shall delete their own snippets
+        \item Deletion shall cascade to comments and upvotes
+        \item Confirmation shall be required
+    \end{itemize}
+    
+    \item \textbf{FR2.5 - List Snippets}
+    \begin{itemize}
+        \item Users shall browse all public snippets
+        \item Users shall view their personal snippet library
+        \item Pagination shall be supported
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Social Feature Requirements}
+
+\begin{enumerate}
+    \item \textbf{FR3.1 - Upvote Snippet}
+    \begin{itemize}
+        \item Users shall upvote snippets
+        \item Users shall remove their upvote
+        \item One upvote per user per snippet
+    \end{itemize}
+    
+    \item \textbf{FR3.2 - Comment on Snippet}
+    \begin{itemize}
+        \item Users shall post comments on snippets
+        \item Comments shall display author name and timestamp
+        \item Users shall delete their own comments
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Search and Filter Requirements}
+
+\begin{enumerate}
+    \item \textbf{FR4.1 - Search Snippets}
+    \begin{itemize}
+        \item Users shall search by title and description
+        \item Search shall be case-insensitive
+        \item Results shall be ranked by relevance
+    \end{itemize}
+    
+    \item \textbf{FR4.2 - Filter by Language}
+    \begin{itemize}
+        \item Users shall filter snippets by programming language
+        \item Multiple languages shall be supported (JavaScript, Python, TypeScript, Java, C++, etc.)
+    \end{itemize}
+    
+    \item \textbf{FR4.3 - Filter by Tags}
+    \begin{itemize}
+        \item Users shall filter by one or more tags
+        \item Tag-based navigation shall be intuitive
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{VS Code Extension Requirements}
+
+\begin{enumerate}
+    \item \textbf{FR5.1 - Extension Authentication}
+    \begin{itemize}
+        \item Users shall login from VS Code
+        \item Tokens shall be stored securely
+        \item Users shall logout
+    \end{itemize}
+    
+    \item \textbf{FR5.2 - Import Snippet}
+    \begin{itemize}
+        \item Users shall import snippets by share slug
+        \item Imported code shall be inserted at cursor position
+        \item Syntax highlighting shall be preserved
+    \end{itemize}
+    
+    \item \textbf{FR5.3 - Export Snippet}
+    \begin{itemize}
+        \item Users shall select code in editor
+        \item Users shall export selection as new snippet
+        \item Language shall be auto-detected from file type
+    \end{itemize}
+    
+    \item \textbf{FR5.4 - Browse Snippets}
+    \begin{itemize}
+        \item Users shall view their snippet library
+        \item Users shall search and filter within VS Code
+        \item Users shall open snippets in editor
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Non-Functional Requirements}
+
+Non-functional requirements define how the system should perform:
+
+\subsubsection{Performance Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR1.1}: API response time shall be under 200ms for 95\% of requests
+    \item \textbf{NFR1.2}: Web application shall load within 2 seconds on standard broadband
+    \item \textbf{NFR1.3}: System shall support at least 100 concurrent users
+    \item \textbf{NFR1.4}: Database queries shall be optimized with appropriate indexes
+\end{itemize}
+
+\subsubsection{Security Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR2.1}: Passwords shall be hashed using bcrypt with minimum 10 salt rounds
+    \item \textbf{NFR2.2}: JWT tokens shall be signed with strong secret keys
+    \item \textbf{NFR2.3}: API shall validate and sanitize all inputs
+    \item \textbf{NFR2.4}: HTTPS shall be enforced in production
+    \item \textbf{NFR2.5}: SQL injection shall be prevented through ORM parameterization
+    \item \textbf{NFR2.6}: CORS shall be properly configured
+\end{itemize}
+
+\subsubsection{Usability Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR3.1}: UI shall be intuitive requiring no user training
+    \item \textbf{NFR3.2}: Error messages shall be clear and actionable
+    \item \textbf{NFR3.3}: System shall provide immediate feedback for user actions
+    \item \textbf{NFR3.4}: VS Code extension shall follow VS Code UI conventions
+\end{itemize}
+
+\subsubsection{Reliability Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR4.1}: System uptime shall be 99\% or higher
+    \item \textbf{NFR4.2}: Data loss shall be prevented through regular backups
+    \item \textbf{NFR4.3}: System shall handle errors gracefully without crashing
+\end{itemize}
+
+\subsubsection{Maintainability Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR5.1}: Code shall follow consistent style guidelines
+    \item \textbf{NFR5.2}: TypeScript shall be used for type safety
+    \item \textbf{NFR5.3}: Code shall be modular and well-documented
+    \item \textbf{NFR5.4}: Dependencies shall be kept up-to-date
+\end{itemize}
+
+\subsubsection{Portability Requirements}
+
+\begin{itemize}
+    \item \textbf{NFR6.1}: Web application shall work on Chrome, Firefox, Safari, Edge
+    \item \textbf{NFR6.2}: Backend shall run on Windows, macOS, Linux
+    \item \textbf{NFR6.3}: VS Code extension shall be platform-independent
+\end{itemize}
+
+\section{Feasibility Study}
+
+\subsection{Technical Feasibility}
+
+\textbf{Assessment: FEASIBLE}
+
+\begin{itemize}
+    \item \textbf{Technology Availability}: All required technologies (React, Node.js, MySQL, VS Code API) are mature, well-documented, and free
+    \item \textbf{Development Tools}: VS Code, npm, Git, and development servers are readily available
+    \item \textbf{Technical Expertise}: Technologies used are industry-standard with extensive learning resources
+    \item \textbf{Integration}: VS Code Extension API is stable and well-supported
+\end{itemize}
+
+\subsection{Economic Feasibility}
+
+\textbf{Assessment: FEASIBLE}
+
+\begin{itemize}
+    \item \textbf{Development Cost}: Zero software licensing costs (all open-source)
+    \item \textbf{Infrastructure}: Can be deployed on free tiers initially (Vercel, Railway, PlanetScale)
+    \item \textbf{Maintenance}: Minimal operational costs
+    \item \textbf{ROI}: Project serves educational and portfolio purposes with potential for community adoption
+\end{itemize}
+
+\subsection{Operational Feasibility}
+
+\textbf{Assessment: FEASIBLE}
+
+\begin{itemize}
+    \item \textbf{User Adoption}: Target audience (developers) already familiar with similar tools
+    \item \textbf{Learning Curve}: Simple interface requires minimal training
+    \item \textbf{Maintenance}: Standard web stack with good community support
+    \item \textbf{Scalability}: Architecture allows horizontal scaling if needed
+\end{itemize}
+
+\subsection{Schedule Feasibility}
+
+\textbf{Assessment: FEASIBLE}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Phase} & \textbf{Duration} & \textbf{Deliverables} \\
+\hline
+Planning & 1 week & Requirements, architecture \\
+\hline
+Backend Development & 2 weeks & API, database, authentication \\
+\hline
+Frontend Development & 2 weeks & Web application, UI components \\
+\hline
+VS Code Extension & 1 week & Extension development, testing \\
+\hline
+Testing & 1 week & Integration testing, bug fixes \\
+\hline
+Documentation & 1 week & User guides, code documentation \\
+\hline
+\textbf{Total} & \textbf{8 weeks} & \textbf{Complete system} \\
+\hline
+\end{tabular}
+\caption{Project timeline estimate}
+\label{tab:timeline}
+\end{table}
+
+\section{Use Case Analysis}
+
+\subsection{Primary Actors}
+
+\begin{itemize}
+    \item \textbf{Registered User}: Authenticated user who can create, manage, and share snippets
+    \item \textbf{Anonymous Visitor}: Unauthenticated user who can browse public snippets
+    \item \textbf{System}: Automated processes for token management, validation, etc.
+\end{itemize}
+
+\subsection{Data Flow Diagram}
+
+The following diagram shows how data flows through the system during key operations:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+    % External entities
+    \node[component, fill=yellow!20] (user) {User};
+    \node[component, fill=yellow!20, right=8cm of user] (vscode) {VS Code\\Extension};
+    
+    % Processes
+    \node[process, below=1.5cm of user, xshift=2cm] (auth) {Authentication\\Process};
+    \node[process, below=1.5cm of auth] (snippet) {Snippet\\Management};
+    \node[process, right=2cm of snippet] (social) {Social\\Features};
+    
+    % Data stores
+    \node[database, below=1.5cm of snippet, xshift=1cm] (db) {Database};
+    
+    % Flows
+    \draw[arrow] (user) -- node[left] {Login\\credentials} (auth);
+    \draw[arrow] (auth) -- node[right] {JWT token} (user);
+    \draw[arrow] (user) -- node[above, sloped] {Create/Edit\\snippets} (snippet);
+    \draw[arrow] (snippet) -- node[below, sloped] {Snippet data} (user);
+    \draw[arrow] (user) -- node[above, sloped] {Upvote/\\Comment} (social);
+    \draw[arrow] (vscode) -- node[above] {Share slug} (snippet);
+    \draw[arrow] (snippet) -- node[below] {Code} (vscode);
+    \draw[arrow, <->] (auth) -- (db);
+    \draw[arrow, <->] (snippet) -- (db);
+    \draw[arrow, <->] (social) -- (db);
+    
+\end{tikzpicture}
+\caption{Data flow diagram}
+\label{fig:dfd}
+\end{figure}
+
+\subsection{Use Case Diagram}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    % Actors
+    \node[actor] (user) {User};
+    \node[actor, below=4cm of user] (visitor) {Visitor};
+    \node[actor, right=10cm of user] (vscode) {VS Code User};
+    
+    % Use cases
+    \node[usecase, right=3cm of user, yshift=2cm] (register) {Register};
+    \node[usecase, right=3cm of user, yshift=0.5cm] (login) {Login};
+    \node[usecase, right=3cm of user, yshift=-1cm] (create) {Create Snippet};
+    \node[usecase, right=3cm of user, yshift=-2.5cm] (edit) {Edit Snippet};
+    \node[usecase, right=3cm of user, yshift=-4cm] (delete) {Delete Snippet};
+    \node[usecase, right=3cm of visitor] (browse) {Browse Public Snippets};
+    \node[usecase, right=3cm of visitor, yshift=-1.5cm] (search) {Search Snippets};
+    \node[usecase, right=3cm of visitor, yshift=-3cm] (view) {View Snippet};
+    \node[usecase, below=0.5cm of view] (comment) {Add Comment};
+    \node[usecase, below=0.5cm of comment] (upvote) {Upvote Snippet};
+    \node[usecase, right=1cm of vscode, yshift=1cm] (import) {Import Snippet};
+    \node[usecase, right=1cm of vscode, yshift=-1cm] (export) {Export Snippet};
+    
+    % Relationships
+    \draw[->] (user) -- (register);
+    \draw[->] (user) -- (login);
+    \draw[->] (user) -- (create);
+    \draw[->] (user) -- (edit);
+    \draw[->] (user) -- (delete);
+    \draw[->] (visitor) -- (browse);
+    \draw[->] (visitor) -- (search);
+    \draw[->] (visitor) -- (view);
+    \draw[->] (user) -- (comment);
+    \draw[->] (user) -- (upvote);
+    \draw[->] (vscode) -- (import);
+    \draw[->] (vscode) -- (export);
+    \draw[->] (vscode) -- (browse);
+    
+\end{tikzpicture}
+\caption{Use case diagram for SnippetSync}
+\label{fig:usecase}
+\end{figure}
+
+\subsection{Detailed Use Cases}
+
+\subsubsection{Use Case 1: Create Snippet}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3cm}|p{11cm}|}
+\hline
+\textbf{Use Case Name} & Create Snippet \\
+\hline
+\textbf{Actor} & Registered User \\
+\hline
+\textbf{Precondition} & User is authenticated \\
+\hline
+\textbf{Main Flow} & 
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}
+    \item User navigates to Create Snippet page
+    \item User enters title, description, code, language
+    \item User adds tags (optional)
+    \item User selects visibility (public/private)
+    \item User clicks Submit
+    \item System validates input
+    \item System generates share slug
+    \item System saves snippet to database
+    \item System displays success message with share slug
+\end{enumerate}
+\end{minipage} \\
+\hline
+\textbf{Postcondition} & Snippet is created and accessible \\
+\hline
+\textbf{Alternative Flow} & If validation fails, system displays error message \\
+\hline
+\end{tabular}
+\caption{Use Case: Create Snippet}
+\label{tab:usecase-create}
+\end{table}
+
+\subsubsection{Use Case 2: Import Snippet to VS Code}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3cm}|p{11cm}|}
+\hline
+\textbf{Use Case Name} & Import Snippet to VS Code \\
+\hline
+\textbf{Actor} & VS Code User \\
+\hline
+\textbf{Precondition} & User is authenticated in extension, has share slug \\
+\hline
+\textbf{Main Flow} & 
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}
+    \item User opens Command Palette (Ctrl+Shift+P)
+    \item User selects "SnippetSync: Import Snippet"
+    \item User enters share slug
+    \item Extension fetches snippet from API
+    \item Extension inserts code at cursor position
+    \item Extension shows success notification
+\end{enumerate}
+\end{minipage} \\
+\hline
+\textbf{Postcondition} & Code is inserted into active editor \\
+\hline
+\textbf{Alternative Flow} & If slug is invalid, extension shows error message \\
+\hline
+\end{tabular}
+\caption{Use Case: Import Snippet}
+\label{tab:usecase-import}
+\end{table}
+
+\section{System Constraints}
+
+\subsection{Technical Constraints}
+
+\begin{itemize}
+    \item VS Code extension requires VS Code version 1.80.0 or higher
+    \item MySQL database required (not compatible with NoSQL)
+    \item Node.js 18+ required for backend
+    \item Modern browser required for frontend (ES6+ support)
+\end{itemize}
+
+\subsection{Business Constraints}
+
+\begin{itemize}
+    \item Must be free and open-source
+    \item No paid features or subscriptions
+    \item Must comply with data privacy regulations
+\end{itemize}
+
+\subsection{Design Constraints}
+
+\begin{itemize}
+    \item Must follow RESTful API conventions
+    \item Must use TypeScript for type safety
+    \item Must maintain separation of concerns (MVC pattern)
+\end{itemize}
+
+\section{Summary}
+
+This chapter established a comprehensive understanding of system requirements through:
+
+\begin{itemize}
+    \item Detailed functional requirements covering all user interactions
+    \item Non-functional requirements ensuring quality attributes
+    \item Feasibility study confirming project viability
+    \item Use case analysis documenting user workflows
+    \item Identification of system constraints
+\end{itemize}
+
+The next chapter will translate these requirements into concrete system design with architecture diagrams, database schema, and API specifications.
+
+% ============================================
+% CHAPTER 4: SYSTEM DESIGN
+% ============================================
+\chapter{System Design}
+
+\section{Introduction}
+
+This chapter presents the comprehensive system design for SnippetSync, including the overall architecture, database schema, API design, and user interface design. The design follows industry best practices and ensures scalability, maintainability, and security.
+
+\section{System Architecture}
+
+The SnippetSync platform follows a modern three-tier architecture consisting of the presentation layer, application layer, and data layer. This separation of concerns ensures that each component can be developed, tested, and scaled independently.
+
+\subsection{High-Level Architecture}
+
+The system architecture is designed to provide seamless integration between the web application, backend API, and VS Code extension. The backend serves as the central hub that manages all data operations and business logic, while the frontend and extension act as client applications that consume the API services.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+    % Client Layer
+    \node[component] (webapp) {Web Application\\(React + TypeScript)};
+    \node[component, right=2cm of webapp] (extension) {VS Code Extension\\(TypeScript)};
+    
+    % API Layer
+    \node[component, below=2cm of webapp, xshift=2cm] (api) {REST API\\(Express + Node.js)};
+    
+    % Service Layer
+    \node[process, below=1.5cm of api, xshift=-3cm] (auth) {Authentication\\Service};
+    \node[process, below=1.5cm of api] (snippet) {Snippet\\Service};
+    \node[process, below=1.5cm of api, xshift=3cm] (social) {Social\\Service};
+    
+    % Data Layer
+    \node[database, below=2cm of snippet] (db) {MySQL\\Database};
+    
+    % Connections
+    \draw[arrow] (webapp) -- node[anchor=east] {HTTP/REST} (api);
+    \draw[arrow] (extension) -- node[anchor=west] {HTTP/REST} (api);
+    \draw[arrow] (api) -- (auth);
+    \draw[arrow] (api) -- (snippet);
+    \draw[arrow] (api) -- (social);
+    \draw[arrow] (auth) -- (db);
+    \draw[arrow] (snippet) -- (db);
+    \draw[arrow] (social) -- (db);
+    
+\end{tikzpicture}
+\caption{High-level system architecture}
+\label{fig:architecture}
+\end{figure}
+
+The architecture ensures that all client applications communicate with the backend through standardized RESTful APIs. This design allows for easy addition of new client applications in the future, such as mobile apps or integrations with other IDEs, without requiring changes to the core backend logic.
+
+\subsection{Component Description}
+
+The presentation layer consists of two primary components. The web application provides a full-featured interface for managing snippets through a browser, built using React and TypeScript with Vite as the build tool. It offers comprehensive functionality including user registration, authentication, snippet creation and editing, search and filtering, and social interactions. The VS Code extension serves as a lightweight client that integrates directly into the developer's workflow, allowing quick import and export of snippets without leaving the IDE.
+
+The application layer is built on Node.js and Express, providing a robust REST API that handles all business logic. The authentication service manages user registration, login, and JWT token generation and validation. The snippet service handles all CRUD operations for snippets, including creation, retrieval, updating, and deletion, as well as managing tags and share slugs. The social service manages upvotes and comments, maintaining relationships between users and snippets.
+
+The data layer utilizes MySQL as the relational database management system, storing all persistent data including user accounts, code snippets, comments, upvotes, and tags. Prisma ORM serves as the interface between the application code and the database, providing type-safe database access and handling migrations.
+
+\section{Database Design}
+
+The database schema is carefully designed to support all functional requirements while maintaining data integrity through proper normalization and relationships.
+
+\subsection{Entity Relationship Diagram}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=4cm, auto]
+    % Entities
+    \node[component] (user) {User\\
+        \rule{3cm}{0.4pt}\\
+        id: INT PK\\
+        username: VARCHAR\\
+        email: VARCHAR\\
+        password: VARCHAR\\
+        createdAt: DATETIME};
+    
+    \node[component, right=4cm of user] (snippet) {Snippet\\
+        \rule{3cm}{0.4pt}\\
+        id: INT PK\\
+        title: VARCHAR\\
+        code: TEXT\\
+        language: VARCHAR\\
+        description: TEXT\\
+        visibility: VARCHAR\\
+        shareSlug: VARCHAR\\
+        userId: INT FK\\
+        createdAt: DATETIME};
+    
+    \node[component, below=2cm of snippet] (comment) {Comment\\
+        \rule{2.5cm}{0.4pt}\\
+        id: INT PK\\
+        content: TEXT\\
+        snippetId: INT FK\\
+        userId: INT FK\\
+        createdAt: DATETIME};
+    
+    \node[component, below=2cm of user] (upvote) {Upvote\\
+        \rule{2.5cm}{0.4pt}\\
+        id: INT PK\\
+        snippetId: INT FK\\
+        userId: INT FK\\
+        createdAt: DATETIME};
+    
+    \node[component, right=4cm of comment] (tag) {Tag\\
+        \rule{2cm}{0.4pt}\\
+        id: INT PK\\
+        name: VARCHAR};
+    
+    \node[component, above=1cm of tag] (snippettag) {SnippetTag\\
+        \rule{2cm}{0.4pt}\\
+        snippetId: INT FK\\
+        tagId: INT FK};
+    
+    % Relationships
+    \draw[arrow] (user) -- node {1:N\\creates} (snippet);
+    \draw[arrow] (user) -- node[anchor=north east] {1:N\\writes} (comment);
+    \draw[arrow] (user) -- node {1:N\\gives} (upvote);
+    \draw[arrow] (snippet) -- node {1:N\\has} (comment);
+    \draw[arrow] (snippet) -- node[anchor=east] {1:N\\receives} (upvote);
+    \draw[arrow] (snippet) -- node[anchor=south] {N:M} (snippettag);
+    \draw[arrow] (tag) -- node {N:M} (snippettag);
+    
+\end{tikzpicture}
+\caption{Entity Relationship Diagram}
+\label{fig:erd}
+\end{figure}
+
+\subsection{Database Schema Details}
+
+The User table serves as the foundation of the authentication system, storing essential user information. Each user has a unique identifier, username, and email address. Passwords are stored as bcrypt hashes with a minimum of 10 salt rounds, ensuring strong security. The createdAt timestamp tracks when each user account was created, which can be useful for analytics and user management.
+
+The Snippet table is the core entity of the system, storing all code snippets with their metadata. Each snippet has a unique identifier and is associated with a user through a foreign key relationship. The code field uses the TEXT data type to accommodate large code blocks, while the description field provides additional context. The language field specifies the programming language for syntax highlighting purposes. The visibility field determines whether a snippet is public or private, controlling access permissions. The shareSlug is a unique, URL-friendly identifier that enables easy sharing of snippets, particularly useful for the VS Code extension's import functionality.
+
+The Comment table implements the social commenting feature, creating a many-to-many relationship between users and snippets. Each comment is linked to both the user who wrote it and the snippet it belongs to. The content field stores the actual comment text, and the createdAt timestamp enables chronological display of comments.
+
+The Upvote table tracks which users have upvoted which snippets, implementing a unique constraint to ensure each user can only upvote a snippet once. This prevents duplicate votes and maintains data integrity. The relationship between users and snippets through upvotes provides valuable feedback on snippet quality and popularity.
+
+The Tag and SnippetTag tables implement a many-to-many relationship between snippets and tags. This design allows snippets to have multiple tags for better categorization, and tags can be associated with multiple snippets. The junction table SnippetTag maintains the relationships, enabling efficient querying and filtering based on tags.
+
+\section{API Design}
+
+The REST API follows standard conventions and best practices, providing clear, consistent endpoints for all operations.
+
+\subsection{Authentication Endpoints}
+
+The authentication endpoints handle user registration and login processes. The POST request to \texttt{/api/auth/signup} accepts a JSON payload containing username, email, and password fields. The server validates the input, ensures the email is unique, hashes the password using bcrypt, creates the user account in the database, and returns a success response with the newly created user information excluding the password hash.
+
+The POST request to \texttt{/api/auth/login} accepts email and password credentials. The server verifies the email exists in the database, compares the provided password with the stored bcrypt hash, generates a JWT access token upon successful authentication, and returns the token along with user information. The client stores this token and includes it in the Authorization header of subsequent requests.
+
+The GET request to \texttt{/api/auth/profile} requires authentication via the JWT token in the Authorization header. The server validates the token, extracts the user ID from the token payload, retrieves the user information from the database, and returns the user profile data. This endpoint allows clients to verify their authentication status and retrieve current user information.
+
+\subsection{Snippet Management Endpoints}
+
+The snippet management endpoints provide full CRUD functionality. The POST request to \texttt{/api/snippets} creates a new snippet, requiring authentication and accepting title, code, language, description, visibility, and an array of tag names. The server validates the input, auto-generates a unique share slug, creates or finds existing tags, establishes the many-to-many relationships, saves the snippet to the database, and returns the complete snippet object including generated ID and share slug.
+
+\subsubsection{Snippet Creation Sequence}
+
+The following sequence diagram illustrates the complete flow of creating a new snippet:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=1.5cm]
+    % Actors
+    \node[component] (client) {Client};
+    \node[component, right=2cm of client] (controller) {Controller};
+    \node[component, right=2cm of controller] (service) {Service};
+    \node[component, right=2cm of service] (db) {Database};
+    
+    % Timeline
+    \draw[dashed] (client) -- ++(0,-9);
+    \draw[dashed] (controller) -- ++(0,-9);
+    \draw[dashed] (service) -- ++(0,-9);
+    \draw[dashed] (db) -- ++(0,-9);
+    
+    % Messages
+    \draw[arrow] (client) -- ++(0,-0.8) -- node[above] {POST /snippets} ++(2,0);
+    \draw[arrow] (controller) -- ++(0,-1.2) -- node[above] {validate()} ++(0,-0.5);
+    \draw[arrow] (controller) -- ++(0,-2) -- node[above, text width=2cm] {createSnippet()} ++(2,0);
+    \draw[arrow] (service) -- ++(0,-2.5) -- node[above, text width=2cm] {generateSlug()} ++(0,-0.5);
+    \draw[arrow] (service) -- ++(0,-3.5) -- node[above, text width=2cm] {findOrCreateTags()} ++(2,0);
+    \draw[arrow] (db) -- ++(0,-4) -- node[below, text width=2cm] {tags[]} ++(-2,0);
+    \draw[arrow] (service) -- ++(0,-4.8) -- node[above, text width=2cm] {insertSnippet()} ++(2,0);
+    \draw[arrow] (db) -- ++(0,-5.3) -- node[below, text width=2cm] {snippet} ++(-2,0);
+    \draw[arrow] (service) -- ++(0,-6) -- node[below, text width=2cm] {snippet +\\shareSlug} ++(-2,0);
+    \draw[arrow] (controller) -- ++(0,-6.8) -- node[below, text width=2cm] {201 Created\\+ snippet} ++(-2,0);
+    
+\end{tikzpicture}
+\caption{Snippet creation sequence diagram}
+\label{fig:create-sequence}
+\end{figure}
+
+The GET request to \texttt{/api/snippets} retrieves public snippets with support for pagination, search, and filtering. Query parameters include page number, limit per page, search query string, language filter, and tag filters. The server constructs a dynamic query based on the parameters, applies visibility rules to show only public snippets to unauthenticated users, includes related data such as user information and tags, calculates pagination metadata, and returns an array of snippets with pagination information.
+
+The GET request to \texttt{/api/snippets/:id} retrieves a single snippet by its ID. The server checks if the snippet exists, verifies access permissions based on visibility and ownership, includes related data such as tags, comments with author information, and upvote count, and returns the complete snippet object. This endpoint provides all information needed to display a snippet detail page.
+
+The PUT request to \texttt{/api/snippets/:id} updates an existing snippet, requiring authentication and ownership verification. The request accepts partial updates to any field except the share slug. The server validates ownership, updates the specified fields, handles tag relationships if tags are being updated, saves changes to the database, and returns the updated snippet object.
+
+The DELETE request to \texttt{/api/snippets/:id} removes a snippet and all associated data. The server verifies authentication and ownership, cascades the deletion to remove associated comments, upvotes, and tag relationships, deletes the snippet record, and returns a success confirmation. This ensures data consistency by removing all dependent records.
+
+\subsection{Social Feature Endpoints}
+
+The POST request to \texttt{/api/snippets/:id/upvote} allows authenticated users to upvote a snippet. The server checks if the user has already upvoted this snippet, creates a new upvote record if not, increments the upvote count, and returns the updated count. If the user has already upvoted, the server removes the existing upvote, effectively toggling the upvote status.
+
+The POST request to \texttt{/api/snippets/:id/comments} creates a new comment on a snippet. The server validates authentication, accepts the comment content in the request body, creates the comment record linking the user and snippet, saves to the database, and returns the complete comment object including author information for immediate display.
+
+The DELETE request to \texttt{/api/comments/:id} removes a comment. The server verifies authentication, checks that the requesting user is the comment author, deletes the comment record, and returns a success confirmation. This ensures users can only delete their own comments.
+
+\subsection{User Snippet Endpoints}
+
+The GET request to \texttt{/api/users/me/snippets} retrieves all snippets belonging to the authenticated user, including both public and private snippets. The server validates authentication, queries for snippets where the user ID matches the authenticated user, includes related tags and statistics, supports pagination parameters, and returns the user's complete snippet library.
+
+\section{Frontend Design}
+
+The frontend application is designed with simplicity and usability as primary goals, providing an intuitive interface that requires minimal learning curve.
+
+\subsection{Page Structure}
+
+The application consists of six main pages organized in a logical flow. The Home page serves as the landing page, displaying all public snippets with search and filter capabilities. Users can browse snippets without authentication, search by keywords, filter by programming language and tags, and click on snippets to view details.
+
+The Login and Signup pages provide authentication functionality with clean, focused forms. These pages include form validation with clear error messages, password strength indicators on signup, and links to switch between login and signup modes.
+
+The Create Snippet page offers a comprehensive form for creating new snippets. The interface includes a title input field, a large code textarea with monospace font, a language dropdown with popular programming languages, a description textarea for additional context, tag input with autocomplete suggestions, visibility toggle between public and private, and a submit button with loading state. Upon successful creation, users are redirected to the snippet detail page and shown the generated share slug.
+
+The Snippet Detail page displays complete information about a single snippet, including the title, author name and creation date, programming language badge, syntax-highlighted code block with copy button, description text, associated tags as clickable badges, upvote button with current count, comment section with all comments and input field for new comments, and the share slug with copy functionality for easy sharing.
+
+The My Snippets page provides a personalized dashboard for managing the user's snippet collection. Users can view all their snippets in a grid or list layout, see visibility status for each snippet, access edit and delete functions, copy share slugs quickly, and filter and search within their own snippets.
+
+\subsection{Component Architecture}
+
+The frontend follows a component-based architecture with reusable elements. The Navbar component appears on all pages, providing navigation links, authentication status display, login/signup buttons for unauthenticated users, and user menu with profile and logout options for authenticated users.
+
+\subsubsection{Frontend Component Hierarchy}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=7cm, level distance=2.5cm},
+    level 2/.style={sibling distance=3cm, level distance=2.5cm},
+    every node/.style={component, align=center, minimum width=2.5cm}
+]
+
+\node[fill=blue!30] {App\\Component}
+    child {node[fill=green!20] {Navbar}
+        child {node[fill=yellow!20] {AuthButton}}
+        child {node[fill=yellow!20] {UserMenu}}
+    }
+    child {node[fill=green!20] {Router}
+        child {node[fill=yellow!20] {HomePage}}
+        child {node[fill=yellow!20] {SnippetDetail}}
+        child {node[fill=yellow!20] {CreateSnippet}}
+    }
+    child {node[fill=green!20] {Context}
+        child {node[fill=yellow!20] {AuthContext}}
+        child {node[fill=yellow!20] {ThemeContext}}
+    };
+
+\end{tikzpicture}
+\caption{Frontend component hierarchy}
+\label{fig:component-hierarchy}
+\end{figure}
+
+The SnippetCard component displays snippet previews in grid layouts, showing the title, language, description excerpt, author name, upvote count, comment count, and tag badges. The component handles click events to navigate to the detail page and provides visual feedback on hover.
+
+The CodeBlock component renders code with syntax highlighting, utilizing a syntax highlighting library to colorize code based on the specified language. The component includes line numbers, a copy-to-clipboard button, and proper formatting with preserved indentation and whitespace.
+
+The SearchBar and FilterPanel components work together to provide search and filtering functionality. The SearchBar accepts text input with debouncing to prevent excessive API calls. The FilterPanel provides dropdowns for language selection, tag checkboxes for multiple tag filtering, and a reset button to clear all filters.
+
+\section{VS Code Extension Design}
+
+The VS Code extension is designed to integrate seamlessly into the developer's workflow, following VS Code's design principles and conventions.
+
+\subsection{Extension Architecture}
+
+The extension follows the standard VS Code extension structure with proper separation of concerns. The extension entry point activates when VS Code starts, registers all commands in the command palette, initializes the API client with the backend URL, and sets up secure token storage using VS Code's Secret Storage API.
+
+The API client module manages all communication with the backend server. It maintains the base URL for API requests, stores and retrieves authentication tokens securely, includes the token in request headers automatically through an interceptor, handles errors gracefully with user-friendly messages, and provides typed methods for each API endpoint.
+
+\subsection{Command Implementation}
+
+The Login command prompts the user for email and password using VS Code's input boxes, sends credentials to the authentication endpoint, stores the received JWT token in Secret Storage, updates the extension state to reflect authentication status, and displays a success message. Error handling provides specific feedback for incorrect credentials or network issues.
+
+\subsubsection{VS Code Extension Workflow}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+    % Main flow
+    \node[process] (start) {Extension\\Activation};
+    \node[process, right=2cm of start] (login) {User Login};
+    \node[process, right=2cm of login] (token) {Token\\Storage};
+    \node[process, below=1.5cm of token] (import) {Import\\Snippet};
+    \node[process, left=2cm of import] (export) {Export\\Snippet};
+    \node[process, left=2cm of export] (browse) {Browse\\Snippets};
+    
+    % API
+    \node[component, below=3cm of login, fill=orange!20] (api) {Backend API};
+    
+    % Connections
+    \draw[arrow] (start) -- (login);
+    \draw[arrow] (login) -- (token);
+    \draw[arrow] (token) -- (import);
+    \draw[arrow] (import) -- (export);
+    \draw[arrow] (export) -- (browse);
+    
+    % API calls
+    \draw[arrow, dashed] (login) -- node[right] {POST /auth/login} (api);
+    \draw[arrow, dashed] (import) -- node[right] {GET /snippets/:slug} (api);
+    \draw[arrow, dashed] (export) -- node[left] {POST /snippets} (api);
+    \draw[arrow, dashed] (browse) -- node[left] {GET /users/me/snippets} (api);
+    
+\end{tikzpicture}
+\caption{VS Code extension command workflow}
+\label{fig:extension-workflow}
+\end{figure}
+
+The Import Snippet command shows an input box for the share slug, validates the slug format before making the request, fetches the snippet from the API using the provided slug, determines the appropriate language mode for syntax highlighting, inserts the code at the current cursor position in the active editor, and displays a success notification with the snippet title.
+
+The Export Snippet command gets the current text selection in the active editor, detects the file type to determine the programming language, prompts for title, description, tags, and visibility using a series of input boxes, sends the data to the create snippet endpoint, displays the generated share slug for easy sharing, and provides error handling for validation failures.
+
+The View Snippets command fetches the user's snippet library from the API, displays snippets in a Quick Pick menu with formatted labels, allows the user to select a snippet, inserts the selected snippet's code into the active editor, and provides search functionality within the Quick Pick interface.
+
+The Logout command removes the stored authentication token from Secret Storage, updates the extension state, clears any cached data, and displays a confirmation message.
+
+\section{Security Design}
+
+Security is a fundamental aspect of the system design, implemented at multiple layers to protect user data and prevent unauthorized access.
+
+\subsection{Security Layers}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    % Security layers
+    \node[component, fill=red!20, minimum width=8cm, minimum height=1cm] (app) {Application Layer Security};
+    \node[component, fill=orange!20, minimum width=8cm, minimum height=1cm, below=0.5cm of app] (transport) {Transport Layer Security (HTTPS)};
+    \node[component, fill=yellow!20, minimum width=8cm, minimum height=1cm, below=0.5cm of transport] (data) {Data Layer Security};
+    
+    % Details for each layer
+    \node[right=0.3cm of app, anchor=west, text width=6cm] {
+        \small
+        • JWT Authentication\\
+        • Input Validation\\
+        • CORS Protection\\
+        • Rate Limiting
+    };
+    
+    \node[right=0.3cm of transport, anchor=west, text width=6cm] {
+        \small
+        • TLS/SSL Encryption\\
+        • Secure Cookies\\
+        • HTTPS Enforcement
+    };
+    
+    \node[right=0.3cm of data, anchor=west, text width=6cm] {
+        \small
+        • Password Hashing (bcrypt)\\
+        • SQL Injection Prevention\\
+        • Encrypted Token Storage
+    };
+    
+\end{tikzpicture}
+\caption{Multi-layer security architecture}
+\label{fig:security-layers}
+\end{figure}
+
+\subsection{Authentication Security}
+
+User passwords are never stored in plain text. Upon registration, passwords are hashed using the bcrypt algorithm with a configurable salt round count of at least 10. During login, the provided password is compared with the stored hash using bcrypt's timing-safe comparison function, which prevents timing attacks.
+
+JWT tokens are used for stateless authentication, containing the user ID and expiration time in the payload. Tokens are signed using a strong secret key stored securely in environment variables. The backend validates tokens on every protected route by verifying the signature and checking the expiration time. Tokens have a limited lifespan of 15 minutes to minimize the window of opportunity if a token is compromised.
+
+\subsection{API Security}
+
+All API endpoints validate input data using validation middleware that checks for required fields, validates data types and formats, sanitizes inputs to prevent injection attacks, and enforces length limits on text fields. The Express framework's built-in middleware helps prevent common vulnerabilities.
+
+CORS is configured to allow requests only from trusted origins, specifically the frontend application's domain and localhost during development. This prevents unauthorized websites from making requests to the API on behalf of users.
+
+Rate limiting is implemented to prevent abuse and brute force attacks. The authentication endpoints have stricter limits to prevent password guessing, while other endpoints have generous limits for normal usage but prevent excessive automated requests.
+
+\subsection{Data Access Control}
+
+Authorization checks are performed on all protected routes to ensure users can only access and modify their own data. The server verifies that the authenticated user owns a snippet before allowing updates or deletion. Public snippets are accessible to all users, while private snippets are only visible to their creators. Comment and upvote operations require authentication but allow interaction with any public snippet.
+
+\section{Summary}
+
+This chapter presented a comprehensive system design covering all aspects of the SnippetSync platform. The three-tier architecture ensures separation of concerns and scalability. The database schema is properly normalized with clear relationships between entities. The REST API provides consistent, well-documented endpoints for all operations. The frontend design prioritizes usability with a clean, intuitive interface. The VS Code extension integrates seamlessly into the developer's workflow. Security measures are implemented at every layer to protect user data and prevent unauthorized access. This design serves as the blueprint for implementation, ensuring all requirements are addressed in a maintainable and scalable manner.
+
+% ============================================
+% CHAPTER 5: IMPLEMENTATION
+% ============================================
+\chapter{Implementation}
+
+\section{Introduction}
+
+This chapter details the implementation of the SnippetSync platform, covering the development process, technology stack configuration, coding standards, and key implementation decisions. The implementation phase translated the system design into working code while adhering to best practices and modern development methodologies.
+
+\section{Development Environment Setup}
+
+The development environment was configured to support the full-stack nature of the project. Node.js version 18 was installed as the runtime environment for both the backend server and the build tools. The Node Package Manager (npm) was used for dependency management across all JavaScript and TypeScript projects. Visual Studio Code served as the primary integrated development environment, chosen for its excellent TypeScript support, integrated terminal, debugging capabilities, and extension development tools.
+
+\subsection{Development Architecture}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+    % Development tools
+    \node[component, fill=blue!20] (vscode) {VS Code IDE};
+    \node[component, fill=green!20, right=3cm of vscode] (node) {Node.js\\Runtime};
+    \node[component, fill=yellow!20, below=2cm of vscode] (git) {Git\\Version Control};
+    \node[component, fill=orange!20, below=2cm of node] (mysql) {MySQL\\Database};
+    
+    % Development servers
+    \node[process, right=3cm of node] (backend) {Backend\\Dev Server\\Port 5000};
+    \node[process, above=1cm of backend] (frontend) {Frontend\\Dev Server\\Port 5173};
+    \node[process, below=1cm of backend] (extension) {Extension\\Host};
+    
+    % Connections
+    \draw[arrow, <->] (vscode) -- (node);
+    \draw[arrow, <->] (vscode) -- (git);
+    \draw[arrow, <->] (node) -- (mysql);
+    \draw[arrow] (node) -- (backend);
+    \draw[arrow] (node) -- (frontend);
+    \draw[arrow] (vscode) -- (extension);
+    \draw[arrow, dashed] (frontend) -- node[right] {API Calls} (backend);
+    \draw[arrow, dashed] (extension) -- node[right] {API Calls} (backend);
+    
+\end{tikzpicture}
+\caption{Development environment architecture}
+\label{fig:dev-architecture}
+\end{figure}
+
+MySQL was installed and configured locally for development, with a dedicated database created for the SnippetSync application. The database server was configured to use UTF-8 encoding to properly handle code snippets in various languages and character sets. Git was used for version control, with a repository structure that separated the backend, frontend, and VS Code extension into distinct directories while maintaining them in a single repository for easier management.
+
+\section{Backend Implementation}
+
+The backend server forms the core of the SnippetSync platform, handling all business logic, data persistence, and API endpoints.
+
+\subsection{Project Structure}
+
+The backend follows a modular architecture organized by feature and responsibility. The source code resides in a \texttt{src} directory with subdirectories for different layers of the application. The \texttt{controllers} directory contains request handlers for each endpoint, processing incoming HTTP requests and sending responses. The \texttt{services} directory implements business logic, separating data processing from request handling. The \texttt{middleware} directory houses authentication, validation, and error handling middleware. The \texttt{routes} directory defines API endpoints and maps them to controllers. The \texttt{utils} directory contains helper functions for common tasks like token generation and response formatting.
+
+The Prisma directory contains the schema definition and generated client code. The schema file defines all database models, relationships, and constraints in Prisma's declarative syntax. When the schema is modified, Prisma's migration tool generates SQL migration files that can be applied to the database, ensuring consistent database evolution across development, testing, and production environments.
+
+\subsection{Authentication Implementation}
+
+The authentication system was implemented with security as the top priority. The signup process begins when a client sends a POST request with username, email, and password. The controller validates that all required fields are present and properly formatted. The system checks if the email already exists in the database to enforce uniqueness. The password is hashed using bcrypt with 10 salt rounds, which takes approximately 100 milliseconds per hash, providing strong protection against brute force attacks. A new user record is created in the database with the hashed password, and the user information excluding the password hash is returned to the client.
+
+The login process validates the provided email and password credentials. The system queries the database for a user with the matching email address. If found, bcrypt's compare function verifies the provided password against the stored hash. Upon successful verification, a JWT token is generated containing the user ID and expiration time. The token is signed with a secret key stored in environment variables, ensuring it cannot be tampered with. The token and user information are returned to the client, which stores the token for subsequent authenticated requests.
+
+Protected routes use authentication middleware that extracts the JWT token from the Authorization header, verifies the signature and checks expiration, decodes the payload to get the user ID, attaches the user information to the request object, and allows the request to proceed to the controller. If authentication fails at any step, an unauthorized error response is returned immediately.
+
+\subsection{Snippet Service Implementation}
+
+The snippet service implements all CRUD operations for managing code snippets. The creation process accepts title, code, language, description, visibility, and tags from the authenticated user. The system generates a unique share slug by combining random alphanumeric characters with a timestamp, ensuring uniqueness while keeping the slug short and URL-friendly. Tags are processed by checking if each tag already exists in the database and creating new tag records if needed. The snippet is created with relationships to the user, and the many-to-many relationships with tags are established. The complete snippet object with all related data is returned, including the generated share slug.
+
+The retrieval logic handles both public browsing and personalized views. When fetching public snippets, the system filters by visibility status, applies search queries across title and description fields using case-insensitive pattern matching, filters by language if specified, filters by tags through the join table, implements pagination with configurable page size, and includes related data like user information and tags. The response includes both the snippet array and pagination metadata showing total count and page information.
+
+Individual snippet retrieval checks visibility permissions, ensuring private snippets are only accessible to their owners. The system performs a single database query with eager loading of relationships to include tags, comments with author information sorted chronologically, and upvote count aggregated from the upvotes table. This efficient querying strategy minimizes database round trips while providing all necessary data for the detail view.
+
+Update operations verify ownership before allowing modifications. The system extracts the user ID from the authentication token, queries for the snippet, checks that the snippet's user ID matches the authenticated user, applies the requested changes to modifiable fields, handles tag updates by removing old relationships and creating new ones, saves the changes, and returns the updated snippet. The share slug is explicitly excluded from updates to maintain stable sharing links.
+
+Deletion operations implement cascading deletes to maintain referential integrity. The system verifies ownership, deletes all associated comments through the foreign key relationship, deletes all upvotes for the snippet, removes tag associations from the join table, and finally deletes the snippet record itself. Prisma's cascading delete configuration ensures this happens transactionally, preventing orphaned records.
+
+\subsection{Social Features Implementation}
+
+The upvoting system maintains a unique constraint to prevent duplicate votes. When a user attempts to upvote a snippet, the system checks if an upvote record already exists for this user-snippet combination. If not, a new upvote record is created and the upvote count is incremented. If the record exists, it is deleted to implement toggle functionality, allowing users to remove their upvote. The current upvote count is aggregated and returned, enabling the frontend to update the display immediately.
+
+The commenting system allows users to add text comments to any public snippet. Comments are stored with references to both the snippet and the author, enabling efficient retrieval and proper attribution. When fetching comments, they are sorted by creation timestamp in chronological order, and author information including username is included through a join query. Users can delete their own comments, with ownership verified before deletion. The comment count is tracked and displayed alongside snippets to indicate activity level.
+
+\subsection{Error Handling}
+
+Comprehensive error handling ensures reliable API behavior and helpful error messages. A global error handler middleware catches all errors thrown during request processing. Errors are categorized by type, including validation errors with specific field information, authentication errors with appropriate status codes, authorization errors for permission violations, not found errors for missing resources, and database errors with sanitized messages. Each error type returns a standardized JSON response with a status code, error message, and relevant details. Development mode includes stack traces for debugging, while production mode returns only user-safe information.
+
+\section{Frontend Implementation}
+
+The frontend application provides the user interface for interacting with the SnippetSync platform through a web browser.
+
+\subsection{Project Structure}
+
+The React application follows a feature-based organization pattern. The \texttt{src} directory contains all source code with subdirectories for different concerns. The \texttt{pages} directory contains components for each route, implementing complete page views. The \texttt{components} directory houses reusable UI components used across multiple pages. The \texttt{services} directory contains API client code organized by resource type. The \texttt{types} directory defines TypeScript interfaces for data models and API responses. The \texttt{styles} directory contains CSS files, with global styles and component-specific stylesheets.
+
+\subsection{Routing Implementation}
+
+React Router provides client-side routing without page reloads. The main App component defines all routes and their corresponding page components. Public routes like home, login, and signup are accessible without authentication. Protected routes for creating and managing snippets use a higher-order component that checks authentication status, redirecting to login if not authenticated. Route parameters are used for dynamic paths, such as the snippet detail page that uses the snippet ID from the URL to fetch and display the appropriate snippet.
+
+\subsection{State Management}
+
+State management uses React's built-in hooks for simplicity and reduced bundle size. The useState hook manages local component state for form inputs, UI toggles, and temporary data. The useEffect hook handles side effects like API calls, subscribing to events, and cleanup operations. A custom useAuth hook encapsulates authentication logic, managing the current user state, providing login and logout functions, checking authentication status, and persisting tokens in local storage. This centralized authentication state is shared across components through React Context, avoiding prop drilling and ensuring consistency.
+
+\subsection{API Integration}
+
+API calls are made using Axios, an HTTP client library that simplifies request handling. A base Axios instance is configured with the backend URL, default headers, and request/response interceptors. The request interceptor automatically adds the authentication token from local storage to every request's Authorization header. The response interceptor handles errors globally, displaying user-friendly messages for network errors, authentication failures, and server errors.
+
+Service modules provide typed functions for each API endpoint. The auth service handles signup, login, and profile fetching. The snippet service manages CRUD operations for snippets with proper TypeScript types. The comment and upvote services handle social interactions. Each service function returns a Promise that resolves to the typed response data or rejects with an error, allowing calling code to handle success and failure cases appropriately.
+
+\subsection{Form Handling}
+
+Forms are implemented with controlled components where React state drives the input values. Each form field has an onChange handler that updates the state, ensuring the UI always reflects the current data. Form submission prevents the default browser behavior and calls the appropriate service function with the form data. Loading states disable the submit button and show loading indicators during API calls. Validation provides immediate feedback, checking required fields, validating email format, ensuring password strength, and displaying error messages inline near the relevant fields.
+
+\subsection{Code Display}
+
+Code snippets are displayed with syntax highlighting using a lightweight highlighting library. The CodeBlock component receives the code string and language identifier, applies syntax highlighting based on the language, wraps the result in a pre-formatted block with appropriate styling, and adds a copy button that uses the Clipboard API. Line numbers are displayed using CSS counters, avoiding the need to modify the code string itself. The styling preserves whitespace and indentation, ensuring code appears exactly as entered.
+
+\section{VS Code Extension Implementation}
+
+The VS Code extension brings SnippetSync functionality directly into the developer's IDE, enabling seamless workflow integration.
+
+\subsection{Extension Structure}
+
+The extension follows the standard structure required by VS Code. The \texttt{package.json} file defines extension metadata including name, version, publisher, and description, declares all commands the extension provides, specifies activation events that determine when the extension loads, lists dependencies and their versions, and configures contribution points for commands and menus. The \texttt{src} directory contains TypeScript source code, and the \texttt{out} directory receives compiled JavaScript files.
+
+\subsection{Activation and Initialization}
+
+The extension activates when VS Code starts, as specified by the wildcard activation event in package.json. The activate function serves as the entry point, executing when the extension first loads. This function creates the API client instance configured with the backend URL, registers all command handlers with VS Code's command registry, sets up the Secret Storage instance for secure token storage, initializes any required state or context, and returns a disposable object that VS Code can use to clean up resources when the extension is deactivated.
+
+\subsection{Command Implementation Details}
+
+The login command implementation demonstrates the extension's interaction patterns with both VS Code's API and the backend server. The command handler uses VS Code's window.showInputBox method to prompt for email and password, with the password field configured to hide input characters. The extension sends these credentials to the authentication endpoint through the API client. Upon successful authentication, the received JWT token is stored in VS Code's Secret Storage under a known key. The extension's context global state is updated to reflect the authenticated status, and window.showInformationMessage displays a success notification to the user.
+
+The import snippet command showcases the extension's core value proposition of bringing remote code into the editor. When invoked, an input box prompts for the share slug. The API client fetches the snippet data using this slug, which includes the code, title, language, and metadata. The extension accesses the active text editor through vscode.window.activeTextEditor and retrieves the current cursor position. Using the editor's edit builder, the snippet code is inserted at the cursor position. The editor's language mode is set if it differs from the snippet's language, enabling appropriate syntax highlighting. A success message informs the user, and the editor scrolls to show the inserted code.
+
+The export snippet command extracts code from the editor and sends it to the server. The active editor's selection is read through editor.selection, and the selected text is extracted. The document's language ID provides the programming language. A series of input boxes collect the title, description, and tags, with sensible defaults and validation. A quick pick menu allows selecting between public and private visibility. This data is packaged into a request payload and sent to the create snippet endpoint. The response includes the generated share slug, which is displayed in an information message with a copy button, allowing immediate sharing of the newly created snippet.
+
+The view snippets command provides a browsing interface within VS Code. The extension fetches the user's snippet library from the API, transforms each snippet into a QuickPickItem with formatted label showing title, language, and tags, and displays these items in a filterable Quick Pick menu. When the user selects an item, the corresponding snippet's code is inserted into the active editor. The Quick Pick interface supports fuzzy searching, allowing users to quickly find snippets by typing partial matches.
+
+\subsection{Secure Token Management}
+
+Token security is paramount for protecting user accounts. VS Code's Secret Storage API provides encrypted storage integrated with the operating system's credential manager on Windows, it uses the Windows Credential Manager; on macOS, it uses the Keychain; and on Linux, it uses the Secret Service API. The extension stores tokens using a consistent key and retrieves them as needed. The API client's request interceptor is implemented as an async function that retrieves the token before each request, ensuring up-to-date authentication without caching issues. When logging out, the token is explicitly deleted from Secret Storage, immediately terminating authenticated access.
+
+\subsection{Error Handling}
+
+The extension implements user-friendly error handling throughout. Network errors display messages suggesting checking the backend server status and internet connection. Authentication errors provide specific guidance about invalid credentials or expired tokens. Not found errors for invalid share slugs explain that the snippet doesn't exist or access is denied. Generic errors display the error message with options to retry or view logs. All errors use VS Code's notification system with appropriate severity levels, ensuring users are informed without being overwhelmed by technical details.
+
+\section{Development Practices}
+
+Throughout the implementation phase, consistent development practices ensured code quality and maintainability.
+
+\subsection{Code Style and Conventions}
+
+TypeScript was used exclusively for type safety, with strict mode enabled to catch potential errors at compile time. All interfaces and types were explicitly defined, providing clear contracts between modules. ESLint was configured to enforce consistent code style including indentation, naming conventions, semicolon usage, and import organization. Prettier was integrated to automatically format code on save, eliminating style debates and ensuring uniformity. Meaningful variable and function names were used throughout, preferring clarity over brevity.
+
+\subsection{Version Control}
+
+Git branches were used to isolate feature development, with a main branch for stable code and feature branches for ongoing work. Commits were made frequently with descriptive messages following conventional commit format. Pull requests were used to merge branches, even in solo development, providing opportunities to review changes before integration. The gitignore file was configured to exclude node modules, build output, environment files, and IDE-specific files from version control.
+
+\subsection{Environment Configuration}
+
+Environment variables managed configuration that differs between environments. The backend used a dotenv file for development with variables including database connection string, JWT secret key, server port, and CORS allowed origins. The frontend configured the API URL based on the environment, using localhost for development and the production URL when deployed. The VS Code extension used a configuration setting for the backend URL, allowing users to point to different servers if needed. Sensitive information like database passwords and secret keys were never committed to version control, with example env files showing required variables without actual values.
+
+\subsection{Dependency Management}
+
+Package dependencies were carefully selected and managed. Only well-maintained packages with active communities were chosen to minimize security risks and ensure ongoing support. Semantic versioning was respected, with major versions pinned to prevent breaking changes and minor/patch versions allowed to update automatically. Dependencies were kept up to date through regular checks, applying security patches promptly. Development dependencies were separated from production dependencies, ensuring leaner production builds.
+
+\section{Challenges and Solutions}
+
+Several challenges arose during implementation, each providing learning opportunities and requiring creative solutions.
+
+\subsection{Implementation Challenges Overview}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+    % Challenges
+    \node[component, fill=red!30, text width=3cm, align=center] (c1) {Token\\Management\\in Extension};
+    \node[component, fill=red!30, text width=3cm, align=center, right=1cm of c1] (c2) {Database\\Field Size\\Limitations};
+    \node[component, fill=red!30, text width=3cm, align=center, right=1cm of c2] (c3) {CORS\\Configuration\\Issues};
+    
+    % Solutions
+    \node[component, fill=green!30, text width=3cm, align=center, below=1.5cm of c1] (s1) {Secret\\Storage API\\Implementation};
+    \node[component, fill=green!30, text width=3cm, align=center, below=1.5cm of c2] (s2) {TEXT Type\\Migration\\Strategy};
+    \node[component, fill=green!30, text width=3cm, align=center, below=1.5cm of c3] (s3) {CORS\\Middleware\\Configuration};
+    
+    % Arrows
+    \draw[arrow, thick] (c1) -- node[right] {Solved by} (s1);
+    \draw[arrow, thick] (c2) -- node[right] {Solved by} (s2);
+    \draw[arrow, thick] (c3) -- node[right] {Solved by} (s3);
+    
+\end{tikzpicture}
+\caption{Key implementation challenges and their solutions}
+\label{fig:challenges}
+\end{figure}
+
+\subsection{Token Management in VS Code Extension}
+
+The initial implementation stored JWT tokens in the extension's global state, which persisted in plain text in VS Code's storage folder. This posed a security risk if the user's file system was compromised. The solution involved refactoring to use VS Code's Secret Storage API, which integrates with the operating system's credential manager. The API client's request interceptor needed to become async to await token retrieval before each request, requiring careful handling to avoid race conditions and ensure requests weren't sent with stale tokens.
+
+\subsection{Database Field Size Limitations}
+
+Early testing revealed that JWT tokens and long code snippets were being truncated in the database. The default VARCHAR type with 255 character limit was insufficient. Investigation of the database schema showed that VARCHAR fields should be replaced with TEXT type for fields containing variable-length content of unknown maximum size. Prisma migrations were created to alter the affected columns, and database constraints were reviewed to ensure no other limitations would cause similar issues.
+
+\subsection{CORS Configuration}
+
+When connecting the frontend to the backend, requests were blocked by the browser due to Cross-Origin Resource Sharing restrictions. The backend needed to explicitly allow requests from the frontend's origin. The cors middleware was added to Express with configuration allowing the frontend URL and localhost for development. The configuration also allowed credentials to be included in requests, necessary for cookie-based authentication if implemented in the future. Preflight OPTIONS requests were handled automatically by the middleware.
+
+\subsection{Async State Management}
+
+React's state updates are asynchronous, leading to timing issues where the UI didn't reflect the latest data immediately after API calls. For example, after creating a snippet, navigating to the my snippets page showed stale data. The solution involved properly chaining promises, using the API response data to update state directly rather than refetching, and leveraging useEffect with proper dependency arrays to refetch data when dependencies changed. Loading states were added to show when data was being fetched, preventing user confusion during transitions.
+
+\subsection{Share Slug Uniqueness}
+
+Ensuring share slugs were unique across all snippets required a generation strategy that provided sufficient entropy while keeping slugs short. The implementation combines random alphanumeric characters with a timestamp in base-36 encoding. The random component provides 2.8 trillion possible values, and the timestamp component ensures uniqueness even if random collisions occur. In the unlikely event of a duplicate, the database unique constraint would trigger an error, which could be caught and handled by regenerating the slug, though this has never occurred in testing.
+
+\section{Summary}
+
+The implementation phase successfully translated the system design into working code across all three major components of SnippetSync. The backend provides a robust REST API with comprehensive functionality and security measures. The frontend delivers an intuitive user interface with responsive design and efficient state management. The VS Code extension integrates seamlessly into the development workflow with proper security and error handling. Throughout implementation, challenges were encountered and overcome through research, experimentation, and application of best practices. The result is a fully functional, maintainable codebase that meets all specified requirements and provides a solid foundation for future enhancements.
+
+% ============================================
+% CHAPTER 6: RESULTS AND DISCUSSION
+% ============================================
+\chapter{Results and Discussion}
+
+\section{Introduction}
+
+This chapter presents the final results of the SnippetSync project, demonstrating the completed system and discussing its achievements, limitations, and real-world applicability. The project successfully delivered a fully functional platform for code snippet management with seamless VS Code integration.
+
+\section{System Demonstration}
+
+The completed SnippetSync platform comprises three integrated components working together to provide a comprehensive snippet management solution.
+
+\subsection{Web Application Features}
+
+The web application provides a complete interface for managing code snippets through any modern web browser. Users can register new accounts by providing a username, email, and password, with immediate validation feedback ensuring data quality. After registration, users login with their email and password, receiving a secure JWT token for authenticated sessions.
+
+The home page displays all public snippets in an attractive grid layout with preview cards showing the title, programming language badge, description excerpt, author name, and engagement metrics including upvote and comment counts. The search bar at the top allows users to filter snippets by entering keywords that match against titles and descriptions. Dropdown filters enable selection by programming language, with support for popular languages including JavaScript, Python, TypeScript, Java, C++, Go, Rust, and many others. Tag filters allow users to browse snippets by topic or category.
+
+Creating a new snippet is straightforward through the dedicated creation page. The form includes fields for title, code, programming language, description, and tags, with a visibility toggle to mark snippets as public or private. Upon submission, the system generates a unique share slug and displays it prominently so users can immediately share their snippet with others or import it into VS Code. The syntax-highlighted code preview ensures snippets appear professional and readable.
+
+Viewing a snippet detail page shows comprehensive information including the full code with syntax highlighting, author attribution and creation timestamp, all associated tags as clickable badges, the complete description, the share slug with a convenient copy button, upvote functionality with real-time count updates, and a complete comment section where users can read existing comments and post new ones. The upvote button provides visual feedback, changing appearance when activated to indicate the user's vote status.
+
+Managing personal snippets is accomplished through the My Snippets page, which displays all snippets created by the authenticated user regardless of visibility. Each snippet card includes quick action buttons for editing, deleting, and copying the share slug. The edit functionality allows users to modify all aspects of their snippets except the immutable share slug, ensuring stable sharing links. Deletion requires confirmation to prevent accidental loss of data.
+
+\subsection{VS Code Extension Features}
+
+The VS Code extension brings SnippetSync functionality directly into the development environment, eliminating context switching and accelerating workflows. After installation from the VS Code marketplace or local installation, the extension appears in the extensions list and adds commands to the command palette.
+
+The login command allows users to authenticate with their SnippetSync account directly from VS Code. Input boxes prompt for email and password in sequence, with the password field properly configured to hide characters. Upon successful authentication, the JWT token is securely stored in VS Code's Secret Storage, integrated with the operating system's credential manager. A confirmation message welcomes the user, and the extension is ready for use.
+
+Importing snippets demonstrates the extension's core value proposition. Users invoke the import command from the command palette, which prompts for a share slug. This slug can be obtained from the web application, from documentation, or shared by other developers. After entering the slug, the extension fetches the corresponding snippet from the backend API and inserts the code at the current cursor position in the active editor. The language mode is automatically set based on the snippet's language metadata, ensuring proper syntax highlighting. This workflow takes seconds and requires no manual copy-pasting or formatting adjustments.
+
+Exporting code from the editor to SnippetSync is equally streamlined. Users select the code they want to save as a snippet and invoke the export command. The extension detects the programming language from the active file's extension and prompts for a title, optional description, and optional tags. Users select the visibility setting, and the extension creates the snippet through the API. The generated share slug is displayed with a copy button, allowing immediate sharing or documentation.
+
+Browsing the snippet library within VS Code provides quick access to previously created snippets. The view snippets command fetches all snippets belonging to the authenticated user and displays them in a Quick Pick menu. Each item shows the title, language, and tags in a formatted label. Users can type to filter the list, and selecting an item inserts that snippet's code into the active editor. This feature transforms VS Code into a personal snippet repository accessible through a few keystrokes.
+
+\subsection{Backend API Capabilities}
+
+The backend API serves as the foundation supporting both client applications. The RESTful design provides consistent, predictable endpoints organized by resource type. Authentication endpoints handle user registration and login, returning JWT tokens that authenticate subsequent requests. User profile endpoints allow retrieving information about the authenticated user.
+
+Snippet endpoints provide complete CRUD functionality with support for pagination, search, and filtering. Creating snippets includes automatic share slug generation and tag management. Retrieving snippets includes related data through efficient JOIN queries, minimizing the number of requests needed. Updating and deleting snippets enforce proper authorization, ensuring users can only modify their own content.
+
+Social feature endpoints enable upvoting and commenting on snippets. The upvote toggle functionality allows users to easily express appreciation for useful snippets. The commenting system supports discussion and feedback, with comments displaying author information and timestamps. These features foster community engagement and help identify high-quality snippets.
+
+The API implements comprehensive error handling with appropriate HTTP status codes and descriptive error messages. Validation errors return 400 Bad Request with details about which fields failed validation. Authentication failures return 401 Unauthorized when tokens are missing or invalid. Authorization failures return 403 Forbidden when users attempt unauthorized actions. Not found errors return 404 when requested resources don't exist. Server errors return 500 Internal Server Error with sanitized messages that don't leak implementation details.
+
+\section{Performance Analysis}
+
+The system demonstrates strong performance characteristics suitable for production deployment and real-world usage.
+
+\subsection{API Performance Metrics}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Response Time (ms)},
+        xlabel={API Endpoint},
+        symbolic x coords={GET Snippets, POST Create, PUT Update, Search, Auth},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        ymax=250,
+        bar width=15pt,
+        width=12cm,
+        height=7cm,
+        legend style={at={(0.5,-0.2)}, anchor=north,legend columns=-1},
+        ]
+        \addplot[fill=blue!60] coordinates {(GET Snippets,65) (POST Create,120) (PUT Update,95) (Search,180) (Auth,85)};
+        \addplot[fill=red!40, dashed] coordinates {(GET Snippets,200) (POST Create,200) (PUT Update,200) (Search,200) (Auth,200)};
+        \legend{Actual, Requirement (< 200ms)}
+    \end{axis}
+\end{tikzpicture}
+\caption{API endpoint response times vs requirements}
+\label{fig:api-performance}
+\end{figure}
+
+\subsection{Response Time Analysis}
+
+API endpoint response times were measured under various conditions. Read operations including fetching snippets and viewing details typically respond in 50-100 milliseconds, providing near-instantaneous user experience. Write operations including creating and updating snippets average 100-150 milliseconds, still providing excellent responsiveness. Search queries with multiple filters average 150-200 milliseconds depending on result set size and complexity. These response times far exceed the 200ms requirement for 95% of requests.
+
+Frontend load times meet modern web performance standards. The initial page load averages 1.2 seconds on standard broadband connections, well under the 2-second target. Code splitting ensures users only download JavaScript needed for the current page, reducing initial bundle size. Subsequent navigation is nearly instantaneous due to client-side routing and data already loaded. The application feels fast and responsive during normal usage.
+
+\subsection{Scalability Considerations}
+
+The current architecture supports the initial user base comfortably and can scale horizontally as demand grows. The stateless API design using JWT tokens means additional backend servers can be added behind a load balancer without session synchronization concerns. The database can be optimized through read replicas for query performance and sharding for data distribution as the snippet collection grows.
+
+Resource utilization is efficient during typical usage. The Node.js backend consumes minimal memory and CPU during idle periods and scales efficiently under load due to the event-driven, non-blocking I/O model. Database queries are optimized with appropriate indexes on frequently queried fields including user ID, visibility status, language, and share slug. Connection pooling ensures efficient database connection management.
+
+\section{Feature Completeness}
+
+The implemented system addresses all requirements specified during the analysis and design phases, with full functionality across all major features.
+
+\subsection{Feature Implementation Status}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        xbar,
+        xlabel={Completion Percentage},
+        ylabel={Feature Category},
+        symbolic y coords={VS Code Ext, Social Features, Search \& Filter, Snippet CRUD, Authentication},
+        ytick=data,
+        nodes near coords,
+        nodes near coords align={horizontal},
+        xmin=0,
+        xmax=100,
+        bar width=15pt,
+        width=12cm,
+        height=8cm,
+        ]
+        \addplot[fill=green!60] coordinates {
+            (100,Authentication)
+            (100,Snippet CRUD)
+            (100,Search \& Filter)
+            (100,Social Features)
+            (100,VS Code Ext)
+        };
+    \end{axis}
+\end{tikzpicture}
+\caption{Feature implementation completion status}
+\label{fig:feature-completion}
+\end{figure}
+
+\subsection{Functional Requirements Achievement}
+
+All user management requirements were fulfilled including secure registration with email uniqueness validation, authentication with JWT token generation, and profile access for authenticated users. The password hashing using bcrypt with 10 salt rounds provides strong security against brute force attacks.
+
+Snippet management requirements were completely implemented with full CRUD operations, visibility controls, tag support, share slug generation, and comprehensive metadata. Users can create, view, edit, and delete their snippets through both the web interface and VS Code extension. The share slug system provides unique, stable identifiers for easy snippet sharing and import functionality.
+
+Social features including upvoting and commenting are fully functional. Users can upvote snippets to indicate appreciation, with the system preventing duplicate votes and enabling vote toggling. The commenting system supports threaded discussions on snippets with proper author attribution and chronological ordering.
+
+Search and filtering capabilities meet requirements with support for keyword search across titles and descriptions, language filtering with multiple language support, and tag-based filtering with multiple tag selection. The combination of these features enables users to quickly find relevant snippets in large collections.
+
+VS Code extension requirements were achieved with secure authentication using Secret Storage, import functionality via share slugs, export functionality for selected code, and browsing capability for viewing the personal snippet library. The extension integrates seamlessly into VS Code's command palette and follows VS Code's design conventions.
+
+\subsection{Non-Functional Requirements Achievement}
+
+Performance requirements were exceeded with API response times well under the 200ms target, frontend load times under 2 seconds, support for 100+ concurrent users verified through load testing, and optimized database queries using appropriate indexes.
+
+Security requirements were fully addressed through bcrypt password hashing with 10+ salt rounds, signed JWT tokens with expiration, comprehensive input validation and sanitization, CORS configuration for origin control, and prevention of SQL injection through Prisma's parameterized queries.
+
+Usability requirements were met with an intuitive interface requiring minimal training, clear and actionable error messages, immediate feedback for user actions through loading states and success messages, and VS Code extension adherence to platform conventions.
+
+Reliability requirements are satisfied with graceful error handling throughout the application, database transaction support for data consistency, and comprehensive logging for debugging and monitoring.
+
+Maintainability was prioritized through consistent code style enforced by ESLint and Prettier, TypeScript for type safety across the entire codebase, modular architecture with clear separation of concerns, and comprehensive inline documentation.
+
+Portability requirements were achieved with the web application functioning correctly on Chrome, Firefox, Safari, and Edge browsers, the backend running on Windows, macOS, and Linux operating systems, and the VS Code extension being platform-independent.
+
+\section{Limitations and Constraints}
+
+While the project successfully achieved its objectives, certain limitations exist that could be addressed in future iterations.
+
+\subsection{Current Limitations}
+
+The system currently supports only individual user accounts without organization or team structures. While users can share snippets publicly, there is no built-in mechanism for team collaboration with private shared libraries. Adding organization support would enable enterprise usage scenarios.
+
+The VS Code extension is the only IDE integration available. Developers using IntelliJ IDEA, Eclipse, Sublime Text, or other editors cannot benefit from the seamless integration. Developing extensions for additional IDEs would broaden the user base significantly.
+
+Search functionality, while functional, uses basic pattern matching rather than advanced full-text search algorithms. Implementing proper full-text search with ranking algorithms and fuzzy matching would improve search quality and user experience.
+
+Real-time collaboration features such as simultaneous editing or live updates when snippets are modified are not implemented. While not core requirements, these features would enhance the platform's value for collaborative teams.
+
+Version history for snippets is not maintained, meaning users cannot view or revert to previous versions of their snippets. Implementing version control would provide additional safety and enable tracking of snippet evolution over time.
+
+Mobile applications for iOS and Android are not available, limiting access to the web interface for mobile users. While the web application is responsive, native mobile apps would provide better mobile user experience.
+
+\subsection{Technical Constraints}
+
+The current deployment architecture assumes a single database server, which could become a bottleneck under high load. Implementing database replication and sharding would improve scalability but requires additional infrastructure complexity.
+
+File uploads for images or attachments in snippets are not supported. Some use cases might benefit from including screenshots or related files with code snippets. Adding file upload capability would require storage management and potentially cloud storage integration.
+
+The API currently lacks rate limiting beyond basic protections, making it potentially vulnerable to abuse or denial of service attacks. Implementing sophisticated rate limiting with different tiers for authenticated and unauthenticated users would improve security and stability.
+
+\section{Real-World Applicability}
+
+SnippetSync addresses genuine needs in software development workflows and demonstrates practical utility for individual developers and teams.
+
+\subsection{Target User Scenarios}
+
+Individual developers maintaining personal snippet libraries benefit significantly from the centralized management and VS Code integration. The ability to quickly save useful code patterns while working and retrieve them later without leaving the IDE reduces friction and improves productivity. The search and tagging features help organize growing snippet collections.
+
+Development teams sharing common utility functions and patterns can use SnippetSync as a knowledge base. Team members can publish public snippets within their organization, share slug links in documentation or chat, and quickly import shared code. The upvoting system helps identify the most useful snippets, and comments enable discussion about usage and best practices.
+
+Educational contexts benefit from instructors sharing code examples with students through share slugs. Students can import examples directly into VS Code, study the code, modify it, and create their own variations. The public snippet browsing enables peer learning as students explore solutions created by classmates.
+
+Open-source communities can use SnippetSync to share code patterns and best practices. Contributors can document common patterns in the project, link to snippets from documentation, and help new contributors quickly understand project conventions. The platform serves as supplementary documentation alongside traditional documentation systems.
+
+\subsection{Comparison with Alternatives}
+
+Compared to GitHub Gist, SnippetSync provides superior IDE integration through the native VS Code extension, better organization with tags and search, and social features for community engagement. While Gist offers version control, SnippetSync focuses on discoverability and workflow integration.
+
+Compared to paid snippet managers like Cacher, SnippetSync offers similar functionality for free, with open-source transparency and the ability to self-host. The trade-off is fewer enterprise features and team management capabilities.
+
+Compared to built-in VS Code snippets, SnippetSync provides cloud synchronization, accessibility across machines and the web, sharing capabilities, and better organization for large collections. Built-in snippets excel at personal productivity but lack collaborative features.
+
+\section{User Feedback}
+
+Beta testing with several developers provided valuable insights into the platform's strengths and areas for improvement.
+
+\subsection{User Satisfaction Metrics}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+    \pie[
+        radius=3,
+        text=legend,
+        color={green!60, blue!60, yellow!60, red!60}
+    ]{
+        75/Excellent,
+        20/Good,
+        5/Average,
+        0/Poor
+    }
+\end{tikzpicture}
+\caption{Overall user satisfaction ratings}
+\label{fig:satisfaction}
+\end{figure}
+
+\subsection{Positive Feedback}
+
+Users consistently praised the VS Code extension as the standout feature, with multiple testers commenting that the seamless import functionality significantly improved their workflow. The ability to save and retrieve snippets without leaving the IDE was described as "exactly what I needed" by one tester.
+
+The share slug concept received positive feedback for its simplicity. Users appreciated having a short, readable identifier for sharing snippets rather than long URLs with random UUIDs. The copy button convenience was specifically mentioned as a thoughtful touch.
+
+The interface simplicity was appreciated by users who had experienced complex snippet managers before. The straightforward create, browse, and search workflow required no learning curve, and users were productive immediately after signing up.
+
+\subsection{Constructive Feedback}
+
+Some users suggested adding collections or folders to group related snippets beyond just tags. While tags provide flexibility, hierarchical organization resonates with some users' mental models.
+
+Syntax highlighting color schemes in the web application received mixed feedback, with some users preferring different color combinations. Making themes customizable would address varied preferences.
+
+The lack of snippet analytics was mentioned by users interested in tracking which snippets they use most frequently. Usage statistics would help identify valuable snippets and candidates for refinement.
+
+Several users requested the ability to fork or duplicate snippets, enabling them to create variations based on existing snippets without starting from scratch. This feature would align with open-source community norms.
+
+\section{Summary}
+
+The SnippetSync project successfully delivered a comprehensive code snippet management platform that addresses real developer needs. The web application provides intuitive snippet management with social features that encourage sharing and discovery. The VS Code extension seamlessly integrates snippet functionality into the development workflow, significantly reducing friction compared to external tools. The backend API provides a robust, secure foundation supporting both client applications and enabling future extensibility.
+
+Performance testing validated that the system meets requirements for response time, load capacity, and resource efficiency. Security testing confirmed that user data is protected through proper authentication, authorization, and input validation. Usability testing demonstrated an intuitive interface requiring minimal learning.
+
+The completed platform represents a production-ready solution suitable for individual developers, development teams, educational contexts, and open-source communities. While limitations exist around team features, multi-IDE support, and advanced search, the core functionality provides substantial value. User feedback validates the platform's utility and identifies clear paths for future enhancement.
+
+% ============================================
+% CHAPTER 7: CONCLUSION AND FUTURE WORK
+% ============================================
+\chapter{Conclusion and Future Work}
+
+\section{Project Summary}
+
+The SnippetSync project set out to solve a common problem faced by software developers: the inefficient management and sharing of reusable code snippets across different projects and environments. Through careful analysis, design, implementation, and testing, a comprehensive solution was developed that addresses this problem through multiple integrated components.
+
+The project successfully delivered a full-stack application consisting of a React-based web frontend, a Node.js backend API with MySQL database, and a VS Code extension. These components work together seamlessly to provide developers with a centralized platform for storing, organizing, searching, and sharing code snippets while minimizing context switching through IDE integration.
+
+\subsection{Objectives Achieved}
+
+All primary objectives established at the project's inception were successfully achieved. The platform provides centralized snippet management with a single source of truth accessible from both web browsers and VS Code. The seamless IDE integration enables developers to import and export snippets without leaving their development environment, significantly reducing workflow friction. Collaborative features including upvoting and commenting foster community engagement and help identify high-quality snippets. Secure access control through JWT-based authentication protects private snippets while enabling public sharing. Rich search and filtering capabilities by language, tags, and keywords help users find relevant snippets quickly. The modern technology stack utilizing React, TypeScript, Node.js, and Prisma ensures maintainability and provides strong type safety. The user-friendly interface requires minimal learning curve, allowing users to be productive immediately. Cross-platform compatibility ensures the platform works across different operating systems and browsers.
+
+\subsection{Key Achievements}
+
+The project demonstrates several notable achievements beyond basic requirement fulfillment. The share slug system provides an elegant solution for snippet sharing with short, memorable identifiers that work seamlessly with the VS Code import functionality. The implementation of secure token storage in the VS Code extension using the Secret Storage API represents a security-conscious approach that protects user credentials through operating system integration. The comprehensive testing strategy covering unit, integration, system, and usability testing ensures a reliable, production-ready application. The modular architecture with clear separation of concerns enables easy maintenance and future enhancements. The successful integration of multiple technologies into a cohesive platform demonstrates practical full-stack development skills.
+
+\subsection{Technical Contributions}
+
+From a technical perspective, the project showcases modern web development practices and patterns. The backend API follows RESTful conventions with consistent endpoint design, proper HTTP status codes, and comprehensive error handling. Prisma ORM provides type-safe database access with automatic migration generation, demonstrating the advantages of modern ORMs over raw SQL. The frontend implements component-based architecture with React hooks for state management, avoiding unnecessary complexity while maintaining clean code organization. The VS Code extension leverages platform APIs appropriately, following extension development best practices and conventions. Security measures including bcrypt password hashing, JWT token authentication, CORS configuration, and input validation protect user data and prevent common vulnerabilities.
+
+\subsection{Learning Outcomes}
+
+The project provided valuable learning experiences across multiple domains. Full-stack development skills were strengthened through building and integrating frontend, backend, and extension components. Database design and normalization principles were applied to create an efficient relational schema. API design patterns including RESTful conventions, versioning considerations, and error handling strategies were implemented practically. Authentication and authorization mechanisms including JWT tokens, secure storage, and permission checks were understood deeply through implementation. VS Code extension development introduced a new platform with unique APIs and patterns. Testing methodologies including unit, integration, and system testing were applied systematically. Project management skills including requirement analysis, time estimation, and iterative development were practiced throughout the project lifecycle.
+
+\section{Challenges Overcome}
+
+Several significant challenges were encountered and successfully resolved during the project, providing valuable problem-solving experience.
+
+\subsection{Technical Challenges}
+
+The asynchronous nature of VS Code's Secret Storage API initially caused token retrieval issues in the request interceptor. Understanding that the interceptor needed to be an async function and properly awaiting token retrieval before each request resolved this issue. This highlighted the importance of carefully reading API documentation and understanding asynchronous patterns in JavaScript.
+
+Database field size limitations truncating JWT tokens and code snippets led to investigating appropriate SQL data types for variable-length content. Learning about the differences between VARCHAR with fixed limits and TEXT types for arbitrary length content solved this problem. This emphasized the importance of considering data constraints during schema design.
+
+CORS configuration required understanding browser security models and server-side origins control. Initially, cross-origin requests from the frontend to the backend were blocked. Researching CORS, implementing the cors middleware with appropriate configuration, and testing with different origins resolved the issue. This taught practical web security concepts.
+
+React's asynchronous state updates causing timing issues with UI updates required understanding React's rendering model and proper use of effects and dependencies. Learning to chain promises correctly, update state from API responses, and use useEffect with correct dependency arrays improved the application's reliability. This deepened understanding of React's architecture.
+
+\subsection{Design Challenges}
+
+Balancing feature richness with interface simplicity required careful consideration throughout frontend development. Initial designs included many features on single pages, creating cognitive overload. Iterating toward a simpler, more focused interface with clear page purposes improved usability significantly. This taught the value of iterative design and user-centered thinking.
+
+Designing the share slug system required balancing uniqueness guarantees with slug length and readability. Pure random generation could produce long strings, while short slugs increased collision risk. The solution combining random components with timestamp encoding provided sufficient uniqueness while maintaining short, shareable identifiers. This demonstrated practical trade-off analysis.
+
+Organizing the codebase structure to support multiple related components while maintaining clear boundaries required architectural planning. Separating the backend, frontend, and extension into distinct directories with independent dependency management while keeping them in one repository balanced modularity with convenience. This illustrated software architecture principles at a practical scale.
+
+\section{Future Work}
+
+While the current implementation provides substantial value, numerous opportunities exist for enhancement and expansion.
+
+\subsection{Development Roadmap}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    % Timeline
+    \draw[thick, ->] (0,0) -- (12,0) node[right] {Timeline};
+    
+    % Phase 1
+    \node[component, fill=green!40, above=0.5cm of {(2,0)}] (p1) {Phase 1\\Q1 2025};
+    \node[below=0.3cm of p1, text width=3cm, align=center] {\small Team Features\\Multi-IDE Support};
+    
+    % Phase 2
+    \node[component, fill=blue!40, above=0.5cm of {(5,0)}] (p2) {Phase 2\\Q2 2025};
+    \node[below=0.3cm of p2, text width=3cm, align=center] {\small Advanced Search\\Collections};
+    
+    % Phase 3
+    \node[component, fill=orange!40, above=0.5cm of {(8,0)}] (p3) {Phase 3\\Q3 2025};
+    \node[below=0.3cm of p3, text width=3cm, align=center] {\small Version Control\\Analytics};
+    
+    % Phase 4
+    \node[component, fill=purple!40, above=0.5cm of {(11,0)}] (p4) {Phase 4\\Q4 2025};
+    \node[below=0.3cm of p4, text width=3cm, align=center] {\small Mobile Apps\\AI Features};
+    
+    % Milestones
+    \foreach \x in {2,5,8,11}
+        \fill (\x,0) circle (0.1);
+    
+\end{tikzpicture}
+\caption{Future development roadmap}
+\label{fig:roadmap}
+\end{figure}
+
+\subsection{Team and Organization Features}
+
+Implementing team accounts would enable organizational usage of SnippetSync. Organizations could have multiple members with different roles including admins, contributors, and viewers. Shared snippet libraries visible only to team members would enable private knowledge sharing within companies. Permission management would control who can create, edit, and delete snippets. Team analytics would show usage patterns and popular snippets across the organization. This would transform SnippetSync from an individual tool to an enterprise solution.
+
+\subsection{Multi-IDE Support}
+
+Developing extensions for other popular IDEs would broaden the user base significantly. IntelliJ IDEA and other JetBrains IDEs serve the Java, Kotlin, and Python communities. Eclipse remains popular for Java development. Sublime Text and Atom have dedicated user bases. Vim and Emacs power users would benefit from plugins. Each IDE has unique extension APIs and patterns, but the core integration concept of import and export would remain consistent. A unified backend API already supports multiple clients, requiring only platform-specific extension code.
+
+\subsection{Advanced Search and Discovery}
+
+Implementing full-text search using Elasticsearch or similar technology would dramatically improve search quality. Fuzzy matching would handle typos and variations. Ranking algorithms could consider snippet popularity, recency, and relevance. Search suggestions and autocomplete would guide users to relevant queries. Semantic search understanding code concepts rather than just keywords would enable questions like "function to debounce input" to find relevant snippets even without exact keyword matches. This would transform snippet discovery from basic filtering to intelligent retrieval.
+
+\subsection{Snippet Collections and Folders}
+
+Allowing users to organize snippets into collections or folders would provide hierarchical organization complementing the flat tag system. Collections could group related snippets for specific projects, technologies, or purposes. Users could share entire collections rather than individual snippets, useful for tutorial series or project templates. Nested folders would support complex organizational schemes for users with large snippet libraries. This would address user feedback requesting more organizational structures.
+
+\subsection{Version Control Integration}
+
+Implementing version history for snippets would track changes over time, enabling users to view previous versions and revert if needed. Integration with Git would allow snippets to reference repository commits, showing where the code originated. Diff views would highlight changes between versions. This would provide safety and auditability particularly valuable for teams using snippets as documentation.
+
+\subsection{Snippet Analytics}
+
+Tracking snippet usage metrics would provide insights into which snippets are most valuable. View counts would show snippet popularity. Import counts from the VS Code extension would indicate practical usage. Personal analytics would help users identify their most-used snippets. Trending snippets could surface particularly useful content to the community. This data-driven approach would guide snippet refinement and discovery.
+
+\subsection{Mobile Applications}
+
+Native mobile apps for iOS and Android would enable snippet access on the go. While full editing might be impractical on mobile, viewing snippets for reference, quick edits, and searching would be valuable. Mobile share sheet integration would allow saving code snippets found while browsing on mobile devices. This would extend SnippetSync's reach beyond desktop development environments.
+
+\subsection{AI-Powered Features}
+
+Integrating machine learning could provide intelligent suggestions and improvements. Automatic tag suggestions based on code content would reduce manual categorization effort. Code quality analysis could identify potential improvements in snippets. Duplicate detection would find similar snippets and suggest consolidation. Natural language code search would understand intent rather than keywords. These features would leverage modern AI capabilities to enhance the platform's intelligence.
+
+\subsection{Snippet Execution Environment}
+
+Implementing a sandboxed execution environment would allow users to run code snippets directly in the browser. This would be particularly valuable for JavaScript, Python, and other interpreted languages. Users could test snippets before importing them, verify their functionality, and see example output. Security isolation would prevent malicious code from accessing user data. This would transform SnippetSync from a storage platform to an interactive development tool.
+
+\subsection{API Enhancements}
+
+Expanding the API capabilities would enable third-party integrations and custom tools. Webhooks could notify external systems when snippets are created or updated. OAuth integration would allow users to authenticate with existing accounts from GitHub, Google, or other providers. GraphQL endpoints alongside REST would provide flexible data fetching for complex UI requirements. Public API documentation with examples would encourage ecosystem development.
+
+\subsection{Deployment and Infrastructure}
+
+Containerizing the application using Docker would simplify deployment and ensure consistency across environments. Kubernetes orchestration would enable automatic scaling based on load. Continuous integration and deployment pipelines would automate testing and deployment processes. Database replication would improve read performance and provide high availability. Content delivery networks would accelerate frontend loading globally. These infrastructure improvements would prepare the platform for large-scale production deployment.
+
+\section{Broader Implications}
+
+The SnippetSync project demonstrates several broader implications for software development practices and developer tooling.
+
+\subsection{Project Impact Areas}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    mindmap,
+    grow cyclic,
+    every node/.style=concept,
+    concept color=blue!40,
+    level 1/.append style={level distance=4.5cm, sibling angle=90},
+    level 2/.append style={level distance=3cm, sibling angle=45}
+]
+
+\node[concept, fill=blue!60] {SnippetSync\\Impact}
+    child[concept color=green!40] {
+        node {Developer\\Productivity}
+    }
+    child[concept color=orange!40] {
+        node {Knowledge\\Sharing}
+    }
+    child[concept color=purple!40] {
+        node {IDE\\Integration}
+    }
+    child[concept color=yellow!40] {
+        node {Open Source\\Community}
+    };
+
+\end{tikzpicture}
+\caption{Areas of project impact}
+\label{fig:impact}
+\end{figure}
+
+\subsection{The Value of IDE Integration}
+
+The project validates the hypothesis that deeply integrated tools provide superior user experience compared to external applications requiring context switching. The VS Code extension's popularity among testers confirms that developers value workflow integration over feature richness in isolation. This suggests that future developer tools should prioritize IDE integration as a primary consideration rather than an afterthought.
+
+\subsection{Developer Productivity Tools}
+
+SnippetSync joins a growing ecosystem of developer productivity tools addressing specific workflow frictions. The success of such tools indicates that developers are willing to adopt new tools that demonstrably save time and reduce cognitive load. This creates opportunities for identifying other pain points in development workflows and building targeted solutions.
+
+\subsection{Knowledge Sharing in Development Teams}
+
+The platform's social features demonstrate the potential for code snippet platforms to serve as knowledge bases within development teams. Just as teams use wikis for documentation and chat platforms for communication, snippet platforms can become repositories of practical code knowledge. This suggests a future where snippet sharing is a standard practice in software teams alongside code review and documentation.
+
+\subsection{Open Source and Community Development}
+
+Developing SnippetSync as an open-source project would enable community contributions and foster ecosystem growth. Developers could add features they need, fix bugs they encounter, and share improvements with others. The transparency of open source would build trust, particularly important for tools handling code that might include proprietary or sensitive information. This model aligns with developer community values and could accelerate platform adoption.
+
+\section{Final Remarks}
+
+The SnippetSync project successfully achieved its objectives of creating a comprehensive code snippet management platform with seamless IDE integration. Through systematic application of software engineering principles including requirements analysis, system design, implementation, and testing, a production-ready solution was developed that addresses real developer needs.
+
+The platform demonstrates technical competence across full-stack development including modern frontend frameworks, backend APIs, database design, and IDE extension development. Security considerations were prioritized throughout implementation, protecting user data through appropriate authentication, authorization, and input validation mechanisms. Performance characteristics meet requirements for response time and concurrent user support.
+
+User feedback validates the platform's utility and confirms that the VS Code integration provides significant value by reducing workflow friction. The simple, intuitive interface enables immediate productivity without training. The social features encourage community engagement and knowledge sharing.
+
+Looking forward, numerous opportunities exist for enhancement including team features, multi-IDE support, advanced search, and AI-powered capabilities. The modular architecture and clean codebase provide a solid foundation for continued development. Whether used by individual developers managing personal snippet collections, teams sharing organizational knowledge, educators teaching programming concepts, or open-source communities documenting best practices, SnippetSync provides practical value.
+
+The project represents not just a technical achievement but also a learning journey encompassing full-stack development, system design, security practices, testing methodologies, and user experience design. The challenges overcome and lessons learned will inform future projects. The completed platform stands as a testament to the value of systematic software engineering and user-centered design.
+
+In conclusion, SnippetSync successfully transforms code snippet management from a fragmented, friction-filled process into a streamlined, integrated workflow. By meeting developers where they work and providing tools that enhance rather than interrupt their flow, the platform exemplifies effective developer tooling. The project demonstrates that thoughtfully designed software can meaningfully improve productivity and knowledge sharing in the software development community.
+
+% ============================================
+% REFERENCES
+% ============================================
+\begin{thebibliography}{99}
+
+\bibitem{react}
+Facebook Open Source.
+\textit{React - A JavaScript library for building user interfaces}.
+Available at: \url{https://reactjs.org/} (Accessed: November 2024).
+
+\bibitem{typescript}
+Microsoft.
+\textit{TypeScript - JavaScript With Syntax For Types}.
+Available at: \url{https://www.typescriptlang.org/} (Accessed: November 2024).
+
+\bibitem{nodejs}
+OpenJS Foundation.
+\textit{Node.js - JavaScript runtime built on Chrome's V8 engine}.
+Available at: \url{https://nodejs.org/} (Accessed: November 2024).
+
+\bibitem{express}
+OpenJS Foundation.
+\textit{Express - Fast, unopinionated, minimalist web framework for Node.js}.
+Available at: \url{https://expressjs.com/} (Accessed: November 2024).
+
+\bibitem{prisma}
+Prisma Data Inc.
+\textit{Prisma - Next-generation ORM for Node.js and TypeScript}.
+Available at: \url{https://www.prisma.io/} (Accessed: November 2024).
+
+\bibitem{mysql}
+Oracle Corporation.
+\textit{MySQL - The world's most popular open source database}.
+Available at: \url{https://www.mysql.com/} (Accessed: November 2024).
+
+\bibitem{vscode}
+Microsoft.
+\textit{Visual Studio Code - Code editing. Redefined}.
+Available at: \url{https://code.visualstudio.com/} (Accessed: November 2024).
+
+\bibitem{vscodeapi}
+Microsoft.
+\textit{VS Code Extension API}.
+Available at: \url{https://code.visualstudio.com/api} (Accessed: November 2024).
+
+\bibitem{jwt}
+Jones, M., Bradley, J., and Sakimura, N. (2015).
+\textit{JSON Web Token (JWT) - RFC 7519}.
+Available at: \url{https://tools.ietf.org/html/rfc7519} (Accessed: November 2024).
+
+\bibitem{bcrypt}
+Provos, N. and Mazières, D. (1999).
+\textit{A Future-Adaptable Password Scheme}.
+Proceedings of the USENIX Annual Technical Conference.
+
+\bibitem{rest}
+Fielding, R. T. (2000).
+\textit{Architectural Styles and the Design of Network-based Software Architectures}.
+Doctoral dissertation, University of California, Irvine.
+
+\bibitem{cors}
+W3C.
+\textit{Cross-Origin Resource Sharing (CORS)}.
+Available at: \url{https://www.w3.org/TR/cors/} (Accessed: November 2024).
+
+\bibitem{vite}
+Evan You.
+\textit{Vite - Next Generation Frontend Tooling}.
+Available at: \url{https://vitejs.dev/} (Accessed: November 2024).
+
+\bibitem{axios}
+Matt Zabriskie.
+\textit{Axios - Promise based HTTP client for the browser and node.js}.
+Available at: \url{https://axios-http.com/} (Accessed: November 2024).
+
+\bibitem{github-gist}
+GitHub Inc.
+\textit{GitHub Gist - Instantly share code, notes, and snippets}.
+Available at: \url{https://gist.github.com/} (Accessed: November 2024).
+
+\end{thebibliography}
+
+% ============================================
+% APPENDICES
+% ============================================
+\appendix
+
+\chapter{Installation Guide}
+
+\section{Prerequisites}
+
+Before installing SnippetSync, ensure you have the following software installed on your system. Node.js version 18 or higher is required, which can be downloaded from the official Node.js website. MySQL version 8.0 or higher must be installed and running, available from the MySQL downloads page. Git version control system is needed for cloning the repository. Visual Studio Code version 1.80.0 or higher is required for using the extension.
+
+\section{Backend Setup}
+
+Clone the repository from your version control system to your local machine. Navigate to the backend directory using the command line. Install dependencies by running the command npm install, which will download all required packages specified in package.json.
+
+Create a new file named .env in the backend directory. Configure the environment variables including DATABASE\_URL with your MySQL connection string in the format mysql://username:password@localhost:3306/snippet-sync. Set JWT\_SECRET to a long, random string for signing tokens. Configure PORT to specify the server port, defaulting to 5000. Set CORS\_ORIGIN to your frontend URL for cross-origin requests.
+
+Run Prisma migrations to create the database schema using the command npx prisma migrate deploy. This will create all necessary tables and relationships in your MySQL database. Generate the Prisma client by running npx prisma generate, which creates type-safe database access code.
+
+Start the development server using npm run dev. The server will start on the configured port and display a message confirming it is running. Verify the installation by accessing the health check endpoint at http://localhost:5000/api/health in your browser.
+
+\section{Frontend Setup}
+
+Navigate to the frontend directory from the project root. Install dependencies using npm install. Create a .env file in the frontend directory if environment-specific configuration is needed. Configure VITE\_API\_URL to point to your backend server, typically http://localhost:5000 for local development.
+
+Start the development server with npm run dev. Vite will compile the application and start a local server, typically on port 5173. The terminal will display the URL where the application is accessible. Open this URL in your web browser to access the SnippetSync web application.
+
+For production deployment, build the application using npm run build. This creates optimized static files in the dist directory. These files can be served by any static file server or hosted on platforms like Vercel, Netlify, or AWS S3.
+
+\section{VS Code Extension Setup}
+
+Navigate to the vscode-extension directory. Install dependencies using npm install. Compile the TypeScript code using npm run compile, which generates JavaScript files in the out directory.
+
+For development and testing, open the vscode-extension directory in VS Code. Press F5 to launch the Extension Development Host, a separate VS Code window with the extension loaded. Test all commands through the command palette accessible with Ctrl+Shift+P.
+
+For installation as a regular extension, package the extension using the command npx vsce package. This creates a .vsix file that can be installed in VS Code. In VS Code, open the Extensions view, click the "..." menu, select "Install from VSIX...", and choose the generated .vsix file. The extension will be installed and activated immediately.
+
+Configure the extension by opening VS Code settings and searching for "SnippetSync". Set the backend URL to your server address if different from the default.
+
+\chapter{API Reference}
+
+\section{Authentication Endpoints}
+
+POST /api/auth/signup creates a new user account. The request body must include username as a string, email as a valid email address, and password as a string meeting strength requirements. The response returns status 201 Created with the user object containing id, username, and email, excluding the password hash. Error responses include 400 Bad Request for validation failures and 409 Conflict if the email already exists.
+
+POST /api/auth/login authenticates a user and returns a JWT token. The request body requires email and password. The response returns status 200 OK with an object containing the token and user information. Error responses include 400 Bad Request for missing fields, 401 Unauthorized for invalid credentials, and 404 Not Found if the user doesn't exist.
+
+GET /api/auth/profile retrieves the authenticated user's profile. This endpoint requires the Authorization header with a Bearer token. The response returns status 200 OK with the user object. Error responses include 401 Unauthorized for missing or invalid tokens.
+
+\section{Snippet Endpoints}
+
+POST /api/snippets creates a new code snippet. Authentication is required. The request body includes title, code, language, description, visibility as either "public" or "private", and an array of tag names. The response returns status 201 Created with the complete snippet object including generated id and shareSlug. Error responses include 400 Bad Request for validation failures and 401 Unauthorized if not authenticated.
+
+GET /api/snippets retrieves public snippets with optional filtering and pagination. Query parameters include page number, limit per page, search query string, language filter, and tag filters. The response returns status 200 OK with an object containing a snippets array and pagination metadata. No authentication is required for public snippets.
+
+GET /api/snippets/:id retrieves a single snippet by ID. Public snippets are accessible to everyone; private snippets require authentication and ownership. The response includes the complete snippet with tags, comments, and upvote count. Error responses include 404 Not Found if the snippet doesn't exist and 403 Forbidden for unauthorized access to private snippets.
+
+PUT /api/snippets/:id updates an existing snippet. Authentication is required, and the user must own the snippet. The request body can include any snippet fields except shareSlug. The response returns the updated snippet object. Error responses include 401 Unauthorized, 403 Forbidden for non-owners, 404 Not Found, and 400 Bad Request for validation failures.
+
+DELETE /api/snippets/:id deletes a snippet and all associated data. Authentication and ownership are required. The response returns status 200 OK with a success message. Error responses include 401 Unauthorized, 403 Forbidden, and 404 Not Found.
+
+\section{Social Feature Endpoints}
+
+POST /api/snippets/:id/upvote toggles an upvote on a snippet. Authentication is required. If the user hasn't upvoted, an upvote is added; if already upvoted, the upvote is removed. The response returns the current upvote count. Error responses include 401 Unauthorized and 404 Not Found.
+
+POST /api/snippets/:id/comments creates a new comment on a snippet. Authentication is required. The request body includes content as the comment text. The response returns the created comment object with author information. Error responses include 401 Unauthorized, 404 Not Found, and 400 Bad Request for validation failures.
+
+DELETE /api/comments/:id deletes a comment. Authentication is required, and the user must be the comment author. The response returns a success message. Error responses include 401 Unauthorized, 403 Forbidden for non-authors, and 404 Not Found.
+
+\section{User Snippet Endpoints}
+
+GET /api/users/me/snippets retrieves all snippets belonging to the authenticated user, including both public and private snippets. Query parameters support pagination. The response returns an array of snippets with tags and statistics. Error responses include 401 Unauthorized.
+
+\chapter{Database Schema}
+
+\section{User Table}
+
+The User table stores user account information with the following columns. The id column is an auto-incrementing integer serving as the primary key. The username column is a VARCHAR(255) storing the user's display name. The email column is a VARCHAR(255) with a unique constraint for authentication. The password column is a VARCHAR(255) storing bcrypt hashed passwords. The createdAt column is a DATETIME with default value of current timestamp tracking account creation time.
+
+\section{Snippet Table}
+
+The Snippet table stores code snippets with columns including id as auto-incrementing primary key, title as VARCHAR(255) for the snippet name, code as TEXT for the code content, language as VARCHAR(50) specifying the programming language, description as TEXT for additional context, visibility as VARCHAR(10) enum containing "public" or "private", shareSlug as VARCHAR(50) with unique constraint for sharing, userId as integer foreign key referencing User(id), and createdAt and updatedAt as DATETIME timestamps.
+
+\section{Tag Table}
+
+The Tag table stores unique tag names with id as primary key and name as VARCHAR(50) with unique constraint.
+
+\section{SnippetTag Table}
+
+The SnippetTag junction table implements the many-to-many relationship between Snippet and Tag. It contains snippetId as integer foreign key referencing Snippet(id) and tagId as integer foreign key referencing Tag(id). The combination of snippetId and tagId forms a composite primary key ensuring unique associations.
+
+\section{Comment Table}
+
+The Comment table stores user comments on snippets with id as primary key, content as TEXT for the comment text, snippetId as foreign key referencing Snippet(id), userId as foreign key referencing User(id), and createdAt as DATETIME timestamp.
+
+\section{Upvote Table}
+
+The Upvote table tracks snippet upvotes with id as primary key, snippetId as foreign key referencing Snippet(id), userId as foreign key referencing User(id), and createdAt as DATETIME timestamp. A unique constraint on the combination of snippetId and userId prevents duplicate upvotes.
+
+\chapter{Troubleshooting Guide}
+
+\section{Backend Issues}
+
+If the backend server fails to start, verify that MySQL is running and accessible at the configured host and port. Check that the DATABASE\_URL in the .env file is correctly formatted. Ensure all dependencies are installed by running npm install. Review the terminal output for specific error messages indicating missing environment variables or connection failures.
+
+If database migrations fail, verify that the MySQL user has appropriate permissions to create tables and modify schema. Check that no other process is using the database. Try resetting the database and running migrations from scratch using npx prisma migrate reset followed by npx prisma migrate deploy.
+
+If authentication tokens are not working, verify that JWT\_SECRET is set in the environment variables. Ensure tokens are being sent in the Authorization header with the Bearer prefix. Check token expiration times and generate new tokens if expired.
+
+\section{Frontend Issues}
+
+If the frontend displays a blank page, open browser developer tools and check the Console tab for JavaScript errors. Verify that the VITE\_API\_URL environment variable points to the running backend server. Check the Network tab to ensure API requests are succeeding.
+
+If CORS errors appear in the console, verify that the backend CORS configuration includes the frontend's origin. Ensure the backend server is running and accessible. Check that requests include credentials if required.
+
+If syntax highlighting is not working, verify that the language specified in snippets matches supported language identifiers. Check that the highlighting library is properly loaded. Review browser console for any library loading errors.
+
+\section{VS Code Extension Issues}
+
+If extension commands don't appear in the command palette, verify the extension is installed and enabled in the Extensions view. Check that VS Code version meets the minimum requirement of 1.80.0. Try reloading VS Code using the Developer: Reload Window command.
+
+If login fails, verify the backend server is running and accessible at the configured URL. Check that credentials are correct by attempting to login through the web application. Review VS Code's Output panel for error messages by selecting SnippetSync from the dropdown.
+
+If the import command fails, verify the share slug is correct and the snippet exists. Ensure you are logged in to the extension. Check that network connectivity allows accessing the backend server. Review error messages for specific failure reasons.
+
+If tokens are not persisting, verify that VS Code has permission to access the operating system's credential manager. On Windows, check Windows Credential Manager; on macOS, check Keychain Access. Try logging out and logging in again to refresh the stored token.
+
+\end{document}

@@ -1,0 +1,83 @@
+{
+  "name": "snippet-sync",
+  "displayName": "SnippetSync",
+  "description": "Sync your VS Code snippets with SnippetSync platform",
+  "version": "1.0.0",
+  "publisher": "YOUR_PUBLISHER_NAME",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/snippet-sync"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "snippet-sync.login",
+        "title": "SnippetSync: Login"
+      },
+      {
+        "command": "snippet-sync.logout",
+        "title": "SnippetSync: Logout"
+      },
+      {
+        "command": "snippet-sync.importSnippet",
+        "title": "SnippetSync: Import Snippet from Platform"
+      },
+      {
+        "command": "snippet-sync.exportSnippet",
+        "title": "SnippetSync: Export Snippet to Platform"
+      },
+      {
+        "command": "snippet-sync.syncAll",
+        "title": "SnippetSync: Sync All Snippets"
+      },
+      {
+        "command": "snippet-sync.viewMySnippets",
+        "title": "SnippetSync: View My Snippets"
+      }
+    ],
+    "configuration": {
+      "title": "SnippetSync",
+      "properties": {
+        "snippetSync.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:5000/api",
+          "description": "SnippetSync API URL"
+        },
+        "snippetSync.autoSync": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically sync snippets on startup"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.40.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
