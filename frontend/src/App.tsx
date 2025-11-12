@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import Home from './pages/Home';
+import Landing from './pages/Landing';
+import Explore from './pages/Explore';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateSnippet from './pages/CreateSnippet.tsx';
@@ -35,7 +36,7 @@ function Navbar() {
           <h2 style={{ color: '#007bff', margin: 0 }}>📝 SnippetSync</h2>
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
-          <Link to="/"><button style={{ background: 'transparent', color: '#333' }}>🏠 Home</button></Link>
+          <Link to="/explore"><button style={{ background: 'transparent', color: '#333' }}>🔍 Explore</button></Link>
           {user ? (
             <>
               <Link to="/my-snippets"><button style={{ background: 'transparent', color: '#333' }}>📚 My Snippets</button></Link>
@@ -71,7 +72,8 @@ function App() {
           <Navbar />
           <div className="container">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/explore" element={<Explore />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/snippet/:id" element={<SnippetDetail />} />
