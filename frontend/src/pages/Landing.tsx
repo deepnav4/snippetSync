@@ -1,309 +1,427 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './Landing.css';
 
-function Landing() {
-  const { user } = useAuth();
-
+export default function Landing() {
   return (
-    <div className="landing-page">
+    <div className="bg-white">
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-icon">✨</span>
-            <span>Your Personal Code Library</span>
-          </div>
-          
-          <h1 className="hero-title">
-            Manage & Share Your
-            <span className="gradient-text"> Code Snippets</span>
-            <br />
-            Seamlessly
-          </h1>
-          
-          <p className="hero-description">
-            SnippetSync helps developers organize, share, and access code snippets instantly. 
-            With VS Code integration and powerful search, never lose a snippet again.
-          </p>
-          
-          <div className="hero-buttons">
-            {user ? (
-              <>
-                <Link to="/explore" className="btn btn-primary btn-large">
-                  <span>🚀 Explore Snippets</span>
+      <section className="bg-gray-100 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Store, Share & Sync Your Code
+                <span className="block mt-2 bg-[#B9FF66] inline-block px-3 py-1">Snippets</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                The ultimate platform for developers to organize, share, and access code snippets. 
+                Import directly into VS Code with one click.
+              </p>
+              <div className="flex gap-4">
+                <Link to="/signup">
+                  <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                    Get Started Free
+                  </button>
                 </Link>
-                <Link to="/create" className="btn btn-secondary btn-large">
-                  <span>➕ Create Snippet</span>
+                <Link to="/guide">
+                  <button className="px-8 py-4 bg-white text-gray-900 font-bold text-lg rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                    View Guide →
+                  </button>
                 </Link>
-              </>
-            ) : (
-              <>
-                <Link to="/signup" className="btn btn-primary btn-large">
-                  <span>Get Started Free</span>
-                  <span className="btn-arrow">→</span>
-                </Link>
-                <Link to="/explore" className="btn btn-secondary btn-large">
-                  <span>Browse Public Snippets</span>
-                </Link>
-              </>
-            )}
-          </div>
-
-          <div className="hero-stats">
-            <div className="stat-item">
-              <div className="stat-number">1000+</div>
-              <div className="stat-label">Code Snippets</div>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <div className="stat-number">50+</div>
-              <div className="stat-label">Languages</div>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <div className="stat-number">500+</div>
-              <div className="stat-label">Developers</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-visual">
-          <div className="code-window">
-            <div className="window-header">
-              <div className="window-dots">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
               </div>
-              <div className="window-title">snippet.js</div>
             </div>
-            <div className="window-content">
-              <pre><code>{`// Quick sort algorithm
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[8px_8px_0_#191A23]">
+              <pre className="bg-gray-900 text-[#B9FF66] p-6 rounded-xl font-mono text-sm overflow-x-auto">
+{`// Save your code snippets
 function quickSort(arr) {
   if (arr.length <= 1) return arr;
   
-  const pivot = arr[0];
-  const left = [];
-  const right = [];
+  const pivot = arr[arr.length - 1];
+  const left = arr.filter((x, i) => 
+    x <= pivot && i < arr.length - 1
+  );
+  const right = arr.filter(x => x > pivot);
   
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i]);
-    } else {
-      right.push(arr[i]);
-    }
-  }
-  
-  return [
-    ...quickSort(left),
-    pivot,
-    ...quickSort(right)
-  ];
-}`}</code></pre>
+  return [...quickSort(left), 
+          pivot, 
+          ...quickSort(right)];
+}`}
+              </pre>
+              <div className="mt-4 text-center">
+                <span className="text-sm text-gray-600">Import to VS Code with share code:</span>
+                <code className="block mt-2 bg-[#B9FF66] text-gray-900 px-4 py-2 rounded-lg font-bold text-xl border-2 border-gray-900">
+                  ABC123
+                </code>
+              </div>
             </div>
-          </div>
-          
-          <div className="floating-card card-1">
-            <div className="card-icon">⚡</div>
-            <div className="card-text">Lightning Fast Search</div>
-          </div>
-          
-          <div className="floating-card card-2">
-            <div className="card-icon">🔒</div>
-            <div className="card-text">Secure & Private</div>
-          </div>
-          
-          <div className="floating-card card-3">
-            <div className="card-icon">🎯</div>
-            <div className="card-text">VS Code Integration</div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="features-section">
-        <div className="section-header">
-          <h2 className="section-title">
-            Everything You Need to
-            <span className="gradient-text"> Manage Code</span>
-          </h2>
-          <p className="section-description">
-            Powerful features designed for developers who value efficiency
-          </p>
-        </div>
-
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">
-              <span className="icon-emoji">💾</span>
-            </div>
-            <h3 className="feature-title">Store & Organize</h3>
-            <p className="feature-description">
-              Keep all your code snippets in one place. Organize with tags, search instantly, and never lose a snippet again.
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+              Why Choose <span className="bg-[#B9FF66] px-2">SnippetSync</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to manage your code snippets efficiently
             </p>
           </div>
 
-          <div className="feature-card feature-highlight">
-            <div className="feature-badge">Most Popular</div>
-            <div className="feature-icon">
-              <span className="icon-emoji">🔌</span>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">⚡</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">VS Code Integration</h3>
+              <p className="text-gray-600 mb-4">
+                Import and export snippets directly from VS Code. No more copy-pasting between browser and editor.
+              </p>
+              <Link to="/guide" className="text-gray-900 font-bold hover:text-[#B9FF66]">
+                Learn More →
+              </Link>
             </div>
-            <h3 className="feature-title">VS Code Extension</h3>
-            <p className="feature-description">
-              Import and export snippets directly in VS Code. No context switching. Just a share slug and you're done.
-            </p>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <span className="icon-emoji">🌐</span>
+            {/* Feature 2 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">🔒</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Public & Private</h3>
+              <p className="text-gray-600 mb-4">
+                Share snippets publicly with the community or keep them private for personal use. Full control over visibility.
+              </p>
+              <Link to="/explore" className="text-gray-900 font-bold hover:text-[#B9FF66]">
+                Explore Snippets →
+              </Link>
             </div>
-            <h3 className="feature-title">Share Publicly</h3>
-            <p className="feature-description">
-              Share snippets with the community or keep them private. Get feedback through comments and upvotes.
-            </p>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <span className="icon-emoji">🔍</span>
+            {/* Feature 3 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">🏷️</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Smart Organization</h3>
+              <p className="text-gray-600 mb-4">
+                Tag, search, and filter your snippets by language. Find what you need in seconds, not minutes.
+              </p>
+              <Link to="/signup" className="text-gray-900 font-bold hover:text-[#B9FF66]">
+                Get Started →
+              </Link>
             </div>
-            <h3 className="feature-title">Advanced Search</h3>
-            <p className="feature-description">
-              Filter by language, tags, or search by keywords. Find exactly what you need in seconds.
-            </p>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <span className="icon-emoji">🎨</span>
+            {/* Feature 4 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">🔗</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Share Codes</h3>
+              <p className="text-gray-600 mb-4">
+                Generate temporary share codes (valid 5 mins) to safely share snippets with teammates without exposing your account.
+              </p>
             </div>
-            <h3 className="feature-title">Syntax Highlighting</h3>
-            <p className="feature-description">
-              Beautiful code rendering with support for 50+ programming languages. Read code comfortably.
-            </p>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <span className="icon-emoji">🔐</span>
+            {/* Feature 5 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">👥</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Community Driven</h3>
+              <p className="text-gray-600 mb-4">
+                Discover, upvote, and comment on snippets from developers worldwide. Learn from the best code examples.
+              </p>
             </div>
-            <h3 className="feature-title">Secure & Private</h3>
-            <p className="feature-description">
-              Your private snippets stay private. Bank-level encryption and secure authentication protect your code.
-            </p>
+
+            {/* Feature 6 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
+              <div className="text-5xl mb-4">📊</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Track Everything</h3>
+              <p className="text-gray-600 mb-4">
+                View your stats, most used languages, top snippets, and contribution history. Monitor your coding library growth.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="how-it-works-section">
-        <div className="section-header">
-          <h2 className="section-title">
-            How It
-            <span className="gradient-text"> Works</span>
-          </h2>
-          <p className="section-description">
-            Get started in minutes, not hours
-          </p>
+      {/* How It Works */}
+      <section className="py-20 px-4 bg-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+              How It <span className="bg-[#B9FF66] px-2">Works</span>
+            </h2>
+            <p className="text-xl text-gray-600">Simple 3-step process to get started</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="bg-[#B9FF66] text-gray-900 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold border-2 border-gray-900 mb-6">
+                01
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Create Account</h3>
+              <p className="text-gray-600 mb-4">
+                Sign up for free in seconds. No credit card required. Start with unlimited public and private snippets.
+              </p>
+              <Link to="/signup">
+                <button className="w-full px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+                  Sign Up Now
+                </button>
+              </Link>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="bg-[#B9FF66] text-gray-900 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold border-2 border-gray-900 mb-6">
+                02
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Install Extension</h3>
+              <p className="text-gray-600 mb-4">
+                Install our VS Code extension from the marketplace. Login once and start syncing your code snippets instantly.
+              </p>
+              <Link to="/guide">
+                <button className="w-full px-6 py-3 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900">
+                  View Guide
+                </button>
+              </Link>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="bg-[#B9FF66] text-gray-900 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold border-2 border-gray-900 mb-6">
+                03
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Start Syncing</h3>
+              <p className="text-gray-600 mb-4">
+                Export snippets with Ctrl+Shift+E, import with share codes, browse your library - all from VS Code!
+              </p>
+              <Link to="/explore">
+                <button className="w-full px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+                  Explore Now
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div className="steps-container">
-          <div className="step-card">
-            <div className="step-number">1</div>
-            <div className="step-content">
-              <h3 className="step-title">Sign Up Free</h3>
-              <p className="step-description">
-                Create your account in seconds. No credit card required.
+      {/* VS Code Integration Highlight */}
+      <section className="py-20 px-4 bg-[#B9FF66]">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white border-2 border-gray-900 rounded-2xl p-12 shadow-[8px_8px_0_#191A23]">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  Seamless VS Code Integration
+                </h2>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <span className="text-2xl">✅</span>
+                    <div>
+                      <strong className="text-gray-900">Export Selected Code</strong>
+                      <p className="text-gray-600">Press Ctrl+Shift+E to instantly save any code selection</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-2xl">✅</span>
+                    <div>
+                      <strong className="text-gray-900">Import with Share Codes</strong>
+                      <p className="text-gray-600">Use 6-character codes to import snippets in seconds</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-2xl">✅</span>
+                    <div>
+                      <strong className="text-gray-900">Browse Your Library</strong>
+                      <p className="text-gray-600">Access all your snippets without leaving VS Code</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-2xl">✅</span>
+                    <div>
+                      <strong className="text-gray-900">Auto Language Detection</strong>
+                      <p className="text-gray-600">Automatically detects and tags the programming language</p>
+                    </div>
+                  </li>
+                </ul>
+                <Link to="/guide">
+                  <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                    Read Full Guide →
+                  </button>
+                </Link>
+              </div>
+              <div className="bg-gray-900 border-2 border-gray-900 rounded-xl p-6">
+                <div className="bg-gray-800 text-white px-4 py-2 rounded-t-lg mb-4 font-mono text-sm">
+                  📁 VS Code - Extension Demo
+                </div>
+                <pre className="text-[#000] font-mono text-sm leading-relaxed">
+{`> SnippetSync: Export Selection
+
+✓ Code exported successfully!
+  Title: "Quick Sort Algorithm"
+  Language: JavaScript
+  Share Code: XYZ789 (expires in 5m)
+
+> SnippetSync: Import Snippet
+
+Enter share code: ABC123
+✓ Snippet imported at cursor!`}
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+              Loved by <span className="bg-[#B9FF66] px-2">Developers</span>
+            </h2>
+            <p className="text-xl text-gray-600">See what our users are saying</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                  S
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">Sarah Chen</div>
+                  <div className="text-sm text-gray-600">Full Stack Developer</div>
+                </div>
+              </div>
+              <div className="text-yellow-500 text-xl mb-3">★★★★★</div>
+              <p className="text-gray-700 italic">
+                "The VS Code integration is a game-changer! I used to waste so much time copying snippets between browser and editor. Now it's instant."
+              </p>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                  M
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">Michael Rodriguez</div>
+                  <div className="text-sm text-gray-600">Senior Engineer</div>
+                </div>
+              </div>
+              <div className="text-yellow-500 text-xl mb-3">★★★★★</div>
+              <p className="text-gray-700 italic">
+                "Finally, a snippet manager that actually works! The share codes feature is perfect for team collaboration. Highly recommend!"
+              </p>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                  A
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">Aisha Patel</div>
+                  <div className="text-sm text-gray-600">Freelance Developer</div>
+                </div>
+              </div>
+              <div className="text-yellow-500 text-xl mb-3">★★★★★</div>
+              <p className="text-gray-700 italic">
+                "I've tried many snippet tools, but SnippetSync is by far the best. Clean UI, fast sync, and the tagging system is perfect for organization."
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="step-arrow">→</div>
-
-          <div className="step-card">
-            <div className="step-number">2</div>
-            <div className="step-content">
-              <h3 className="step-title">Add Your Snippets</h3>
-              <p className="step-description">
-                Create snippets from the web or directly in VS Code.
-              </p>
+      {/* Stats Section */}
+      <section className="py-20 px-4 bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-5xl font-bold text-[#B9FF66] mb-2">10K+</div>
+              <div className="text-white">Active Users</div>
             </div>
-          </div>
-
-          <div className="step-arrow">→</div>
-
-          <div className="step-card">
-            <div className="step-number">3</div>
-            <div className="step-content">
-              <h3 className="step-title">Access Anywhere</h3>
-              <p className="step-description">
-                Use your snippets on any device, anytime you need them.
-              </p>
+            <div>
+              <div className="text-5xl font-bold text-[#B9FF66] mb-2">50K+</div>
+              <div className="text-white">Snippets Shared</div>
+            </div>
+            <div>
+              <div className="text-5xl font-bold text-[#B9FF66] mb-2">100K+</div>
+              <div className="text-white">Code Imports</div>
+            </div>
+            <div>
+              <div className="text-5xl font-bold text-[#B9FF66] mb-2">24/7</div>
+              <div className="text-white">Available</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
-        <div className="cta-content">
-          <h2 className="cta-title">
-            Ready to Boost Your
-            <span className="gradient-text"> Productivity?</span>
+      <section className="py-20 px-4 bg-[#B9FF66]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            Ready to Organize Your Code?
           </h2>
-          <p className="cta-description">
+          <p className="text-2xl text-gray-900 mb-8">
             Join thousands of developers who trust SnippetSync for their code management
           </p>
-          <div className="cta-buttons">
-            {user ? (
-              <Link to="/create" className="btn btn-primary btn-large">
-                <span>Create Your First Snippet</span>
-                <span className="btn-arrow">→</span>
-              </Link>
-            ) : (
-              <>
-                <Link to="/signup" className="btn btn-primary btn-large">
-                  <span>Start Free Today</span>
-                  <span className="btn-arrow">→</span>
-                </Link>
-                <Link to="/explore" className="btn btn-outline btn-large">
-                  <span>Explore Snippets</span>
-                </Link>
-              </>
-            )}
+          <div className="flex justify-center gap-4">
+            <Link to="/signup">
+              <button className="px-10 py-5 bg-gray-900 text-white font-bold text-xl rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
+                Start Free Today
+              </button>
+            </Link>
+            <Link to="/explore">
+              <button className="px-10 py-5 bg-white text-gray-900 font-bold text-xl rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
+                Explore Snippets
+              </button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="landing-footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <h3>📝 SnippetSync</h3>
-            <p>Manage your code snippets with ease</p>
-          </div>
-          <div className="footer-links">
-            <div className="footer-column">
-              <h4>Product</h4>
-              <Link to="/explore">Explore</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/login">Login</Link>
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="text-2xl font-bold mb-4">
+                <span className="bg-[#B9FF66] text-gray-900 px-2 py-1 rounded">Snippet</span>
+                <span>Sync</span>
+              </div>
+              <p className="text-gray-400">
+                The ultimate code snippet manager for modern developers.
+              </p>
             </div>
-            <div className="footer-column">
-              <h4>Resources</h4>
-              <a href="#features">Features</a>
-              <a href="#how-it-works">How It Works</a>
+            <div>
+              <h3 className="font-bold mb-4">Product</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link to="/explore" className="hover:text-[#B9FF66]">Explore</Link></li>
+                <li><Link to="/guide" className="hover:text-[#B9FF66]">Guide</Link></li>
+                <li><Link to="/signup" className="hover:text-[#B9FF66]">Sign Up</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-4">Resources</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-[#B9FF66]">Documentation</a></li>
+                <li><a href="#" className="hover:text-[#B9FF66]">API Reference</a></li>
+                <li><a href="#" className="hover:text-[#B9FF66]">Support</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-4">Connect</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-[#B9FF66]">GitHub</a></li>
+                <li><a href="#" className="hover:text-[#B9FF66]">Twitter</a></li>
+                <li><a href="#" className="hover:text-[#B9FF66]">Discord</a></li>
+              </ul>
             </div>
           </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; 2024 SnippetSync. Built with ❤️ for developers.</p>
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+            <p>© 2025 SnippetSync. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
   );
 }
-
-export default Landing;

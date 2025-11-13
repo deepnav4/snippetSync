@@ -3,14 +3,14 @@ import * as snippetService from '../services/snippetService';
 import { sendSuccess, sendError } from '../utils/response';
 
 /**
- * Create a new snippet
+ * Create a new snippet with temporary share code
  */
 export const createSnippet = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user!.userId;
     const { title, description, language, code, visibility } = req.body;
 
-    const snippet = await snippetService.createSnippet({
+    const result = await snippetService.createSnippet({
       title,
       description,
       language,
@@ -19,7 +19,12 @@ export const createSnippet = async (req: Request, res: Response): Promise<void> 
       authorId: userId,
     });
 
-    sendSuccess(res, snippet, 'Snippet created successfully', 201);
+    // Return snippet with share code and expiration
+    sendSuccess(res, {
+      snippet: result.snippet,
+      shareCode: result.shareCode.code,
+      expiresAt: result.shareCode.expiresAt,
+    }, 'Snippet created successfully', 201);
   } catch (error: any) {
     sendError(res, error.message, 400);
   }
@@ -40,7 +45,20 @@ export const getPublicSnippets = async (req: Request, res: Response): Promise<vo
       order: order as 'asc' | 'desc',
     });
 
-    sendSuccess(res, result);
+    // Transform shareCodes to shareCode for all snippets
+    const transformedResult = {
+      ...result,
+      snippets: result.snippets.map(snippet => {
+        const transformed = {
+          ...snippet,
+          shareCode: (snippet as any).shareCodes || [],
+        };
+        delete (transformed as any).shareCodes;
+        return transformed;
+      }),
+    };
+
+    sendSuccess(res, transformedResult);
   } catch (error: any) {
     sendError(res, error.message, 400);
   }
@@ -55,7 +73,15 @@ export const getSnippetById = async (req: Request, res: Response): Promise<void>
     const userId = (req as any).user?.userId;
 
     const snippet = await snippetService.getSnippetById(id, userId);
-    sendSuccess(res, snippet);
+    
+    // Transform shareCodes (plural from DB) to shareCode (singular for frontend)
+    const transformedSnippet = {
+      ...snippet,
+      shareCode: (snippet as any).shareCodes || [],
+    };
+    delete (transformedSnippet as any).shareCodes;
+    
+    sendSuccess(res, transformedSnippet);
   } catch (error: any) {
     const statusCode = error.message === 'Snippet not found' ? 404 : 403;
     sendError(res, error.message, statusCode);
@@ -63,15 +89,16 @@ export const getSnippetById = async (req: Request, res: Response): Promise<void>
 };
 
 /**
- * Get snippet by share slug (for importing to VS Code)
+ * Get snippet by temporary share code (for importing to VS Code)
  */
-export const getSnippetByShareSlug = async (req: Request, res: Response): Promise<void> => {
+export const getSnippetByCode = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { slug } = req.params;
-    const snippet = await snippetService.getSnippetByShareSlug(slug);
+    const { code } = req.params;
+    const snippet = await snippetService.getSnippetByCode(code);
     sendSuccess(res, snippet);
   } catch (error: any) {
-    sendError(res, error.message, 404);
+    const statusCode = error.message === 'Share code has expired' ? 410 : 404;
+    sendError(res, error.message, statusCode);
   }
 };
 
@@ -111,6 +138,22 @@ export const deleteSnippet = async (req: Request, res: Response): Promise<void> 
     sendSuccess(res, null, 'Snippet deleted successfully');
   } catch (error: any) {
     const statusCode = error.message === 'Snippet not found' ? 404 : 403;
+    sendError(res, error.message, statusCode);
+  }
+};
+
+/**
+ * Generate a new temporary share code for a snippet
+ * Public endpoint - anyone can generate a code for any snippet
+ */
+export const generateShareCode = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const result = await snippetService.generateShareCode(id);
+    sendSuccess(res, result, 'Share code generated successfully');
+  } catch (error: any) {
+    const statusCode = error.message === 'Snippet not found' ? 404 : 400;
     sendError(res, error.message, statusCode);
   }
 };

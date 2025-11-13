@@ -115,15 +115,15 @@ export class ApiService {
     return response.data.data;
   }
 
-  async getSnippetBySlug(slug: string): Promise<Snippet> {
+  async getSnippetByCode(code: string): Promise<Snippet> {
     const response = await this.api.get<{ success: boolean; data: Snippet }>(
-      `/snippets/import/${slug}`
+      `/snippets/import/${code}`
     );
     return response.data.data;
   }
 
-  async createSnippet(data: CreateSnippetData): Promise<Snippet> {
-    const response = await this.api.post<{ success: boolean; data: Snippet }>(
+  async createSnippet(data: CreateSnippetData): Promise<{ snippet: Snippet, shareCode: string, expiresAt: string }> {
+    const response = await this.api.post<{ success: boolean; data: { snippet: Snippet, shareCode: string, expiresAt: string } }>(
       '/snippets',
       data
     );

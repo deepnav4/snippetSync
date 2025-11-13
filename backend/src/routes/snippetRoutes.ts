@@ -25,11 +25,11 @@ router.get('/public', paginationValidation, snippetController.getPublicSnippets)
 router.get('/my', authenticate, snippetController.getMySnippets);
 
 /**
- * @route   GET /api/snippets/import/:slug
- * @desc    Get snippet by share slug (for VS Code extension)
+ * @route   GET /api/snippets/import/:code
+ * @desc    Get snippet by temporary share code (for VS Code extension)
  * @access  Public
  */
-router.get('/import/:slug', snippetController.getSnippetByShareSlug);
+router.get('/import/:code', snippetController.getSnippetByCode);
 
 /**
  * @route   POST /api/snippets
@@ -58,6 +58,13 @@ router.put('/:id', authenticate, uuidParamValidation, updateSnippetValidation, s
  * @access  Private (author only)
  */
 router.delete('/:id', authenticate, uuidParamValidation, snippetController.deleteSnippet);
+
+/**
+ * @route   POST /api/snippets/:id/generate-code
+ * @desc    Generate a new temporary share code for a snippet
+ * @access  Public (anyone can generate a code for any snippet)
+ */
+router.post('/:id/generate-code', uuidParamValidation, snippetController.generateShareCode);
 
 /**
  * @route   GET /api/snippets/user/:userId

@@ -19,18 +19,27 @@ export class SnippetManager {
         return;
       }
 
-      // Get share slug from user
-      const slug = await vscode.window.showInputBox({
-        prompt: 'Enter snippet share slug or URL',
-        placeHolder: 'e.g., abc123 or full URL',
+      // Get 6-digit share code from user
+      const code = await vscode.window.showInputBox({
+        prompt: 'Enter 6-digit temporary share code',
+        placeHolder: 'e.g., a7k9m2',
+        validateInput: (value) => {
+          if (!value) {
+            return null;
+          }
+          if (value.length !== 6) {
+            return 'Code must be exactly 6 characters';
+          }
+          if (!/^[a-z0-9]+$/i.test(value)) {
+            return 'Code must contain only letters and numbers';
+          }
+          return null;
+        },
       });
 
-      if (!slug) {
+      if (!code) {
         return;
       }
-
-      // Extract slug from URL if provided
-      const extractedSlug = this.extractSlugFromUrl(slug);
 
       // Fetch snippet
       vscode.window.withProgress(
@@ -40,7 +49,7 @@ export class SnippetManager {
           cancellable: false,
         },
         async () => {
-          const snippet = await this.apiService.getSnippetBySlug(extractedSlug);
+          const snippet = await this.apiService.getSnippetByCode(code.toLowerCase());
 
           // Insert into active editor
           const editor = vscode.window.activeTextEditor;
@@ -51,7 +60,7 @@ export class SnippetManager {
             });
 
             vscode.window.showInformationMessage(
-              `Imported snippet: ${snippet.title}`
+              `✓ Imported snippet: ${snippet.title}`
             );
           } else {
             // No active editor, create new file
@@ -61,15 +70,25 @@ export class SnippetManager {
             });
             await vscode.window.showTextDocument(doc);
             vscode.window.showInformationMessage(
-              `Imported snippet: ${snippet.title}`
+              `✓ Imported snippet: ${snippet.title}`
             );
           }
         }
       );
     } catch (error: any) {
-      vscode.window.showErrorMessage(
-        `Failed to import snippet: ${error.message}`
-      );
+      if (error.message.includes('expired')) {
+        vscode.window.showErrorMessage(
+          '⏰ Share code has expired. Please generate a new code from the web app.'
+        );
+      } else if (error.message.includes('not found')) {
+        vscode.window.showErrorMessage(
+          '❌ Invalid share code. Please check and try again.'
+        );
+      } else {
+        vscode.window.showErrorMessage(
+          `Failed to import snippet: ${error.message}`
+        );
+      }
     }
   }
 
@@ -136,7 +155,7 @@ export class SnippetManager {
           cancellable: false,
         },
         async () => {
-          await this.apiService.createSnippet({
+          const result = await this.apiService.createSnippet({
             title,
             description: description || undefined,
             code,
@@ -145,9 +164,22 @@ export class SnippetManager {
             tags: tags ? tags.split(',').map((t) => t.trim()) : undefined,
           });
 
-          vscode.window.showInformationMessage(
-            `Snippet "${title}" exported successfully!`
+          // Calculate minutes until expiration
+          const expiresAt = new Date(result.expiresAt);
+          const now = new Date();
+          const minutesRemaining = Math.round((expiresAt.getTime() - now.getTime()) / 60000);
+
+          // Show success message with share code
+          const action = await vscode.window.showInformationMessage(
+            `✓ Snippet "${title}" exported successfully!\n\n⚡ Temporary Share Code: ${result.shareCode}\n\n⏰ Expires in ${minutesRemaining} minutes`,
+            'Copy Code',
+            'OK'
           );
+
+          if (action === 'Copy Code') {
+            await vscode.env.clipboard.writeText(result.shareCode);
+            vscode.window.showInformationMessage('✓ Share code copied to clipboard!');
+          }
         }
       );
     } catch (error: any) {
@@ -227,15 +259,6 @@ export class SnippetManager {
     vscode.window.showInformationMessage(
       'Full sync feature coming soon! Use import/export for now.'
     );
-  }
-
-  private extractSlugFromUrl(input: string): string {
-    // If it's a full URL, extract the slug
-    if (input.includes('http')) {
-      const parts = input.split('/');
-      return parts[parts.length - 1];
-    }
-    return input.trim();
   }
 
   private mapLanguageToVSCode(language: string): string {

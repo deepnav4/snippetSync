@@ -17,12 +17,12 @@ export const snippetService = {
     return response.data.data;
   },
 
-  async getByShareSlug(slug: string): Promise<Snippet> {
-    const response = await api.get(`/snippets/import/${slug}`);
+  async getByShareCode(code: string): Promise<Snippet> {
+    const response = await api.get(`/snippets/import/${code}`);
     return response.data.data;
   },
 
-  async create(data: CreateSnippetData): Promise<Snippet> {
+  async create(data: CreateSnippetData): Promise<{ snippet: Snippet, shareCode: string, expiresAt: string }> {
     const response = await api.post('/snippets', data);
     return response.data.data;
   },
@@ -34,6 +34,11 @@ export const snippetService = {
 
   async delete(id: string): Promise<void> {
     await api.delete(`/snippets/${id}`);
+  },
+
+  async generateShareCode(id: string): Promise<{ code: string, expiresAt: string }> {
+    const response = await api.post(`/snippets/${id}/generate-code`);
+    return response.data.data;
   },
 
   async toggleUpvote(id: string): Promise<{ upvoted: boolean }> {

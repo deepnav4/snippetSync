@@ -36,8 +36,9 @@ export default function CreateSnippet() {
     setLoading(true);
 
     try {
-      const snippet = await snippetService.create(formData);
-      navigate(`/snippet/${snippet.id}`);
+      const result = await snippetService.create(formData);
+      alert(`Snippet created successfully!\n\nShare Code: ${result.shareCode}\n\nThis code expires in 5 minutes. You can use it in VS Code to import the snippet.\n\nCtrl+Shift+P → "SnippetSync: Import Snippet"`);
+      navigate(`/snippet/${result.snippet.id}`);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to create snippet');
     } finally {
@@ -46,116 +47,146 @@ export default function CreateSnippet() {
   };
 
   return (
-    <div>
-      <h1>Create Snippet</h1>
-      <div className="card">
-        <form onSubmit={handleSubmit}>
-          {error && <div className="error">{error}</div>}
-
-          <div>
-            <label>Title *</label>
-            <input
-              type="text"
-              value={formData.title}
-              onChange={e => setFormData({ ...formData, title: e.target.value })}
-              required
-            />
-          </div>
-
-          <div>
-            <label>Description</label>
-            <textarea
-              value={formData.description}
-              onChange={e => setFormData({ ...formData, description: e.target.value })}
-              rows={3}
-            />
-          </div>
-
-          <div>
-            <label>Language *</label>
-            <select
-              value={formData.language}
-              onChange={e => setFormData({ ...formData, language: e.target.value })}
-              required
-            >
-              <option value="javascript">JavaScript</option>
-              <option value="typescript">TypeScript</option>
-              <option value="python">Python</option>
-              <option value="java">Java</option>
-              <option value="cpp">C++</option>
-              <option value="go">Go</option>
-              <option value="rust">Rust</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Code *</label>
-            <textarea
-              value={formData.code}
-              onChange={e => setFormData({ ...formData, code: e.target.value })}
-              rows={15}
-              style={{ fontFamily: 'monospace' }}
-              required
-            />
-          </div>
-
-          <div>
-            <label>Visibility</label>
-            <select
-              value={formData.visibility}
-              onChange={e => setFormData({ ...formData, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })}
-            >
-              <option value="PUBLIC">Public</option>
-              <option value="PRIVATE">Private</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Tags</label>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-              <input
-                type="text"
-                value={tagInput}
-                onChange={e => setTagInput(e.target.value)}
-                placeholder="Add a tag..."
-                onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
-              />
-              <button type="button" onClick={handleAddTag}>Add Tag</button>
-            </div>
-            {formData.tags && formData.tags.length > 0 && (
-              <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
-                {formData.tags.map(tag => (
-                  <span key={tag} style={{ 
-                    background: '#e0e0e0', 
-                    padding: '5px 10px', 
-                    borderRadius: '15px',
-                    fontSize: '14px'
-                  }}>
-                    {tag}
-                    <button 
-                      type="button" 
-                      onClick={() => handleRemoveTag(tag)}
-                      style={{ 
-                        marginLeft: '5px', 
-                        background: 'none', 
-                        border: 'none', 
-                        cursor: 'pointer',
-                        padding: '0 5px'
-                      }}
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
+    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-900 mb-8">
+          Create <span className="bg-[#B9FF66] px-2">Snippet</span>
+        </h1>
+        
+        <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[8px_8px_0_#191A23]">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 border-2 border-red-600 text-red-600 px-4 py-3 rounded-lg font-medium">
+                {error}
               </div>
             )}
-          </div>
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Snippet'}
-          </button>
-        </form>
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Title *
+              </label>
+              <input
+                type="text"
+                value={formData.title}
+                onChange={e => setFormData({ ...formData, title: e.target.value })}
+                required
+                className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all"
+                placeholder="My awesome code snippet"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Description
+              </label>
+              <textarea
+                value={formData.description}
+                onChange={e => setFormData({ ...formData, description: e.target.value })}
+                rows={3}
+                className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all resize-none"
+                placeholder="What does this snippet do?"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Language *
+                </label>
+                <select
+                  value={formData.language}
+                  onChange={e => setFormData({ ...formData, language: e.target.value })}
+                  required
+                  className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
+                >
+                  <option value="javascript">JavaScript</option>
+                  <option value="typescript">TypeScript</option>
+                  <option value="python">Python</option>
+                  <option value="java">Java</option>
+                  <option value="cpp">C++</option>
+                  <option value="go">Go</option>
+                  <option value="rust">Rust</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Visibility
+                </label>
+                <select
+                  value={formData.visibility}
+                  onChange={e => setFormData({ ...formData, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })}
+                  className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
+                >
+                  <option value="PUBLIC">🌍 Public</option>
+                  <option value="PRIVATE">🔒 Private</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Code *
+              </label>
+              <textarea
+                value={formData.code}
+                onChange={e => setFormData({ ...formData, code: e.target.value })}
+                rows={15}
+                required
+                className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-mono text-sm bg-gray-900 text-[#B9FF66] resize-none"
+                placeholder="// Your code here..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Tags
+              </label>
+              <div className="flex gap-2 mb-3">
+                <input
+                  type="text"
+                  value={tagInput}
+                  onChange={e => setTagInput(e.target.value)}
+                  placeholder="Add a tag..."
+                  onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
+                  className="flex-1 px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all"
+                />
+                <button 
+                  type="button" 
+                  onClick={handleAddTag}
+                  className="px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  Add Tag
+                </button>
+              </div>
+              {formData.tags && formData.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {formData.tags.map(tag => (
+                    <span key={tag} className="px-4 py-2 bg-[#B9FF66] text-gray-900 font-medium rounded-full border-2 border-gray-900 flex items-center gap-2">
+                      #{tag}
+                      <button 
+                        type="button" 
+                        onClick={() => handleRemoveTag(tag)}
+                        className="text-gray-900 hover:text-red-600 font-bold text-lg"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="w-full px-6 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Creating...' : 'Create Snippet'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

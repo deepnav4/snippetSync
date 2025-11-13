@@ -53,7 +53,6 @@ model Snippet {
   language    String   // Programming language (e.g., "javascript", "python", "typescript")
   code        String   @db.Text // The actual code content
   visibility  Visibility @default(PUBLIC) // PUBLIC or PRIVATE
-  shareSlug   String   @unique @default(uuid()) // Unique slug for sharing private snippets
   authorId    String
   upvotesCount Int     @default(0) // Denormalized count for performance
   createdAt   DateTime @default(now())
@@ -64,12 +63,29 @@ model Snippet {
   comments    Comment[]
   upvotes     Upvote[]
   tags        Tag[]    @relation("SnippetTags")
+  shareCodes  ShareCode[]
   
   @@index([authorId])
   @@index([visibility])
-  @@index([shareSlug])
   @@index([createdAt])
   @@map("snippets")
+}
+
+// ShareCode Model - Temporary 6-digit codes for sharing snippets (expires in 5 minutes)
+model ShareCode {
+  id        String   @id @default(uuid())
+  code      String   @unique @db.VarChar(6) // 6-character alphanumeric code (e.g., "a7k9m2")
+  snippetId String
+  expiresAt DateTime // Code expires 5 minutes after creation
+  createdAt DateTime @default(now())
+  
+  // Relations
+  snippet   Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  
+  @@index([code])
+  @@index([snippetId])
+  @@index([expiresAt])
+  @@map("share_codes")
 }
 
 // Visibility Enum - Defines snippet visibility options

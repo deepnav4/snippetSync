@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { useState, useEffect } from 'react';
+import notificationService from './lib/notifications';
 import Landing from './pages/Landing';
 import Explore from './pages/Explore';
 import Login from './pages/Login';
@@ -7,6 +9,11 @@ import Signup from './pages/Signup';
 import CreateSnippet from './pages/CreateSnippet.tsx';
 import SnippetDetail from './pages/SnippetDetail.tsx';
 import MySnippets from './pages/MySnippets.tsx';
+import Profile from './pages/Profile.tsx';
+import Guide from './pages/Guide.tsx';
+import Dashboard from './pages/Dashboard.tsx';
+import PublicProfile from './pages/PublicProfile.tsx';
+import Notifications from './pages/Notifications.tsx';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -16,48 +23,115 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function Navbar() {
   const { user, logout } = useAuth();
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  useEffect(() => {
+    if (user) {
+      loadNotificationCount();
+      // Poll for updates every 30 seconds
+      const interval = setInterval(loadNotificationCount, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
+
+  const loadNotificationCount = async () => {
+    try {
+      const count = await notificationService.getUnreadCount();
+      setNotificationCount(count);
+    } catch (error) {
+      console.error('Failed to load notification count:', error);
+    }
+  };
   
   return (
-    <nav style={{ 
-      background: 'white', 
-      padding: '15px 0', 
-      marginBottom: '30px', 
-      borderBottom: '1px solid #e0e0e0',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
-    }}>
-      <div className="container" style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '10px'
-      }}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <h2 style={{ color: '#007bff', margin: 0 }}>📝 SnippetSync</h2>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
-          <Link to="/explore"><button style={{ background: 'transparent', color: '#333' }}>🔍 Explore</button></Link>
-          {user ? (
-            <>
-              <Link to="/my-snippets"><button style={{ background: 'transparent', color: '#333' }}>📚 My Snippets</button></Link>
-              <Link to="/create"><button>➕ Create</button></Link>
-              <span style={{ 
-                margin: '0 10px', 
-                padding: '5px 12px',
-                background: '#f0f0f0',
-                borderRadius: '20px',
-                fontSize: '14px'
-              }}>
-                👤 {user.username}
-              </span>
-              <button onClick={() => logout()} style={{ background: '#dc3545' }}>Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login"><button>Login</button></Link>
-              <Link to="/signup"><button>Sign Up</button></Link>
-            </>
-          )}
+    <nav className="bg-white border-b-2 border-gray-900 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <div className="text-2xl font-bold">
+              <span className="bg-[#B9FF66] text-gray-900 px-2 py-1 rounded">Snippet</span>
+              <span className="text-gray-900">Sync</span>
+            </div>
+          </Link>
+
+          {/* Navigation */}
+          <div className="flex items-center gap-6">
+            <Link 
+              to="/explore" 
+              className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+            >
+              Explore
+            </Link>
+            <Link 
+              to="/guide" 
+              className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+            >
+              Guide
+            </Link>
+            
+            {user ? (
+              <>
+                <Link 
+                  to="/dashboard" 
+                  className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <Link 
+                  to="/my-snippets" 
+                  className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+                >
+                  My Snippets
+                </Link>
+                
+                {/* Notification Bell */}
+                <div className="relative">
+                  <Link to="/notifications" className="relative">
+                    <button className="p-3 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors relative">
+                      <span className="text-2xl">🔔</span>
+                      {notificationCount > 0 && (
+                        <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-gray-900">
+                          {notificationCount > 9 ? '9+' : notificationCount}
+                        </span>
+                      )}
+                    </button>
+                  </Link>
+                </div>
+
+                <Link 
+                  to="/create" 
+                  className="px-6 py-2 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]"
+                >
+                  Create
+                </Link>
+                <Link to="/profile">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors">
+                    <span className="text-gray-900 font-medium">{user.username}</span>
+                  </div>
+                </Link>
+                <button 
+                  onClick={() => logout()} 
+                  className="px-6 py-2 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button className="px-6 py-2 text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                    Login
+                  </button>
+                </Link>
+                <Link to="/signup">
+                  <button className="px-6 py-2 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>
@@ -70,18 +144,21 @@ function App() {
       <AuthProvider>
         <div>
           <Navbar />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/explore" element={<Explore />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/snippet/:id" element={<SnippetDetail />} />
-              <Route path="/create" element={<ProtectedRoute><CreateSnippet /></ProtectedRoute>} />
-              <Route path="/my-snippets" element={<ProtectedRoute><MySnippets /></ProtectedRoute>} />
-              <Route path="*" element={<div>404 Not Found</div>} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/snippet/:id" element={<SnippetDetail />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/create" element={<ProtectedRoute><CreateSnippet /></ProtectedRoute>} />
+            <Route path="/my-snippets" element={<ProtectedRoute><MySnippets /></ProtectedRoute>} />
+            <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/user/:username" element={<PublicProfile />} />
+            <Route path="*" element={<div className="min-h-screen flex items-center justify-center"><div className="text-4xl font-bold text-gray-900">404 Not Found</div></div>} />
+          </Routes>
         </div>
       </AuthProvider>
     </Router>

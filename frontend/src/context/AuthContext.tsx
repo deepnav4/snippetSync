@@ -42,12 +42,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const { user: userData } = await authService.login({ email, password });
+    await authService.login({ email, password });
+    // Fetch user profile after login
+    const userData = await authService.getProfile();
     setUser(userData);
   };
 
   const signup = async (username: string, email: string, password: string, fullName?: string) => {
-    const { user: userData } = await authService.signup({ username, email, password, fullName });
+    await authService.signup({ username, email, password, fullName });
+    // Fetch user profile after signup
+    const userData = await authService.getProfile();
     setUser(userData);
   };
 

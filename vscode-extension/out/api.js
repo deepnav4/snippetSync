@@ -120,8 +120,8 @@ class ApiService {
         const response = await this.api.get(`/snippets/${id}`);
         return response.data.data;
     }
-    async getSnippetBySlug(slug) {
-        const response = await this.api.get(`/snippets/import/${slug}`);
+    async getSnippetByCode(code) {
+        const response = await this.api.get(`/snippets/import/${code}`);
         return response.data.data;
     }
     async createSnippet(data) {

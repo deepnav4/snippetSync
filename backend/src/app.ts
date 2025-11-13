@@ -10,6 +10,8 @@ import authRoutes from './routes/authRoutes';
 import snippetRoutes from './routes/snippetRoutes';
 import upvoteRoutes from './routes/upvoteRoutes';
 import commentRoutes from './routes/commentRoutes';
+import userRoutes from './routes/userRoutes';
+import notificationRoutes from './routes/notificationRoutes';
 
 // Middleware
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
@@ -56,6 +58,8 @@ export const createApp = (): Application => {
   app.use('/api/snippets', snippetRoutes);
   app.use('/api/snippets', upvoteRoutes);
   app.use('/api/snippets', commentRoutes);
+  app.use('/api/users', userRoutes);
+  app.use('/api/notifications', notificationRoutes);
 
   // Error handling
   app.use(notFoundHandler);

@@ -19,7 +19,6 @@ export interface Snippet {
   code: string;
   language: string;
   visibility: 'PUBLIC' | 'PRIVATE';
-  shareSlug: string | null;
   authorId: string;
   createdAt: string;
   updatedAt: string;
@@ -30,6 +29,10 @@ export interface Snippet {
     comments: number;
   };
   isUpvoted?: boolean;
+  shareCode?: Array<{
+    code: string;
+    expiresAt: string;
+  }>;
 }
 
 export interface Comment {

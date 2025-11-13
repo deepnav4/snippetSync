@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { SnippetFilters } from '../types';
+import { generateUniqueCode } from '../utils/codeGenerator';
 
 const prisma = new PrismaClient();
 
@@ -21,11 +22,14 @@ export interface UpdateSnippetData {
 }
 
 /**
- * Create a new snippet
+ * Create a new snippet with temporary 6-digit share code
  */
 export const createSnippet = async (data: CreateSnippetData) => {
-  // Generate a unique share slug
-  const shareSlug = Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+  // Generate a unique 6-digit code
+  const code = await generateUniqueCode();
+  
+  // Set expiration to 5 minutes from now
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
   
   const snippet = await prisma.snippet.create({
     data: {
@@ -35,7 +39,6 @@ export const createSnippet = async (data: CreateSnippetData) => {
       code: data.code,
       visibility: data.visibility,
       authorId: data.authorId,
-      shareSlug,
     },
     include: {
       author: {
@@ -54,7 +57,22 @@ export const createSnippet = async (data: CreateSnippetData) => {
     },
   });
 
-  return snippet;
+  // Create the temporary share code
+  const shareCode = await prisma.shareCode.create({
+    data: {
+      code,
+      snippetId: snippet.id,
+      expiresAt,
+    },
+  });
+
+  return { 
+    snippet, 
+    shareCode: { 
+      code: shareCode.code, 
+      expiresAt: shareCode.expiresAt 
+    } 
+  };
 };
 
 /**
@@ -102,6 +120,21 @@ export const getPublicSnippets = async (filters: SnippetFilters) => {
             name: true,
           },
         },
+        shareCodes: {
+          where: {
+            expiresAt: {
+              gt: new Date(), // Only include non-expired codes
+            },
+          },
+          select: {
+            code: true,
+            expiresAt: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1, // Get the most recent valid code
+        },
         _count: {
           select: {
             comments: true,
@@ -148,6 +181,21 @@ export const getSnippetById = async (
           name: true,
         },
       },
+      shareCodes: {
+        where: {
+          expiresAt: {
+            gt: new Date(), // Only include non-expired codes
+          },
+        },
+        select: {
+          code: true,
+          expiresAt: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: 1, // Get the most recent valid code
+      },
       comments: {
         include: {
           author: {
@@ -183,20 +231,15 @@ export const getSnippetById = async (
 };
 
 /**
- * Get snippet by share slug (for private snippets)
+ * Get snippet by temporary share code (for VS Code import)
+ * Validates that the code hasn't expired
  */
-export const getSnippetByShareSlug = async (shareSlug: string) => {
-  const snippet = await prisma.snippet.findUnique({
-    where: { shareSlug },
+export const getSnippetByCode = async (code: string) => {
+  // Find the share code
+  const shareCode = await prisma.shareCode.findUnique({
+    where: { code },
     include: {
-      author: {
-        select: {
-          id: true,
-          username: true,
-          profilePicture: true,
-        },
-      },
-      comments: {
+      snippet: {
         include: {
           author: {
             select: {
@@ -205,24 +248,79 @@ export const getSnippetByShareSlug = async (shareSlug: string) => {
               profilePicture: true,
             },
           },
-        },
-        orderBy: {
-          createdAt: 'desc',
-        },
-      },
-      _count: {
-        select: {
-          upvotes: true,
+          comments: {
+            include: {
+              author: {
+                select: {
+                  id: true,
+                  username: true,
+                  profilePicture: true,
+                },
+              },
+            },
+            orderBy: {
+              createdAt: 'desc',
+            },
+          },
+          _count: {
+            select: {
+              upvotes: true,
+            },
+          },
         },
       },
     },
+  });
+
+  if (!shareCode) {
+    throw new Error('Share code not found');
+  }
+
+  // Check if code has expired
+  if (shareCode.expiresAt < new Date()) {
+    // Delete the expired code
+    await prisma.shareCode.delete({
+      where: { id: shareCode.id },
+    });
+    throw new Error('Share code has expired');
+  }
+
+  return shareCode.snippet;
+};
+
+/**
+ * Generate a new temporary share code for an existing snippet
+ * Anyone can generate a code for any snippet (public access)
+ */
+export const generateShareCode = async (snippetId: string) => {
+  // Check if snippet exists
+  const snippet = await prisma.snippet.findUnique({
+    where: { id: snippetId },
   });
 
   if (!snippet) {
     throw new Error('Snippet not found');
   }
 
-  return snippet;
+  // Generate a unique 6-digit code
+  const code = await generateUniqueCode();
+  
+  // Set expiration to 5 minutes from now
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
+
+  // Create the temporary share code
+  const shareCode = await prisma.shareCode.create({
+    data: {
+      code,
+      snippetId: snippet.id,
+      expiresAt,
+    },
+  });
+
+  return {
+    code: shareCode.code,
+    expiresAt: shareCode.expiresAt,
+  };
 };
 
 /**
@@ -329,6 +427,21 @@ export const getUserSnippets = async (
           id: true,
           name: true,
         },
+      },
+      shareCodes: {
+        where: {
+          expiresAt: {
+            gt: new Date(), // Only include non-expired codes
+          },
+        },
+        select: {
+          code: true,
+          expiresAt: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: 1, // Get the most recent valid code
       },
       _count: {
         select: {
