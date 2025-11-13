@@ -1,3 +1,5 @@
 # Ignore node_modules everywhere (including child folders)
 node_modules/
 **/node_modules/
+.vscode/
+**/.vscode/
