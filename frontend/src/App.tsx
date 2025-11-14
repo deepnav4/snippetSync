@@ -24,6 +24,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function Navbar() {
   const { user, logout } = useAuth();
   const [notificationCount, setNotificationCount] = useState(0);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -56,20 +57,7 @@ function Navbar() {
           </Link>
 
           {/* Navigation */}
-          <div className="flex items-center gap-6">
-            <Link 
-              to="/explore" 
-              className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
-            >
-              Explore
-            </Link>
-            <Link 
-              to="/guide" 
-              className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
-            >
-              Guide
-            </Link>
-            
+          <div className="flex items-center gap-4">
             {user ? (
               <>
                 <Link 
@@ -79,46 +67,81 @@ function Navbar() {
                   Dashboard
                 </Link>
                 <Link 
-                  to="/my-snippets" 
+                  to="/explore" 
                   className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
                 >
-                  My Snippets
+                  Explore
                 </Link>
                 
                 {/* Notification Bell */}
-                <div className="relative">
-                  <Link to="/notifications" className="relative">
-                    <button className="p-3 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors relative">
-                      <span className="text-2xl">🔔</span>
-                      {notificationCount > 0 && (
-                        <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-gray-900">
-                          {notificationCount > 9 ? '9+' : notificationCount}
-                        </span>
-                      )}
-                    </button>
-                  </Link>
-                </div>
+                <Link to="/notifications" className="relative">
+                  <button className="p-2 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors relative">
+                    <span className="text-xl">🔔</span>
+                    {notificationCount > 0 && (
+                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-gray-900">
+                        {notificationCount > 9 ? '9+' : notificationCount}
+                      </span>
+                    )}
+                  </button>
+                </Link>
 
                 <Link 
                   to="/create" 
-                  className="px-6 py-2 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]"
+                  className="px-5 py-2 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[3px_3px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[1px] hover:translate-y-[1px]"
                 >
-                  Create
+                  + New
                 </Link>
-                <Link to="/profile">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors">
-                    <span className="text-gray-900 font-medium">{user.username}</span>
-                  </div>
-                </Link>
-                <button 
-                  onClick={() => logout()} 
-                  className="px-6 py-2 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  Logout
-                </button>
+                
+                {/* Profile Dropdown */}
+                <div className="relative">
+                  <button 
+                    onClick={() => setShowProfileMenu(!showProfileMenu)}
+                    className="flex items-center gap-2 px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900"
+                  >
+                    <span className="font-medium">{user.username}</span>
+                    <span className="text-sm">{showProfileMenu ? '▲' : '▼'}</span>
+                  </button>
+                  
+                  {showProfileMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border-2 border-gray-900 rounded-lg shadow-[4px_4px_0_#191A23] overflow-hidden z-50">
+                      <Link 
+                        to="/profile" 
+                        onClick={() => setShowProfileMenu(false)}
+                        className="block px-4 py-3 text-gray-900 hover:bg-[#B9FF66] transition-colors font-medium border-b border-gray-200"
+                      >
+                        👤 My Profile
+                      </Link>
+                      <Link 
+                        to="/my-snippets" 
+                        onClick={() => setShowProfileMenu(false)}
+                        className="block px-4 py-3 text-gray-900 hover:bg-[#B9FF66] transition-colors font-medium border-b border-gray-200"
+                      >
+                        📚 My Snippets
+                      </Link>
+                      <button 
+                        onClick={() => { logout(); setShowProfileMenu(false); }} 
+                        className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 transition-colors font-medium"
+                      >
+                        🚪 Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               </>
             ) : (
               <>
+                <Link 
+                  to="/explore" 
+                  className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+                >
+                  Explore
+                </Link>
+                <Link 
+                  to="/guide" 
+                  className="text-gray-900 hover:text-[#B9FF66] font-medium transition-colors"
+                >
+                  Guide
+                </Link>
                 <Link to="/login">
                   <button className="px-6 py-2 text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
                     Login

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { snippetService } from '../lib/snippets';
 import { useAuth } from '../context/AuthContext';
 import type { Snippet, Comment } from '../lib/types';
@@ -183,7 +183,11 @@ export default function SnippetDetail() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-gray-500">By:</span>
-            <span className="text-gray-900 font-bold">{snippet.author.username}</span>
+            <Link to={`/user/${snippet.author.username}`}>
+              <span className="text-gray-900 font-bold hover:text-[#B9FF66] transition-colors cursor-pointer underline">
+                {snippet.author.username}
+              </span>
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-gray-500">Visibility:</span>

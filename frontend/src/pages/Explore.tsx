@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { snippetService } from '../lib/snippets';
 import type { Snippet } from '../lib/types';
+import { CodeBrackets, CirclePattern } from '../svgs';
 
 export default function Explore() {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
@@ -116,8 +117,16 @@ export default function Explore() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Decorative SVGs */}
+      <div className="absolute top-10 left-10 opacity-15">
+        <CirclePattern color="#B9FF66" />
+      </div>
+      <div className="absolute top-40 right-20 floating-animation opacity-10">
+        <CodeBrackets color="#191A23" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <h1 className="text-4xl font-bold text-gray-900">

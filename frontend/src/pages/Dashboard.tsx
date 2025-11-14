@@ -5,6 +5,7 @@ import userService from '../lib/users';
 import type { Snippet } from '../lib/types';
 import type { UserProfile, UserStats } from '../lib/users';
 import { useAuth } from '../context/AuthContext';
+import { GridDots, FloatingCode } from '../svgs';
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -63,8 +64,16 @@ export default function Dashboard() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Decorative SVGs */}
+      <div className="absolute top-20 right-10 opacity-10">
+        <GridDots color="#191A23" />
+      </div>
+      <div className="absolute bottom-40 left-10 floating-animation opacity-10" style={{ animationDelay: '1s' }}>
+        <FloatingCode color="#191A23" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Welcome Header */}
         <div className="bg-gradient-to-r from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-2xl p-8 mb-8 shadow-[8px_8px_0_#191A23] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-gray-900 rounded-full -mr-16 -mt-16 opacity-10"></div>

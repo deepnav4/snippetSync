@@ -132,9 +132,6 @@ const Profile: React.FC = () => {
               <h1 className="text-5xl font-bold text-gray-900 mb-2">
                 {profile.username}
               </h1>
-              {profile.fullName && (
-                <p className="text-xl text-gray-800 mb-3">{profile.fullName}</p>
-              )}
               {editMode ? (
                 <textarea
                   value={bio}
@@ -194,55 +191,43 @@ const Profile: React.FC = () => {
           </div>
         </div>
 
-        {/* Stats Cards with Animation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-          <StatCard
-            icon="📝"
-            label="Total Snippets"
-            value={profile._count.snippets}
-            color="bg-gradient-to-br from-white to-gray-50"
-            accentColor="text-blue-600"
-          />
-          <StatCard
-            icon="👍"
-            label="Upvotes Received"
-            value={stats.upvotesReceived}
-            color="bg-gradient-to-br from-white to-gray-50"
-            accentColor="text-green-600"
-          />
-          <StatCard
-            icon="💬"
-            label="Comments"
-            value={profile._count.comments}
-            color="bg-gradient-to-br from-white to-gray-50"
-            accentColor="text-purple-600"
-          />
-          <StatCard
-            icon="❤️"
-            label="Upvotes Given"
-            value={profile._count.upvotes}
-            color="bg-gradient-to-br from-white to-gray-50"
-            accentColor="text-red-600"
-          />
-        </div>
-
-        {/* Activity Summary Banner */}
-        <div className="bg-gray-900 border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-6 mb-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="bg-[#B9FF66] p-3 rounded-lg border-2 border-[#B9FF66]">
-                <span className="text-2xl">🚀</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Activity Score</h3>
-                <p className="text-gray-400 text-sm">Based on your contributions</p>
-              </div>
+        {/* Stats Cards - 4 Column Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {/* Total Snippets */}
+          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Total Snippets</div>
+            <div className="text-4xl font-bold text-blue-600 mb-3">{profile._count.snippets}</div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600" style={{ width: '100%' }}></div>
             </div>
-            <div className="text-right">
-              <div className="text-4xl font-bold text-[#B9FF66]">
-                {profile._count.snippets * 10 + stats.upvotesReceived * 5 + profile._count.comments * 2}
-              </div>
-              <p className="text-gray-400 text-sm">Total Points</p>
+          </div>
+
+          {/* Upvotes Received */}
+          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Upvotes Received</div>
+            <div className="text-4xl font-bold text-green-600 mb-3">{stats.upvotesReceived}</div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-green-400 to-green-600" style={{ width: '100%' }}></div>
+            </div>
+          </div>
+
+          {/* Total Comments */}
+          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Comments Made</div>
+            <div className="text-4xl font-bold text-purple-600 mb-3">{profile._count.comments}</div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-purple-400 to-purple-600" style={{ width: '100%' }}></div>
+            </div>
+          </div>
+
+          {/* Activity Score */}
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-2">Activity Score</div>
+            <div className="text-4xl font-bold text-[#B9FF66] mb-3">
+              {profile._count.snippets * 10 + stats.upvotesReceived * 5 + profile._count.comments * 2}
+            </div>
+            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-[#B9FF66] to-[#a3e655]" style={{ width: '100%' }}></div>
             </div>
           </div>
         </div>
@@ -251,21 +236,90 @@ const Profile: React.FC = () => {
         {stats.languageStats.length > 0 && (
           <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-4xl">🎨</span>
+              <span className="text-4xl">💻</span>
               <h2 className="text-3xl font-bold text-gray-900">
-                Language Expertise
+                Language <span className="bg-[#B9FF66] px-2">Contributions</span>
               </h2>
             </div>
-            <div className="space-y-5">
-              {stats.languageStats.map((stat, index) => (
-                <LanguageBar
-                  key={stat.language}
-                  language={stat.language}
-                  count={stat.count}
-                  total={profile._count.snippets}
-                  rank={index + 1}
-                />
-              ))}
+            
+            {/* Two Column Layout: Bar Graph and Pie Chart */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Column - Bar Graph */}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Progress Bars</h3>
+                <div className="space-y-4">
+                  {stats.languageStats.slice(0, 5).map((stat, index) => {
+                    const percentage = (stat.count / profile._count.snippets) * 100;
+                    const colors = [
+                      { gradient: 'from-blue-500 to-blue-600', bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-500' },
+                      { gradient: 'from-green-500 to-green-600', bg: 'bg-green-100', text: 'text-green-700', border: 'border-green-500' },
+                      { gradient: 'from-purple-500 to-purple-600', bg: 'bg-purple-100', text: 'text-purple-700', border: 'border-purple-500' },
+                      { gradient: 'from-orange-500 to-orange-600', bg: 'bg-orange-100', text: 'text-orange-700', border: 'border-orange-500' },
+                      { gradient: 'from-pink-500 to-pink-600', bg: 'bg-pink-100', text: 'text-pink-700', border: 'border-pink-500' },
+                    ];
+                    const color = colors[index] || colors[0];
+                    
+                    return (
+                      <div key={stat.language} className="group">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <span className={`${color.bg} ${color.text} px-3 py-1 rounded-full font-bold text-sm border-2 ${color.border}`}>
+                              #{index + 1}
+                            </span>
+                            <span className="font-bold text-gray-900 text-lg">{stat.language}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={`font-bold ${color.text} text-xl`}>{stat.count}</span>
+                            <span className="text-gray-500 text-sm">({percentage.toFixed(1)}%)</span>
+                          </div>
+                        </div>
+                        <div className="h-4 bg-gray-200 rounded-full overflow-hidden border-2 border-gray-900">
+                          <div 
+                            className={`h-full bg-gradient-to-r ${color.gradient} transition-all duration-1000 ease-out`}
+                            style={{ width: `${percentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right Column - Circular Pie Chart */}
+              <div className="flex flex-col items-center justify-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-6">Distribution Chart</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                  {stats.languageStats.slice(0, 5).map((stat, index) => {
+                    const percentage = (stat.count / profile._count.snippets) * 100;
+                    const colors = ['#3b82f6', '#10b981', '#8b5cf6', '#f97316', '#ec4899'];
+                    return (
+                      <div key={stat.language} className="text-center group hover:scale-110 transition-transform">
+                        <div className="relative w-24 h-24 mb-2">
+                          <svg className="transform -rotate-90" width="96" height="96">
+                            <circle cx="48" cy="48" r="40" stroke="#e5e7eb" strokeWidth="10" fill="none" />
+                            <circle 
+                              cx="48" 
+                              cy="48" 
+                              r="40" 
+                              stroke={colors[index]} 
+                              strokeWidth="10" 
+                              fill="none"
+                              strokeDasharray={`${(percentage / 100) * 251} 251`}
+                              className="transition-all duration-1000"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-base font-bold text-gray-900">{percentage.toFixed(0)}%</span>
+                          </div>
+                        </div>
+                        <div className="w-4 h-4 rounded-full mx-auto mb-1" style={{ backgroundColor: colors[index] }}></div>
+                        <p className="text-sm font-semibold text-gray-700">{stat.language}</p>
+                        <p className="text-xs text-gray-500">{stat.count} snippets</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -366,58 +420,6 @@ const Profile: React.FC = () => {
             )}
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-// Helper Components
-const StatCard: React.FC<{ icon: string; label: string; value: number; color: string; accentColor: string }> = ({
-  icon,
-  label,
-  value,
-  color,
-  accentColor,
-}) => (
-  <div className={`${color} border-2 border-gray-900 rounded-xl shadow-[6px_6px_0_#191A23] p-6 text-center hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all group`}>
-    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{icon}</div>
-    <div className={`text-3xl font-bold ${accentColor} mb-2`}>
-      {value}
-    </div>
-    <div className="text-sm font-semibold text-gray-600">{label}</div>
-  </div>
-);
-
-const LanguageBar: React.FC<{
-  language: string;
-  count: number;
-  total: number;
-  rank: number;
-}> = ({ language, count, total, rank }) => {
-  const percentage = ((count / total) * 100).toFixed(1);
-  const colors = ['#B9FF66', '#a3e655', '#8fd43a', '#7bc220', '#67b010'];
-  const barColor = colors[rank - 1] || '#B9FF66';
-
-  return (
-    <div className="group">
-      <div className="flex justify-between items-center mb-3">
-        <div className="flex items-center gap-3">
-          <span className="bg-gray-900 text-[#B9FF66] w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-gray-900">
-            {rank}
-          </span>
-          <span className="font-bold text-gray-900 text-lg">
-            {language}
-          </span>
-        </div>
-        <span className="text-gray-600 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-full border border-gray-300">
-          {count} ({percentage}%)
-        </span>
-      </div>
-      <div className="h-5 bg-gray-200 rounded-full overflow-hidden border-2 border-gray-300 relative">
-        <div
-          className="h-full border-r-2 border-gray-900 transition-all duration-700 ease-out group-hover:animate-pulse"
-          style={{ width: `${percentage}%`, backgroundColor: barColor }}
-        />
       </div>
     </div>
   );

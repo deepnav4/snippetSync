@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { snippetService } from '../lib/snippets';
 import type { CreateSnippetData } from '../lib/types';
+import { FloatingCode, GridDots } from '../svgs';
 
 export default function CreateSnippet() {
   const [formData, setFormData] = useState<CreateSnippetData>({
@@ -47,7 +48,14 @@ export default function CreateSnippet() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Decorative SVGs */}
+      <div className="absolute top-20 right-10 opacity-10">
+        <GridDots color="#191A23" />
+      </div>
+      <div className="absolute bottom-20 left-10 floating-animation opacity-15" style={{ animationDelay: '1.5s' }}>
+        <FloatingCode color="#B9FF66" />
+      </div>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-8">
           Create <span className="bg-[#B9FF66] px-2">Snippet</span>

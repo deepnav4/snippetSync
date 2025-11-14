@@ -1,11 +1,23 @@
 import { Link } from 'react-router-dom';
+import { CodeBrackets, GridDots, FloatingCode } from '../svgs';
 
 export default function Landing() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-gray-100 py-20 px-4 relative overflow-hidden">
+        {/* Decorative SVGs */}
+        <div className="absolute top-10 left-10 opacity-30">
+          <GridDots color="#B9FF66" />
+        </div>
+        <div className="absolute top-20 right-20 floating-animation opacity-20">
+          <CodeBrackets color="#191A23" />
+        </div>
+        <div className="absolute bottom-10 right-40 floating-animation opacity-15" style={{ animationDelay: '2s' }}>
+          <FloatingCode color="#191A23" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-6xl font-bold text-gray-900 mb-6 leading-tight">
@@ -58,8 +70,16 @@ function quickSort(arr) {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-4 bg-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-40 left-5 opacity-20">
+          <FloatingCode color="#B9FF66" />
+        </div>
+        <div className="absolute bottom-20 right-10 opacity-15">
+          <GridDots color="#191A23" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 mb-4">
               Why Choose <span className="bg-[#B9FF66] px-2">SnippetSync</span>
@@ -137,8 +157,13 @@ function quickSort(arr) {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 bg-gray-100">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-4 bg-gray-100 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-10 right-20 floating-animation opacity-25">
+          <CodeBrackets color="#B9FF66" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 mb-4">
               How It <span className="bg-[#B9FF66] px-2">Works</span>

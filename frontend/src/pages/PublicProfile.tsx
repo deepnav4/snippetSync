@@ -138,58 +138,133 @@ export default function PublicProfile() {
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        {/* Stats Grid - Compact 3 Column Layout */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="text-4xl mb-2">📚</div>
-            <div className="text-3xl font-bold text-gray-900">{profile._count.snippets}</div>
-            <div className="text-sm text-gray-600 font-semibold">Public Snippets</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-4xl">📚</div>
+              <div className="text-right">
+                <div className="text-4xl font-bold text-blue-600">{profile._count.snippets}</div>
+                <div className="text-sm text-gray-600 font-semibold">Snippets</div>
+              </div>
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600" style={{ width: '100%' }}></div>
+            </div>
           </div>
 
           <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="text-4xl mb-2">👍</div>
-            <div className="text-3xl font-bold text-blue-600">{stats?.upvotesReceived || 0}</div>
-            <div className="text-sm text-gray-600 font-semibold">Total Upvotes</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-4xl">👍</div>
+              <div className="text-right">
+                <div className="text-4xl font-bold text-green-600">{stats?.upvotesReceived || 0}</div>
+                <div className="text-sm text-gray-600 font-semibold">Upvotes</div>
+              </div>
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-green-400 to-green-600" style={{ width: '100%' }}></div>
+            </div>
           </div>
 
-          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="text-4xl mb-2">💬</div>
-            <div className="text-3xl font-bold text-purple-600">{profile._count.comments}</div>
-            <div className="text-sm text-gray-600 font-semibold">Comments</div>
-          </div>
-
-          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="text-4xl mb-2">⚡</div>
-            <div className="text-3xl font-bold text-orange-600">{activityScore}</div>
-            <div className="text-sm text-gray-600 font-semibold">Activity Score</div>
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-4xl">⚡</div>
+              <div className="text-right">
+                <div className="text-4xl font-bold text-[#B9FF66]">{activityScore}</div>
+                <div className="text-sm text-gray-400 font-semibold">Activity</div>
+              </div>
+            </div>
+            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-[#B9FF66] to-[#a3e655]" style={{ width: '100%' }}></div>
+            </div>
           </div>
         </div>
 
         {/* Language Stats */}
         {stats && stats.languageStats.length > 0 && (
-          <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 mb-8 shadow-[6px_6px_0_#191A23]">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Top <span className="bg-[#B9FF66] px-2 py-1 rounded">Languages</span>
+          <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 mb-8 shadow-[6px_6px_0_#191A23]">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span>💻</span>
+              Language <span className="bg-[#B9FF66] px-2">Contributions</span>
             </h2>
-            <div className="grid md:grid-cols-5 gap-4">
-              {stats.languageStats.slice(0, 5).map((lang, index) => {
-                const colors = [
-                  { bg: 'from-blue-400 to-blue-600', text: 'text-blue-600' },
-                  { bg: 'from-green-400 to-green-600', text: 'text-green-600' },
-                  { bg: 'from-purple-400 to-purple-600', text: 'text-purple-600' },
-                  { bg: 'from-orange-400 to-orange-600', text: 'text-orange-600' },
-                  { bg: 'from-pink-400 to-pink-600', text: 'text-pink-600' },
-                ];
-                return (
-                  <div key={lang.language} className="bg-gray-50 border-2 border-gray-900 rounded-xl p-4 hover:scale-105 transition-transform">
-                    <div className={`w-12 h-12 bg-gradient-to-r ${colors[index].bg} rounded-lg flex items-center justify-center text-white font-bold text-xl mb-3 border-2 border-gray-900`}>
-                      {index + 1}
-                    </div>
-                    <div className={`text-2xl font-bold ${colors[index].text}`}>{lang.count}</div>
-                    <div className="text-sm font-semibold text-gray-900">{lang.language}</div>
-                  </div>
-                );
-              })}
+            
+            {/* Two Column Layout: Bar Graph and Pie Chart */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Column - Bar Graph */}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Progress Bars</h3>
+                <div className="space-y-4">
+                  {stats.languageStats.slice(0, 5).map((lang, index) => {
+                    const percentage = (lang.count / profile._count.snippets) * 100;
+                    const colors = [
+                      { gradient: 'from-blue-500 to-blue-600', bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-500' },
+                      { gradient: 'from-green-500 to-green-600', bg: 'bg-green-100', text: 'text-green-700', border: 'border-green-500' },
+                      { gradient: 'from-purple-500 to-purple-600', bg: 'bg-purple-100', text: 'text-purple-700', border: 'border-purple-500' },
+                      { gradient: 'from-orange-500 to-orange-600', bg: 'bg-orange-100', text: 'text-orange-700', border: 'border-orange-500' },
+                      { gradient: 'from-pink-500 to-pink-600', bg: 'bg-pink-100', text: 'text-pink-700', border: 'border-pink-500' },
+                    ];
+                    const color = colors[index];
+                    
+                    return (
+                      <div key={lang.language}>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <span className={`${color.bg} ${color.text} px-3 py-1 rounded-full font-bold text-sm border-2 ${color.border}`}>
+                              #{index + 1}
+                            </span>
+                            <span className="font-bold text-gray-900 text-lg">{lang.language}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={`font-bold ${color.text} text-xl`}>{lang.count}</span>
+                            <span className="text-gray-500 text-sm">({percentage.toFixed(1)}%)</span>
+                          </div>
+                        </div>
+                        <div className="h-4 bg-gray-200 rounded-full overflow-hidden border-2 border-gray-900">
+                          <div 
+                            className={`h-full bg-gradient-to-r ${color.gradient} transition-all duration-1000`}
+                            style={{ width: `${percentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            
+              {/* Right Column - Circular Pie Chart */}
+              <div className="flex flex-col items-center justify-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-6">Distribution Chart</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                  {stats.languageStats.slice(0, 5).map((lang, index) => {
+                    const percentage = (lang.count / profile._count.snippets) * 100;
+                    const colors = ['#3b82f6', '#10b981', '#8b5cf6', '#f97316', '#ec4899'];
+                    return (
+                      <div key={lang.language} className="text-center hover:scale-110 transition-transform">
+                        <div className="relative w-24 h-24 mb-2">
+                          <svg className="transform -rotate-90" width="96" height="96">
+                            <circle cx="48" cy="48" r="40" stroke="#e5e7eb" strokeWidth="10" fill="none" />
+                            <circle 
+                              cx="48" 
+                              cy="48" 
+                              r="40" 
+                              stroke={colors[index]} 
+                              strokeWidth="10" 
+                              fill="none"
+                              strokeDasharray={`${(percentage / 100) * 251} 251`}
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-base font-bold text-gray-900">{percentage.toFixed(0)}%</span>
+                          </div>
+                        </div>
+                        <div className="w-4 h-4 rounded-full mx-auto mb-1" style={{ backgroundColor: colors[index] }}></div>
+                        <p className="text-sm font-semibold text-gray-700">{lang.language}</p>
+                        <p className="text-xs text-gray-500">{lang.count} snippets</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         )}
