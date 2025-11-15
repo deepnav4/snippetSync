@@ -1,14 +1,10 @@
+# Don't copy these files into Docker
 node_modules
 dist
-npm-debug.log
 .env
-.env.local
-.env.*.local
-*.db
-*.db-journal
 .git
 .gitignore
 README.md
-.vscode
-coverage
+*.md
 .DS_Store
+npm-debug.log

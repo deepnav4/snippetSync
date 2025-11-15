@@ -2,6 +2,14 @@
 
 This guide will help you run the entire SnippetSync application (Frontend + Backend + Database) using Docker.
 
+
+// clone the repository
+// cd backend
+// docker-compose up -d
+// backend will be at http://localhost:5000
+
+docker exec -it snippetsync-db mysql -u snippetuser -psnippetpass snippetsync
+
 ## 📋 Prerequisites
 
 - **Docker Desktop** installed and running

@@ -291,3 +291,9 @@ If you encounter issues:
 ## 🔗 Full Stack Setup
 
 To run both frontend and backend together, see the root-level `docker-compose.yml` for complete stack deployment.
+
+
+
+
+# Access MySQL command line inside the container
+docker exec -it snippetsync-db mysql -u snippetuser -psnippetpass snippetsync
