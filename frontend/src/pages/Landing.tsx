@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { CodeBrackets, GridDots, FloatingCode } from '../svgs';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 export default function Landing() {
+  const { user } = useAuth();
   const [showWakeupMessage, setShowWakeupMessage] = useState(false);
 
   useEffect(() => {
@@ -57,9 +59,9 @@ export default function Landing() {
                 Import directly into VS Code with one click.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link to="/signup" className="w-full sm:w-auto">
+                <Link to={user ? "/dashboard" : "/signup"} className="w-full sm:w-auto">
                   <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
-                    Get Started Free
+                    {user ? 'Go to Dashboard' : 'Get Started Free'}
                   </button>
                 </Link>
                 <Link to="/guide" className="w-full sm:w-auto">
