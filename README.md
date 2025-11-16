@@ -1,0 +1,1 @@
+for vs code extension just donwload .vsxi file from vs-code extension folder than go to vs code then extenion tab click on 3 dots and than last option install file .vsxi file and then control+shift+p and type snippetSync login with same creditails with website and good to go
