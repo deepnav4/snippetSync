@@ -1,9 +1,37 @@
 import { Link } from 'react-router-dom';
 import { CodeBrackets, GridDots, FloatingCode } from '../svgs';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Landing() {
+  const [showWakeupMessage, setShowWakeupMessage] = useState(false);
+
+  useEffect(() => {
+    checkBackendHealth();
+  }, []);
+
+  const checkBackendHealth = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const baseUrl = apiUrl.replace('/api', '');
+    
+    try {
+      await axios.get(`${baseUrl}/health`, { timeout: 5000 });
+    } catch (error) {
+      // Backend is sleeping/cold start
+      setShowWakeupMessage(true);
+      setTimeout(() => setShowWakeupMessage(false), 10000);
+    }
+  };
+
   return (
     <div className="bg-white">
+      {/* Backend Wakeup Notification */}
+      {showWakeupMessage && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-[#B9FF66] border-2 border-gray-900 rounded-lg px-4 sm:px-6 py-3 shadow-[4px_4px_0_#191A23] animate-bounce">
+          <p className="text-gray-900 font-bold text-xs sm:text-sm md:text-base">☕ Backend is waking up, please wait 30-60 seconds...</p>
+        </div>
+      )}
+      
       {/* Hero Section */}
       <section className="bg-gray-100 py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
         {/* Decorative SVGs */}
