@@ -114,18 +114,18 @@ export default function MySnippets() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-2">
-              My <span className="bg-[#B9FF66] px-3 py-1 rounded">Snippets</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+              My <span className="bg-[#B9FF66] px-2 sm:px-3 py-1 rounded">Snippets</span>
             </h1>
-            <p className="text-gray-600 text-lg">Manage your code library</p>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">Manage your code library</p>
           </div>
-          <Link to="/create">
-            <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+          <Link to="/create" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
               + Create New
             </button>
           </Link>
@@ -133,11 +133,11 @@ export default function MySnippets() {
 
         {/* Stats Cards */}
         {snippets.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-              <div className="text-4xl mb-2">📚</div>
-              <div className="text-3xl font-bold text-gray-900">{stats.total}</div>
-              <div className="text-sm text-gray-600 font-semibold">Total Snippets</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="bg-white border-2 border-gray-900 rounded-xl p-4 sm:p-6 shadow-[4px_4px_0_#191A23] sm:shadow-[6px_6px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] sm:hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
+              <div className="text-3xl sm:text-4xl mb-2">📚</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.total}</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-semibold">Total Snippets</div>
             </div>
             <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
               <div className="text-4xl mb-2">🌍</div>
@@ -159,12 +159,12 @@ export default function MySnippets() {
 
         {/* Filters */}
         {snippets.length > 0 && (
-          <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 mb-8 shadow-[6px_6px_0_#191A23]">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex gap-2 flex-wrap">
+          <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-[6px_6px_0_#191A23]">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setFilter('all')}
-                  className={`px-6 py-3 rounded-lg font-bold border-2 border-gray-900 transition-all ${
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold border-2 border-gray-900 transition-all text-sm sm:text-base ${
                     filter === 'all'
                       ? 'bg-[#B9FF66] text-gray-900'
                       : 'bg-white text-gray-900 hover:bg-gray-50'
@@ -207,12 +207,12 @@ export default function MySnippets() {
         )}
         
         {filteredAndSortedSnippets.length === 0 ? (
-          <div className="bg-white border-2 border-gray-900 rounded-2xl p-16 text-center shadow-[8px_8px_0_#191A23]">
-            <div className="text-8xl mb-6">📝</div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 sm:p-12 md:p-16 text-center shadow-[8px_8px_0_#191A23]">
+            <div className="text-6xl sm:text-7xl md:text-8xl mb-4 sm:mb-6">📝</div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               {snippets.length === 0 ? 'No snippets yet' : 'No snippets match your filter'}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
               {snippets.length === 0 
                 ? 'Start building your code library today!'
                 : 'Try changing your filter settings'}
@@ -226,12 +226,12 @@ export default function MySnippets() {
             )}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             {filteredAndSortedSnippets.map(snippet => (
-              <div key={snippet.id} className="bg-white border-2 border-gray-900 rounded-2xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[10px_10px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all group">
+              <div key={snippet.id} className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[10px_10px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all group">
                 {/* Header with timestamp */}
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#B9FF66] transition-colors flex-1">
+                <div className="flex items-start justify-between mb-2 sm:mb-3 gap-2">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#B9FF66] transition-colors flex-1 break-words">
                     {snippet.title}
                   </h3>
                   <span className="text-xs text-gray-500 ml-3 bg-gray-100 px-3 py-1 rounded-full border border-gray-300 flex-shrink-0">

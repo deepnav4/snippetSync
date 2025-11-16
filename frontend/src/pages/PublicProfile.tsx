@@ -83,26 +83,26 @@ export default function PublicProfile() {
   const level = Math.floor(profile._count.snippets / 10) + 1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Profile Header */}
-        <div className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-900 rounded-2xl p-8 mb-8 shadow-[8px_8px_0_#191A23] relative overflow-hidden">
+        <div className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-900 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 shadow-[8px_8px_0_#191A23] relative overflow-hidden">
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#B9FF66] rounded-full -mr-16 -mt-16 opacity-20"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#B9FF66] rounded-full -ml-12 -mb-12 opacity-20"></div>
+          <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-[#B9FF66] rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 opacity-20"></div>
+          <div className="absolute bottom-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-[#B9FF66] rounded-full -ml-8 sm:-ml-12 -mb-8 sm:-mb-12 opacity-20"></div>
           
-          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
+          <div className="relative z-10 flex flex-col md:flex-row gap-6 sm:gap-8 items-start">
             {/* Avatar */}
             <div className="flex-shrink-0">
-              <div className="w-32 h-32 bg-gradient-to-br from-[#B9FF66] to-[#a3e655] rounded-full border-4 border-gray-900 flex items-center justify-center text-6xl font-bold text-gray-900 shadow-[6px_6px_0_#191A23]">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-gradient-to-br from-[#B9FF66] to-[#a3e655] rounded-full border-4 border-gray-900 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 shadow-[6px_6px_0_#191A23]">
                 {profile.username[0].toUpperCase()}
               </div>
             </div>
 
             {/* Info */}
             <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-3 mb-3">
-                <h1 className="text-5xl font-bold text-gray-900">{profile.username}</h1>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">{profile.username}</h1>
                 <span className="px-4 py-2 bg-blue-100 text-blue-700 border-2 border-blue-600 rounded-full text-sm font-bold">
                   ✓ Verified
                 </span>
@@ -139,13 +139,13 @@ export default function PublicProfile() {
         </div>
 
         {/* Stats Grid - Compact 3 Column Layout */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-4xl">📚</div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white border-2 border-gray-900 rounded-xl p-4 sm:p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="text-3xl sm:text-4xl">📚</div>
               <div className="text-right">
-                <div className="text-4xl font-bold text-blue-600">{profile._count.snippets}</div>
-                <div className="text-sm text-gray-600 font-semibold">Snippets</div>
+                <div className="text-3xl sm:text-4xl font-bold text-blue-600">{profile._count.snippets}</div>
+                <div className="text-xs sm:text-sm text-gray-600 font-semibold">Snippets</div>
               </div>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">

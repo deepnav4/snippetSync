@@ -166,15 +166,15 @@ export default function SnippetDetail() {
   const isOwner = user?.id === snippet.authorId;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-8 sm:py-10 md:py-12">
       {/* Header Card */}
-      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{snippet.title}</h1>
+      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 break-words">{snippet.title}</h1>
         {snippet.description && (
-          <p className="text-gray-600 text-lg mb-6">{snippet.description}</p>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4 sm:mb-6">{snippet.description}</p>
         )}
         
-        <div className="flex flex-wrap gap-6 items-center mb-6">
+        <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-6 items-center mb-4 sm:mb-6">
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-gray-500">Language:</span>
             <span className="bg-[#B9FF66] text-gray-900 px-3 py-1 rounded-lg font-bold text-sm border-2 border-gray-900">
@@ -209,16 +209,16 @@ export default function SnippetDetail() {
         )}
 
         {/* Share Code Section */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           {snippet.shareCode && snippet.shareCode.length > 0 ? (
-            <div className="bg-[#B9FF66] border-2 border-gray-900 rounded-xl p-5 shadow-[4px_4px_0_#191A23]">
-              <div className="mb-3">
-                <span className="text-sm font-bold text-gray-900">
+            <div className="bg-[#B9FF66] border-2 border-gray-900 rounded-xl p-4 sm:p-5 shadow-[4px_4px_0_#191A23]">
+              <div className="mb-2 sm:mb-3">
+                <span className="text-xs sm:text-sm font-bold text-gray-900">
                   ⚡ Temporary Share Code (Expires in 5 minutes)
                 </span>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <code className="flex-1 bg-white border-2 border-gray-900 rounded-lg px-4 py-3 font-mono text-xl font-bold text-gray-900 tracking-wider">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <code className="flex-1 bg-white border-2 border-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3 font-mono text-base sm:text-lg md:text-xl font-bold text-gray-900 tracking-wider break-all">
                   {snippet.shareCode[0].code}
                 </code>
                 <button
@@ -250,13 +250,13 @@ export default function SnippetDetail() {
         </div>
         
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <button
             onClick={handleUpvote}
             disabled={!user}
             className={`${
               isUpvoted ? 'bg-[#B9FF66]' : 'bg-white'
-            } text-gray-900 px-6 py-3 rounded-lg font-bold border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed`}
+            } text-gray-900 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base`}
           >
             {isUpvoted ? '✓ Upvoted' : '👍 Upvote'} ({snippet._count.upvotes})
           </button>
@@ -278,21 +278,21 @@ export default function SnippetDetail() {
       </div>
 
       {/* Code Display */}
-      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">Code</h3>
-        <pre className="bg-gray-900 text-[#B9FF66] p-6 rounded-xl overflow-auto max-h-[500px] border-2 border-gray-900 font-mono text-sm leading-relaxed">
+      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Code</h3>
+        <pre className="bg-gray-900 text-[#B9FF66] p-3 sm:p-4 md:p-6 rounded-xl overflow-auto max-h-[400px] sm:max-h-[500px] border-2 border-gray-900 font-mono text-xs sm:text-sm leading-relaxed">
           {snippet.code}
         </pre>
       </div>
 
       {/* Comments Section */}
-      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">
+      <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-4 sm:p-6 md:p-8">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
           Comments ({comments.length})
         </h3>
         
         {user ? (
-          <form onSubmit={handleAddComment} className="mb-8">
+          <form onSubmit={handleAddComment} className="mb-6 sm:mb-8">
             <textarea
               value={commentText}
               onChange={e => setCommentText(e.target.value)}

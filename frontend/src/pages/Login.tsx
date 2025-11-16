@@ -33,11 +33,11 @@ export default function Login() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
             Welcome <span className="bg-[#B9FF66] px-2">Back</span>
           </h1>
-          <p className="text-gray-600">Sign in to access your code snippets</p>
+          <p className="text-sm sm:text-base text-gray-600">Sign in to access your code snippets</p>
         </div>
 
         {/* Form Card */}

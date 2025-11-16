@@ -3,8 +3,7 @@
   "displayName": "SnippetSync",
   "description": "Sync your VS Code snippets with SnippetSync platform",
   "version": "1.0.0",
-  "publisher": "YOUR_PUBLISHER_NAME",
-  "icon": "icon.png",
+  "publisher": "snippetsync",
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/snippet-sync"

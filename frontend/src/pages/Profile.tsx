@@ -104,17 +104,17 @@ const Profile: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10 md:py-12">
         {/* Header Card with Decorative Elements */}
-        <div className="relative bg-[#B9FF66] border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8 overflow-hidden">
+        <div className="relative bg-[#B9FF66] border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-6 sm:p-8 mb-6 sm:mb-8 overflow-hidden">
           {/* Decorative circles */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-gray-900 opacity-5 rounded-full -ml-16 -mb-16"></div>
+          <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-white opacity-10 rounded-full -mr-16 sm:-mr-20 -mt-16 sm:-mt-20"></div>
+          <div className="absolute bottom-0 left-0 w-24 sm:w-32 h-24 sm:h-32 bg-gray-900 opacity-5 rounded-full -ml-12 sm:-ml-16 -mb-12 sm:-mb-16"></div>
           
-          <div className="relative flex flex-col md:flex-row items-center gap-8">
+          <div className="relative flex flex-col md:flex-row items-center gap-6 sm:gap-8">
             {/* Avatar with badge */}
             <div className="relative">
-              <div className="w-32 h-32 rounded-full border-4 border-gray-900 shadow-[6px_6px_0_#191A23] flex items-center justify-center bg-white text-gray-900 text-5xl font-bold overflow-hidden">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-gray-900 shadow-[6px_6px_0_#191A23] flex items-center justify-center bg-white text-gray-900 text-4xl sm:text-5xl font-bold overflow-hidden">
                 {profile.profilePicture ? (
                   <img src={profile.profilePicture} alt={profile.username} className="w-full h-full object-cover" />
                 ) : (
@@ -129,7 +129,7 @@ const Profile: React.FC = () => {
 
             {/* User Info */}
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-5xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                 {profile.username}
               </h1>
               {editMode ? (
@@ -192,11 +192,11 @@ const Profile: React.FC = () => {
         </div>
 
         {/* Stats Cards - 4 Column Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
           {/* Total Snippets */}
-          <div className="bg-white border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Total Snippets</div>
-            <div className="text-4xl font-bold text-blue-600 mb-3">{profile._count.snippets}</div>
+          <div className="bg-white border-2 border-gray-900 rounded-xl p-4 sm:p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Total Snippets</div>
+            <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2 sm:mb-3">{profile._count.snippets}</div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600" style={{ width: '100%' }}></div>
             </div>

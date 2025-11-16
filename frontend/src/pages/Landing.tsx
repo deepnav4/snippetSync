@@ -5,44 +5,44 @@ export default function Landing() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20 px-4 relative overflow-hidden">
+      <section className="bg-gray-100 py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
         {/* Decorative SVGs */}
-        <div className="absolute top-10 left-10 opacity-30">
+        <div className="absolute top-10 left-10 opacity-30 hidden md:block">
           <GridDots color="#B9FF66" />
         </div>
-        <div className="absolute top-20 right-20 floating-animation opacity-20">
+        <div className="absolute top-20 right-20 floating-animation opacity-20 hidden lg:block">
           <CodeBrackets color="#191A23" />
         </div>
-        <div className="absolute bottom-10 right-40 floating-animation opacity-15" style={{ animationDelay: '2s' }}>
+        <div className="absolute bottom-10 right-40 floating-animation opacity-15 hidden lg:block" style={{ animationDelay: '2s' }}>
           <FloatingCode color="#191A23" />
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <h1 className="text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
                 Store, Share & Sync Your Code
-                <span className="block mt-2 bg-[#B9FF66] inline-block px-3 py-1">Snippets</span>
+                <span className="inline-block mt-2 bg-[#B9FF66] px-2 sm:px-3 py-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Snippets</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8">
                 The ultimate platform for developers to organize, share, and access code snippets. 
                 Import directly into VS Code with one click.
               </p>
-              <div className="flex gap-4">
-                <Link to="/signup">
-                  <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link to="/signup" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     Get Started Free
                   </button>
                 </Link>
-                <Link to="/guide">
-                  <button className="px-8 py-4 bg-white text-gray-900 font-bold text-lg rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                <Link to="/guide" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     View Guide →
                   </button>
                 </Link>
               </div>
             </div>
-            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[8px_8px_0_#191A23]">
-              <pre className="bg-gray-900 text-[#B9FF66] p-6 rounded-xl font-mono text-sm overflow-x-auto">
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_#191A23]">
+              <pre className="bg-gray-900 text-[#B9FF66] p-4 sm:p-6 rounded-xl font-mono text-xs sm:text-sm overflow-x-auto">
 {`// Save your code snippets
 function quickSort(arr) {
   if (arr.length <= 1) return arr;
@@ -70,7 +70,7 @@ function quickSort(arr) {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-white relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-40 left-5 opacity-20">
           <FloatingCode color="#B9FF66" />
@@ -80,11 +80,11 @@ function quickSort(arr) {
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               Why Choose <span className="bg-[#B9FF66] px-2">SnippetSync</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
               Everything you need to manage your code snippets efficiently
             </p>
           </div>
@@ -157,28 +157,28 @@ function quickSort(arr) {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 bg-gray-100 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-gray-100 relative overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-10 right-20 floating-animation opacity-25">
+        <div className="absolute top-10 right-20 floating-animation opacity-25 hidden lg:block">
           <CodeBrackets color="#B9FF66" />
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               How It <span className="bg-[#B9FF66] px-2">Works</span>
             </h2>
-            <p className="text-xl text-gray-600">Simple 3-step process to get started</p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">Simple 3-step process to get started</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Step 1 */}
-            <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
-              <div className="bg-[#B9FF66] text-gray-900 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold border-2 border-gray-900 mb-6">
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 sm:p-8 shadow-[6px_6px_0_#191A23]">
+              <div className="bg-[#B9FF66] text-gray-900 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold border-2 border-gray-900 mb-4 sm:mb-6">
                 01
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Create Account</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Create Account</h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                 Sign up for free in seconds. No credit card required. Start with unlimited public and private snippets.
               </p>
               <Link to="/signup">
@@ -224,12 +224,12 @@ function quickSort(arr) {
       </section>
 
       {/* VS Code Integration Highlight */}
-      <section className="py-20 px-4 bg-[#B9FF66]">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-[#B9FF66]">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white border-2 border-gray-900 rounded-2xl p-12 shadow-[8px_8px_0_#191A23]">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 sm:p-8 md:p-12 shadow-[8px_8px_0_#191A23]">
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Seamless VS Code Integration
                 </h2>
                 <ul className="space-y-4 mb-8">
@@ -292,20 +292,20 @@ Enter share code: ABC123
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               Loved by <span className="bg-[#B9FF66] px-2">Developers</span>
             </h2>
-            <p className="text-xl text-gray-600">See what our users are saying</p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">See what our users are saying</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-6 sm:p-8 shadow-[6px_6px_0_#191A23]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold border-2 border-gray-900">
                   S
                 </div>
                 <div>
@@ -357,41 +357,41 @@ Enter share code: ABC123
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 bg-gray-900">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
             <div>
-              <div className="text-5xl font-bold text-[#B9FF66] mb-2">10K+</div>
-              <div className="text-white">Active Users</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#B9FF66] mb-2">10K+</div>
+              <div className="text-white text-sm sm:text-base">Active Users</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-[#B9FF66] mb-2">50K+</div>
-              <div className="text-white">Snippets Shared</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#B9FF66] mb-2">50K+</div>
+              <div className="text-white text-sm sm:text-base">Snippets Shared</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-[#B9FF66] mb-2">100K+</div>
-              <div className="text-white">Code Imports</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#B9FF66] mb-2">100K+</div>
+              <div className="text-white text-sm sm:text-base">Code Imports</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-[#B9FF66] mb-2">24/7</div>
-              <div className="text-white">Available</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#B9FF66] mb-2">24/7</div>
+              <div className="text-white text-sm sm:text-base">Available</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-[#B9FF66]">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-[#B9FF66]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             Ready to Organize Your Code?
           </h2>
-          <p className="text-2xl text-gray-900 mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-900 mb-6 sm:mb-8">
             Join thousands of developers who trust SnippetSync for their code management
           </p>
-          <div className="flex justify-center gap-4">
-            <Link to="/signup">
-              <button className="px-10 py-5 bg-gray-900 text-white font-bold text-xl rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <Link to="/signup" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gray-900 text-white font-bold text-lg sm:text-xl rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
                 Start Free Today
               </button>
             </Link>
@@ -405,9 +405,9 @@ Enter share code: ABC123
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
+      <footer className="bg-gray-900 text-white py-8 sm:py-10 md:py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
             <div>
               <div className="text-2xl font-bold mb-4">
                 <span className="bg-[#B9FF66] text-gray-900 px-2 py-1 rounded">Snippet</span>

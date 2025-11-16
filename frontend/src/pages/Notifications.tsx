@@ -93,16 +93,16 @@ export default function Notifications() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-2xl p-8 mb-8 shadow-[8px_8px_0_#191A23]">
-          <div className="flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 shadow-[8px_8px_0_#191A23]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                 🔔 Notifications
               </h1>
-              <p className="text-xl text-gray-800">
+              <p className="text-base sm:text-lg md:text-xl text-gray-800">
                 {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'You\'re all caught up!'}
               </p>
             </div>
@@ -161,14 +161,14 @@ export default function Notifications() {
             {filteredNotifications.map(notification => (
               <div
                 key={notification.id}
-                className={`bg-white border-2 border-gray-900 rounded-2xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all ${
+                className={`bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all ${
                   !notification.read ? 'bg-gradient-to-r from-[#B9FF66] to-white' : ''
                 }`}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3 sm:gap-4">
                   {/* Icon */}
                   <div className="flex-shrink-0">
-                    <div className={`w-14 h-14 rounded-full border-2 border-gray-900 flex items-center justify-center text-3xl ${
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-gray-900 flex items-center justify-center text-2xl sm:text-3xl ${
                       !notification.read ? 'bg-[#B9FF66]' : 'bg-gray-100'
                     }`}>
                       {getNotificationIcon(notification.type)}

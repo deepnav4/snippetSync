@@ -2,23 +2,23 @@ import { Link } from 'react-router-dom';
 
 export default function Guide() {
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
             VS Code <span className="bg-[#B9FF66] px-2">Extension</span> Guide
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600">
             Learn how to import and export code snippets directly from VS Code
           </p>
         </div>
 
         {/* Installation Section */}
-        <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">📦</span>
-            <h2 className="text-3xl font-bold text-gray-900">Step 1: Install Extension</h2>
+        <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+          <div className="flex items-center gap-3 mb-4 sm:mb-6">
+            <span className="text-3xl sm:text-4xl">📦</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Step 1: Install Extension</h2>
           </div>
           
           <div className="space-y-4">

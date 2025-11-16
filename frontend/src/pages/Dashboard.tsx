@@ -64,36 +64,36 @@ export default function Dashboard() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Decorative SVGs */}
-      <div className="absolute top-20 right-10 opacity-10">
+      <div className="absolute top-20 right-10 opacity-10 hidden lg:block">
         <GridDots color="#191A23" />
       </div>
-      <div className="absolute bottom-40 left-10 floating-animation opacity-10" style={{ animationDelay: '1s' }}>
+      <div className="absolute bottom-40 left-10 floating-animation opacity-10 hidden lg:block" style={{ animationDelay: '1s' }}>
         <FloatingCode color="#191A23" />
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-2xl p-8 mb-8 shadow-[8px_8px_0_#191A23] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gray-900 rounded-full -mr-16 -mt-16 opacity-10"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gray-900 rounded-full -ml-12 -mb-12 opacity-10"></div>
+        <div className="bg-gradient-to-r from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 shadow-[8px_8px_0_#191A23] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 sm:w-32 h-20 sm:h-32 bg-gray-900 rounded-full -mr-10 sm:-mr-16 -mt-10 sm:-mt-16 opacity-10"></div>
+          <div className="absolute bottom-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-gray-900 rounded-full -ml-8 sm:-ml-12 -mb-8 sm:-mb-12 opacity-10"></div>
           <div className="relative z-10">
-            <h1 className="text-5xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
               Welcome back, {user?.username}! 👋
             </h1>
-            <p className="text-xl text-gray-800">Here's what's happening with your snippets</p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-800">Here's what's happening with your snippets</p>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 shadow-[6px_6px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-5xl">📚</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white border-2 border-gray-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-[4px_4px_0_#191A23] sm:shadow-[6px_6px_0_#191A23] hover:shadow-[6px_6px_0_#191A23] sm:hover:shadow-[8px_8px_0_#191A23] hover:-translate-y-1 transition-all">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="text-3xl sm:text-4xl md:text-5xl">📚</div>
               <div className="text-right">
-                <div className="text-4xl font-bold text-gray-900">{profile?._count.snippets || 0}</div>
-                <div className="text-sm text-gray-600 font-semibold">Total Snippets</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{profile?._count.snippets || 0}</div>
+                <div className="text-xs sm:text-sm text-gray-600 font-semibold">Total Snippets</div>
               </div>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -141,35 +141,35 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Recent Snippets */}
           <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-gray-900">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
                 Recent <span className="bg-[#B9FF66] px-2 py-1 rounded">Snippets</span>
               </h2>
-              <Link to="/my-snippets" className="text-gray-900 hover:text-[#B9FF66] font-semibold transition-colors">
+              <Link to="/my-snippets" className="text-gray-900 hover:text-[#B9FF66] font-semibold transition-colors text-sm sm:text-base">
                 View All →
               </Link>
             </div>
 
             {snippets.length === 0 ? (
-              <div className="bg-white border-2 border-gray-900 rounded-2xl p-12 text-center shadow-[6px_6px_0_#191A23]">
-                <div className="text-6xl mb-4">📝</div>
-                <p className="text-xl text-gray-600 font-medium mb-6">No snippets yet</p>
+              <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 sm:p-12 text-center shadow-[6px_6px_0_#191A23]">
+                <div className="text-5xl sm:text-6xl mb-4">📝</div>
+                <p className="text-lg sm:text-xl text-gray-600 font-medium mb-4 sm:mb-6">No snippets yet</p>
                 <Link to="/create">
-                  <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]">
+                  <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]">
                     Create First Snippet
                   </button>
                 </Link>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {snippets.map(snippet => (
                   <Link key={snippet.id} to={`/snippet/${snippet.id}`}>
-                    <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all group">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#B9FF66] transition-colors flex-1">
+                    <div className="bg-white border-2 border-gray-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-[4px_4px_0_#191A23] hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all group">
+                      <div className="flex items-start justify-between mb-2 sm:mb-3 gap-3">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#B9FF66] transition-colors flex-1 break-words">
                           {snippet.title}
                         </h3>
                         <span className="text-xs text-gray-500 ml-3 bg-gray-100 px-3 py-1 rounded-full border border-gray-300">
@@ -200,10 +200,10 @@ export default function Dashboard() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Quick Actions */}
-            <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 shadow-[6px_6px_0_#191A23]">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Quick Actions</h3>
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 shadow-[6px_6px_0_#191A23]">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <Link to="/create">
                   <button className="w-full px-6 py-3 bg-[#B9FF66] text-gray-900 font-bold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 text-left flex items-center gap-3">

@@ -117,42 +117,43 @@ export default function Explore() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gray-100 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Decorative SVGs */}
-      <div className="absolute top-10 left-10 opacity-15">
+      <div className="absolute top-10 left-10 opacity-15 hidden lg:block">
         <CirclePattern color="#B9FF66" />
       </div>
-      <div className="absolute top-40 right-20 floating-animation opacity-10">
+      <div className="absolute top-40 right-20 floating-animation opacity-10 hidden lg:block">
         <CodeBrackets color="#191A23" />
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
             Explore <span className="bg-[#B9FF66] px-2">Snippets</span>
           </h1>
-          <Link to="/create">
-            <button className="px-6 py-3 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]">
+          <Link to="/create" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-[#B9FF66] text-gray-900 font-semibold rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[4px_4px_0_#191A23] hover:shadow-[2px_2px_0_#191A23] hover:translate-x-[2px] hover:translate-y-[2px]">
               + Create Snippet
             </button>
           </Link>
         </div>
         
         {/* Filters */}
-        <div className="bg-white border-2 border-gray-900 rounded-2xl p-6 mb-8 shadow-[6px_6px_0_#191A23]">
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-[6px_6px_0_#191A23]">
+          <div className="flex flex-col gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="🔍 Search snippets..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="flex-1 px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all"
+              className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all"
             />
-            <select 
+            <div className="flex flex-col sm:flex-row gap-3">
+              <select 
               value={languageFilter} 
               onChange={e => setLanguageFilter(e.target.value)}
-              className="px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
+              className="w-full sm:flex-1 px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
             >
               <option value="all">All Languages</option>
               <option value="javascript">JavaScript</option>
@@ -167,7 +168,7 @@ export default function Explore() {
             <select 
               value={sortBy} 
               onChange={e => setSortBy(e.target.value)}
-              className="px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
+              className="w-full sm:flex-1 px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
             >
               <option value="recent">📅 Most Recent</option>
               <option value="oldest">🕐 Oldest First</option>
@@ -181,11 +182,12 @@ export default function Explore() {
                   setLanguageFilter('all');
                   setSortBy('recent');
                 }}
-                className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors border-2 border-gray-900 whitespace-nowrap"
+                className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors border-2 border-gray-900 whitespace-nowrap"
               >
                 ✖ Clear
               </button>
             )}
+            </div>
           </div>
         </div>
         
