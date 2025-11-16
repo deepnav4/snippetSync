@@ -6,7 +6,7 @@
   "publisher": "snippetsync",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/snippet-sync"
+    "url": "https://github.com/deepnav4/snippetSync"
   },
   "engines": {
     "vscode": "^1.80.0"
@@ -50,7 +50,7 @@
       "properties": {
         "snippetSync.apiUrl": {
           "type": "string",
-          "default": "http://localhost:5000/api",
+          "default": "https://snippetsync-jgk8.onrender.com/api",
           "description": "SnippetSync API URL"
         },
         "snippetSync.autoSync": {
