@@ -28,7 +28,7 @@ export const createApp = (): Application => {
       origin: ['http://localhost:3000', 
         'http://localhost:5173', 
         'http://localhost:5174' , 
-        'https://snippet-sync-orpin.vercel.app/',
+        'https://snippet-sync-orpin.vercel.app',
         'https://snippetsync-jgk8.onrender.com',
       ],
       credentials: true,
