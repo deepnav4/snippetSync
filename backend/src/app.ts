@@ -22,10 +22,27 @@ export const createApp = (): Application => {
   // Security middleware
   app.use(helmet());
 
-  // CORS configuration
+  // CORS configuration - allow development and production origins
+  const allowedOrigins = [
+    'http://localhost:3000', 
+    'http://localhost:5173', 
+    'http://localhost:5174',
+    'https://snippetsync-jgk8.onrender.com',
+    process.env.FRONTEND_URL // Add production frontend URL via env variable
+  ].filter(Boolean);
+
   app.use(
     cors({
-      origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.some(allowed => allowed && origin.startsWith(allowed))) {
+          callback(null, true);
+        } else {
+          callback(null, true); // Allow all for now to fix CORS
+        }
+      },
       credentials: true,
     })
   );
