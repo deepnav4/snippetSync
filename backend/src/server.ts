@@ -9,9 +9,9 @@ const PORT = process.env.PORT || 5000;
 const app = createApp();
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔒 CORS origin: ${process.env.CORS_ORIGIN || 'http://localhost:3000'}`);
+  console.log(` Server is running on http://localhost:${PORT}`);
+  console.log(` Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(` CORS origin: ${process.env.CORS_ORIGIN || 'http://localhost:3000'}`);
 });
 
 // Handle unhandled promise rejections
