@@ -23,7 +23,7 @@ export default function Landing() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
+            <div className="min-w-0">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
                 Store, Share & Sync Your Code
                 <span className="inline-block mt-2 bg-[#B9FF66] px-2 sm:px-3 py-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Snippets</span>
@@ -45,7 +45,7 @@ export default function Landing() {
                 </Link>
               </div>
             </div>
-            <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_#191A23]">
+            <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_#191A23] min-w-0">
               <pre className="bg-gray-900 text-[#B9FF66] p-4 sm:p-6 rounded-xl font-mono text-xs sm:text-sm overflow-x-auto">
                 {`// Save your code snippets
 function quickSort(arr) {
