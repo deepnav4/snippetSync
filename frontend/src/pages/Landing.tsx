@@ -7,7 +7,7 @@ export default function Landing() {
 
   return (
     <div className="bg-white">
-      
+
       {/* Hero Section */}
       <section className="bg-gray-100 py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
         {/* Decorative SVGs */}
@@ -20,7 +20,7 @@ export default function Landing() {
         <div className="absolute bottom-10 right-40 floating-animation opacity-15 hidden lg:block" style={{ animationDelay: '2s' }}>
           <FloatingCode color="#191A23" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
@@ -29,10 +29,10 @@ export default function Landing() {
                 <span className="inline-block mt-2 bg-[#B9FF66] px-2 sm:px-3 py-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Snippets</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8">
-                The ultimate platform for developers to organize, share, and access code snippets. 
+                The ultimate platform for developers to organize, share, and access code snippets.
                 Import directly into VS Code with one click.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pr-2 pb-2">
                 <Link to={user ? "/dashboard" : "/signup"} className="w-full sm:w-auto block">
                   <button className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     {user ? 'Go to Dashboard' : 'Get Started Free'}
@@ -47,7 +47,7 @@ export default function Landing() {
             </div>
             <div className="bg-white border-2 border-gray-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_#191A23]">
               <pre className="bg-gray-900 text-[#B9FF66] p-4 sm:p-6 rounded-xl font-mono text-xs sm:text-sm overflow-x-auto">
-{`// Save your code snippets
+                {`// Save your code snippets
 function quickSort(arr) {
   if (arr.length <= 1) return arr;
   
@@ -82,7 +82,7 @@ function quickSort(arr) {
         <div className="absolute bottom-20 right-10 opacity-15">
           <GridDots color="#191A23" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
@@ -129,7 +129,8 @@ function quickSort(arr) {
 
             {/* Feature 4 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Share Codes</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Share
+                Codes</h3>
               <p className="text-gray-600 mb-4">
                 Generate temporary share codes (valid 5 mins) to safely share snippets with teammates without exposing your account.
               </p>
@@ -160,7 +161,7 @@ function quickSort(arr) {
         <div className="absolute top-10 right-20 floating-animation opacity-25 hidden lg:block">
           <CodeBrackets color="#B9FF66" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">

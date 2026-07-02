@@ -77,7 +77,9 @@ function Navbar() {
                 {/* Notification Bell */}
                 <Link to="/notifications" className="relative">
                   <button className="p-2 bg-gray-100 rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors relative">
-                    <span className="text-lg sm:text-xl">🔔</span>
+                    <svg className="w-5 h-5 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
                     {notificationCount > 0 && (
                       <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-gray-900">
                         {notificationCount > 9 ? '9+' : notificationCount}
@@ -110,20 +112,20 @@ function Navbar() {
                         onClick={() => setShowProfileMenu(false)}
                         className="block px-4 py-3 text-gray-900 hover:bg-[#B9FF66] transition-colors font-medium border-b border-gray-200"
                       >
-                        👤 My Profile
+                        My Profile
                       </Link>
                       <Link 
                         to="/my-snippets" 
                         onClick={() => setShowProfileMenu(false)}
                         className="block px-4 py-3 text-gray-900 hover:bg-[#B9FF66] transition-colors font-medium border-b border-gray-200"
                       >
-                        📚 My Snippets
+                        My Snippets
                       </Link>
                       <button 
                         onClick={() => { logout(); setShowProfileMenu(false); }} 
                         className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 transition-colors font-medium"
                       >
-                        🚪 Logout
+                        Logout
                       </button>
                     </div>
                   )}
@@ -189,48 +191,48 @@ function Navbar() {
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  📊 Dashboard
+                  Dashboard
                 </Link>
                 <Link 
                   to="/explore" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  🔍 Explore
+                  Explore
                 </Link>
                 <Link 
                   to="/notifications" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg relative text-base"
                 >
-                  🔔 Notifications {notificationCount > 0 && `(${notificationCount})`}
+                  Notifications {notificationCount > 0 && `(${notificationCount})`}
                 </Link>
                 <Link 
                   to="/create" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  ➕ Create Snippet
+                  Create Snippet
                 </Link>
                 <Link 
                   to="/my-snippets" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  📚 My Snippets
+                  My Snippets
                 </Link>
                 <Link 
                   to="/profile" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  👤 Profile
+                  Profile
                 </Link>
                 <button 
                   onClick={() => { logout(); setShowMobileMenu(false); }}
                   className="w-full text-left px-4 py-3.5 text-red-600 hover:bg-red-50 active:bg-red-100 transition-colors font-medium rounded-lg text-base"
                 >
-                  🚪 Logout
+                  Logout
                 </button>
               </>
             ) : (
@@ -240,28 +242,28 @@ function Navbar() {
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  🔍 Explore
+                  Explore
                 </Link>
                 <Link 
                   to="/guide" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-[#B9FF66] active:bg-[#a3e655] transition-colors font-medium rounded-lg text-base"
                 >
-                  📖 Guide
+                  Guide
                 </Link>
                 <Link 
                   to="/login" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 text-gray-900 hover:bg-gray-100 active:bg-gray-200 transition-colors font-medium rounded-lg text-base"
                 >
-                  🔑 Login
+                  Login
                 </Link>
                 <Link 
                   to="/signup" 
                   onClick={() => setShowMobileMenu(false)}
                   className="block px-4 py-3.5 bg-[#B9FF66] text-gray-900 hover:bg-[#a3e655] active:bg-[#8fd645] transition-colors font-bold rounded-lg border-2 border-gray-900 shadow-[4px_4px_0_#191A23] text-center text-base"
                 >
-                  ✨ Sign Up
+                  Sign Up
                 </Link>
               </>
             )}
