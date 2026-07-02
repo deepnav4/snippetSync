@@ -1,38 +1,12 @@
 import { Link } from 'react-router-dom';
 import { CodeBrackets, GridDots, FloatingCode } from '../svgs';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 export default function Landing() {
   const { user } = useAuth();
-  const [showWakeupMessage, setShowWakeupMessage] = useState(false);
-
-  useEffect(() => {
-    checkBackendHealth();
-  }, []);
-
-  const checkBackendHealth = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-    const baseUrl = apiUrl.replace('/api', '');
-    
-    try {
-      await axios.get(`${baseUrl}/health`, { timeout: 5000 });
-    } catch (error) {
-      // Backend is sleeping/cold start
-      setShowWakeupMessage(true);
-      setTimeout(() => setShowWakeupMessage(false), 10000);
-    }
-  };
 
   return (
     <div className="bg-white">
-      {/* Backend Wakeup Notification */}
-      {showWakeupMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-[#B9FF66] border-2 border-gray-900 rounded-lg px-4 sm:px-6 py-3 shadow-[4px_4px_0_#191A23] animate-bounce">
-          <p className="text-gray-900 font-bold text-xs sm:text-sm md:text-base">☕ Backend is waking up, please wait 30-60 seconds...</p>
-        </div>
-      )}
       
       {/* Hero Section */}
       <section className="bg-gray-100 py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
@@ -59,13 +33,13 @@ export default function Landing() {
                 Import directly into VS Code with one click.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link to={user ? "/dashboard" : "/signup"} className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                <Link to={user ? "/dashboard" : "/signup"} className="w-full sm:w-auto block">
+                  <button className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-[#B9FF66] text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     {user ? 'Go to Dashboard' : 'Get Started Free'}
                   </button>
                 </Link>
-                <Link to="/guide" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                <Link to="/guide" className="w-full sm:w-auto block">
+                  <button className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-900 font-bold text-base sm:text-lg rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     View Guide →
                   </button>
                 </Link>
@@ -122,7 +96,6 @@ function quickSort(arr) {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">⚡</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">VS Code Integration</h3>
               <p className="text-gray-600 mb-4">
                 Import and export snippets directly from VS Code. No more copy-pasting between browser and editor.
@@ -134,7 +107,6 @@ function quickSort(arr) {
 
             {/* Feature 2 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">🔒</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Public & Private</h3>
               <p className="text-gray-600 mb-4">
                 Share snippets publicly with the community or keep them private for personal use. Full control over visibility.
@@ -146,7 +118,6 @@ function quickSort(arr) {
 
             {/* Feature 3 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">🏷️</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Smart Organization</h3>
               <p className="text-gray-600 mb-4">
                 Tag, search, and filter your snippets by language. Find what you need in seconds, not minutes.
@@ -158,7 +129,6 @@ function quickSort(arr) {
 
             {/* Feature 4 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">🔗</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Share Codes</h3>
               <p className="text-gray-600 mb-4">
                 Generate temporary share codes (valid 5 mins) to safely share snippets with teammates without exposing your account.
@@ -167,7 +137,6 @@ function quickSort(arr) {
 
             {/* Feature 5 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">👥</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Community Driven</h3>
               <p className="text-gray-600 mb-4">
                 Discover, upvote, and comment on snippets from developers worldwide. Learn from the best code examples.
@@ -176,7 +145,6 @@ function quickSort(arr) {
 
             {/* Feature 6 */}
             <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 hover:shadow-[8px_8px_0_#191A23] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all">
-              <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Track Everything</h3>
               <p className="text-gray-600 mb-4">
                 View your stats, most used languages, top snippets, and contribution history. Monitor your coding library growth.
@@ -264,47 +232,55 @@ function quickSort(arr) {
                 </h2>
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-start gap-3">
-                    <span className="text-2xl">✅</span>
+                    <svg className="w-5 h-5 text-gray-900 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <div>
                       <strong className="text-gray-900">Export Selected Code</strong>
                       <p className="text-gray-600">Press Ctrl+Shift+E to instantly save any code selection</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-2xl">✅</span>
+                    <svg className="w-5 h-5 text-gray-900 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <div>
                       <strong className="text-gray-900">Import with Share Codes</strong>
                       <p className="text-gray-600">Use 6-character codes to import snippets in seconds</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-2xl">✅</span>
+                    <svg className="w-5 h-5 text-gray-900 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <div>
                       <strong className="text-gray-900">Browse Your Library</strong>
                       <p className="text-gray-600">Access all your snippets without leaving VS Code</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-2xl">✅</span>
+                    <svg className="w-5 h-5 text-gray-900 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <div>
                       <strong className="text-gray-900">Auto Language Detection</strong>
                       <p className="text-gray-600">Automatically detects and tags the programming language</p>
                     </div>
                   </li>
                 </ul>
-                <Link to="/guide">
-                  <button className="px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
+                <Link to="/guide" className="w-full sm:w-auto block mt-4">
+                  <button className="w-full px-8 py-4 bg-[#B9FF66] text-gray-900 font-bold text-lg rounded-lg hover:bg-[#a3e655] transition-colors border-2 border-gray-900 shadow-[6px_6px_0_#191A23] hover:shadow-[3px_3px_0_#191A23] hover:translate-x-[3px] hover:translate-y-[3px]">
                     Read Full Guide →
                   </button>
                 </Link>
               </div>
-              <div className="bg-gray-900 border-2 border-gray-900 rounded-xl p-6">
-                <div className="bg-gray-800 text-white px-4 py-2 rounded-t-lg mb-4 font-mono text-sm">
-                  📁 VS Code - Extension Demo
+              <div className="bg-gray-900 border-2 border-gray-900 rounded-xl p-4 sm:p-6 overflow-hidden">
+                <div className="bg-gray-800 text-white px-4 py-2 rounded-t-lg mb-4 font-mono text-xs sm:text-sm">
+                  VS Code - Extension Demo
                 </div>
-                <pre className="text-[#000] font-mono text-sm leading-relaxed">
-{`> SnippetSync: Export Selection
-
+                <pre className="text-[#B9FF66] font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
+                  {`> SnippetSync: Export Selection
+                  
 ✓ Code exported successfully!
   Title: "Quick Sort Algorithm"
   Language: JavaScript
@@ -350,9 +326,9 @@ Enter share code: ABC123
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-6 sm:p-8 shadow-[6px_6px_0_#191A23]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold border-2 border-gray-900">
                   M
                 </div>
                 <div>
@@ -367,9 +343,9 @@ Enter share code: ABC123
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-8 shadow-[6px_6px_0_#191A23]">
+            <div className="bg-gray-100 border-2 border-gray-900 rounded-2xl p-6 sm:p-8 shadow-[6px_6px_0_#191A23]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-2xl font-bold border-2 border-gray-900">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#B9FF66] rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold border-2 border-gray-900">
                   A
                 </div>
                 <div>
@@ -420,13 +396,13 @@ Enter share code: ABC123
             Join thousands of developers who trust SnippetSync for their code management
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <Link to="/signup" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gray-900 text-white font-bold text-lg sm:text-xl rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
+            <Link to="/signup" className="w-full sm:w-auto block">
+              <button className="w-full px-8 sm:px-10 py-4 sm:py-5 bg-gray-900 text-white font-bold text-lg sm:text-xl rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
                 Start Free Today
               </button>
             </Link>
-            <Link to="/explore">
-              <button className="px-10 py-5 bg-white text-gray-900 font-bold text-xl rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
+            <Link to="/explore" className="w-full sm:w-auto block">
+              <button className="w-full px-8 sm:px-10 py-4 sm:py-5 bg-white text-gray-900 font-bold text-lg sm:text-xl rounded-lg hover:bg-gray-100 transition-colors border-2 border-gray-900 shadow-[8px_8px_0_#191A23] hover:shadow-[4px_4px_0_#191A23] hover:translate-x-[4px] hover:translate-y-[4px]">
                 Explore Snippets
               </button>
             </Link>

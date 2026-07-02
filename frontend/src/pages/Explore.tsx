@@ -144,7 +144,7 @@ export default function Explore() {
           <div className="flex flex-col gap-3 sm:gap-4">
             <input
               type="text"
-              placeholder="🔍 Search snippets..."
+              placeholder="Search snippets..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all"
@@ -170,10 +170,10 @@ export default function Explore() {
               onChange={e => setSortBy(e.target.value)}
               className="w-full sm:flex-1 px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
             >
-              <option value="recent">📅 Most Recent</option>
-              <option value="oldest">🕐 Oldest First</option>
-              <option value="mostUpvoted">👍 Most Upvoted</option>
-              <option value="mostCommented">💬 Most Commented</option>
+              <option value="recent">Most Recent</option>
+              <option value="oldest">Oldest First</option>
+              <option value="mostUpvoted">Most Upvoted</option>
+              <option value="mostCommented">Most Commented</option>
             </select>
             {(searchTerm || languageFilter !== 'all' || sortBy !== 'recent') && (
               <button
@@ -184,7 +184,7 @@ export default function Explore() {
                 }}
                 className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors border-2 border-gray-900 whitespace-nowrap"
               >
-                ✖ Clear
+                Clear Filters
               </button>
             )}
             </div>
@@ -194,9 +194,6 @@ export default function Explore() {
         {/* Snippets Grid */}
         {!Array.isArray(filteredSnippets) || filteredSnippets.length === 0 ? (
           <div className="bg-white border-2 border-gray-900 rounded-2xl p-12 text-center shadow-[6px_6px_0_#191A23]">
-            <div className="text-6xl mb-4">📝</div>
-            <p className="text-xl text-gray-600 font-medium">
-              {searchTerm || languageFilter !== 'all' ? 'No snippets match your filters.' : 'No snippets yet. Be the first to share!'}</p>
             <p className="text-xl text-gray-600 font-medium">
               {searchTerm || languageFilter !== 'all' ? 'No snippets match your filters.' : 'No snippets yet. Be the first to share!'}
             </p>
@@ -222,17 +219,17 @@ export default function Explore() {
                   </span>
                   <Link to={`/user/${snippet.author.username}`} onClick={(e) => e.stopPropagation()}>
                     <span className="px-3 py-1 bg-gray-100 text-gray-900 font-medium rounded-full border-2 border-gray-900 hover:bg-[#B9FF66] transition-colors cursor-pointer">
-                      👤 {snippet.author.username}
+                      Author: {snippet.author.username}
                     </span>
                   </Link>
                   <span className="px-3 py-1 bg-gray-100 text-gray-900 font-medium rounded-full border-2 border-gray-900">
-                    👍 {snippet._count.upvotes}
+                    Upvotes: {snippet._count.upvotes}
                   </span>
                   <span className="px-3 py-1 bg-gray-100 text-gray-900 font-medium rounded-full border-2 border-gray-900">
-                    💬 {snippet._count.comments}
+                    Comments: {snippet._count.comments}
                   </span>
                   <span className="px-3 py-1 bg-gray-100 text-gray-900 font-medium rounded-full border-2 border-gray-900">
-                    🕐 {formatDate(snippet.createdAt)}
+                    Created: {formatDate(snippet.createdAt)}
                   </span>
                 </div>
                 

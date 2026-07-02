@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { snippetService } from '../lib/snippets';
 import type { Snippet } from '../lib/types';
-import axios from 'axios';
 
 export default function Home() {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
@@ -11,30 +10,14 @@ export default function Home() {
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [languageFilter, setLanguageFilter] = useState('all');
-  const [showWakeupMessage, setShowWakeupMessage] = useState(false);
 
   useEffect(() => {
-    checkBackendHealth();
+    loadSnippets();
   }, []);
 
   useEffect(() => {
     filterSnippets();
   }, [snippets, searchTerm, languageFilter]);
-
-  const checkBackendHealth = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-    const baseUrl = apiUrl.replace('/api', '');
-    
-    try {
-      await axios.get(`${baseUrl}/health`, { timeout: 5000 });
-      loadSnippets();
-    } catch (error) {
-      // Backend is sleeping/cold start
-      setShowWakeupMessage(true);
-      setTimeout(() => loadSnippets(), 3000);
-      setTimeout(() => setShowWakeupMessage(false), 8000);
-    }
-  };
 
   const filterSnippets = () => {
     let filtered = snippets;
@@ -80,13 +63,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-6 sm:py-8 md:py-12 px-4">
-      {/* Backend Wakeup Notification */}
-      {showWakeupMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-[#B9FF66] border-2 border-gray-900 rounded-lg px-6 py-3 shadow-[4px_4px_0_#191A23] animate-bounce">
-          <p className="text-gray-900 font-bold text-sm sm:text-base">☕ Backend is waking up, please wait...</p>
-        </div>
-      )}
-      
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
@@ -128,7 +104,6 @@ export default function Home() {
       
       {!Array.isArray(filteredSnippets) || filteredSnippets.length === 0 ? (
         <div className="bg-white border-2 border-gray-900 rounded-2xl p-8 sm:p-12 text-center shadow-[6px_6px_0_#191A23]">
-          <div className="text-5xl sm:text-6xl mb-4">📝</div>
           <p className="text-lg sm:text-xl text-gray-600 font-medium">{searchTerm || languageFilter !== 'all' ? 'No snippets match your filters.' : 'Be the first to share!'}</p>
         </div>
       ) : (
@@ -144,16 +119,16 @@ export default function Home() {
               
               <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                 <span className="px-3 py-1 bg-[#B9FF66] text-gray-900 font-bold rounded-full border-2 border-gray-900 text-xs sm:text-sm">
-                  📝 {snippet.language}
+                  {snippet.language}
                 </span>
                 <span className="px-3 py-1 bg-blue-100 text-blue-700 border-2 border-blue-600 font-semibold rounded-full text-xs sm:text-sm">
-                  👤 {snippet.author.username}
+                  Author: {snippet.author.username}
                 </span>
                 <span className="px-3 py-1 bg-purple-100 text-purple-700 border-2 border-purple-600 font-semibold rounded-full text-xs sm:text-sm">
-                  👍 {snippet._count.upvotes}
+                  Upvotes: {snippet._count.upvotes}
                 </span>
                 <span className="px-3 py-1 bg-green-100 text-green-700 border-2 border-green-600 font-semibold rounded-full text-xs sm:text-sm">
-                  💬 {snippet._count.comments}
+                  Comments: {snippet._count.comments}
                 </span>
               </div>
               

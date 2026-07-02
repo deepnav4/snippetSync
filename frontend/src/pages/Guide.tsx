@@ -17,7 +17,6 @@ export default function Guide() {
         {/* Installation Section */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
           <div className="flex items-center gap-3 mb-4 sm:mb-6">
-            <span className="text-3xl sm:text-4xl">📦</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Step 1: Install Extension</h2>
           </div>
           
@@ -46,7 +45,6 @@ export default function Guide() {
         {/* Configuration Section */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">⚙️</span>
             <h2 className="text-3xl font-bold text-gray-900">Step 2: Configure Extension</h2>
           </div>
           
@@ -81,7 +79,6 @@ export default function Guide() {
         {/* Export Section */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">📤</span>
             <h2 className="text-3xl font-bold text-gray-900">Exporting Snippets</h2>
           </div>
           
@@ -91,7 +88,7 @@ export default function Guide() {
             </p>
             
             <div className="bg-gray-50 border-2 border-gray-300 rounded-xl p-6">
-              <h3 className="font-bold text-xl text-gray-900 mb-4">📝 Export Selected Code</h3>
+              <h3 className="font-bold text-xl text-gray-900 mb-4">Export Selected Code</h3>
               <ol className="space-y-3 text-gray-700">
                 <li className="flex gap-3">
                   <span className="bg-[#B9FF66] text-gray-900 font-bold px-3 py-1 rounded-full border-2 border-gray-900 flex-shrink-0">1</span>
@@ -125,7 +122,7 @@ export default function Guide() {
             </div>
 
             <div className="bg-[#B9FF66] border-2 border-gray-900 rounded-xl p-6">
-              <h3 className="font-bold text-xl text-gray-900 mb-3">⌨️ Keyboard Shortcut</h3>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">Keyboard Shortcut</h3>
               <p className="text-gray-900">
                 Press <kbd className="bg-white px-3 py-1 rounded border-2 border-gray-900">Ctrl+Shift+E</kbd> to quickly export selected code
               </p>
@@ -136,7 +133,6 @@ export default function Guide() {
         {/* Import Section */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">📥</span>
             <h2 className="text-3xl font-bold text-gray-900">Importing Snippets</h2>
           </div>
           
@@ -146,7 +142,7 @@ export default function Guide() {
             </p>
             
             <div className="bg-gray-50 border-2 border-gray-300 rounded-xl p-6">
-              <h3 className="font-bold text-xl text-gray-900 mb-4">🔑 Using Share Code</h3>
+              <h3 className="font-bold text-xl text-gray-900 mb-4">Using Share Code</h3>
               <ol className="space-y-3 text-gray-700">
                 <li className="flex gap-3">
                   <span className="bg-[#B9FF66] text-gray-900 font-bold px-3 py-1 rounded-full border-2 border-gray-900 flex-shrink-0">1</span>
@@ -180,7 +176,7 @@ export default function Guide() {
             </div>
 
             <div className="bg-[#B9FF66] border-2 border-gray-900 rounded-xl p-6">
-              <h3 className="font-bold text-xl text-gray-900 mb-3">⚠️ Important Note</h3>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">Important Note</h3>
               <p className="text-gray-900">
                 Share codes expire after <strong>5 minutes</strong> for security. Generate a new code if yours has expired.
               </p>
@@ -191,7 +187,6 @@ export default function Guide() {
         {/* Browse Section */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">🔍</span>
             <h2 className="text-3xl font-bold text-gray-900">Browse Your Snippets</h2>
           </div>
           
@@ -222,28 +217,27 @@ export default function Guide() {
         {/* Troubleshooting */}
         <div className="bg-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">🔧</span>
             <h2 className="text-3xl font-bold text-gray-900">Troubleshooting</h2>
           </div>
           
           <div className="space-y-4">
             <div className="border-l-4 border-[#B9FF66] bg-gray-50 p-4 rounded-r-lg">
-              <h3 className="font-bold text-gray-900 mb-2">❌ "Not authenticated" error</h3>
+              <h3 className="font-bold text-gray-900 mb-2">"Not authenticated" error</h3>
               <p className="text-gray-700">Run <strong>"SnippetSync: Login"</strong> again and re-enter your credentials</p>
             </div>
 
             <div className="border-l-4 border-[#B9FF66] bg-gray-50 p-4 rounded-r-lg">
-              <h3 className="font-bold text-gray-900 mb-2">❌ "Share code expired" error</h3>
+              <h3 className="font-bold text-gray-900 mb-2">"Share code expired" error</h3>
               <p className="text-gray-700">Generate a new share code from the website. Codes expire after 5 minutes.</p>
             </div>
 
             <div className="border-l-4 border-[#B9FF66] bg-gray-50 p-4 rounded-r-lg">
-              <h3 className="font-bold text-gray-900 mb-2">❌ "Failed to export" error</h3>
+              <h3 className="font-bold text-gray-900 mb-2">"Failed to export" error</h3>
               <p className="text-gray-700">Check your internet connection and ensure you're logged in</p>
             </div>
 
             <div className="border-l-4 border-[#B9FF66] bg-gray-50 p-4 rounded-r-lg">
-              <h3 className="font-bold text-gray-900 mb-2">❌ Commands not appearing</h3>
+              <h3 className="font-bold text-gray-900 mb-2">Commands not appearing</h3>
               <p className="text-gray-700">Restart VS Code after installing the extension</p>
             </div>
           </div>
@@ -252,7 +246,6 @@ export default function Guide() {
         {/* Quick Reference */}
         <div className="bg-gray-900 text-white border-2 border-gray-900 rounded-2xl shadow-[8px_8px_0_#191A23] p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-4xl">⚡</span>
             <h2 className="text-3xl font-bold">Quick Reference</h2>
           </div>
           

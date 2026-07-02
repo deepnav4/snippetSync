@@ -127,8 +127,8 @@ export default function CreateSnippet() {
                   onChange={e => setFormData({ ...formData, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })}
                   className="w-full px-4 py-3 border-2 border-gray-900 rounded-lg focus:outline-none focus:border-[#B9FF66] focus:ring-2 focus:ring-[#B9FF66] transition-all font-medium bg-white"
                 >
-                  <option value="PUBLIC">🌍 Public</option>
-                  <option value="PRIVATE">🔒 Private</option>
+                  <option value="PUBLIC">Public</option>
+                  <option value="PRIVATE">Private</option>
                 </select>
               </div>
             </div>
