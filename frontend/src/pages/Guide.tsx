@@ -39,6 +39,21 @@ export default function Guide() {
               <div className="pl-4">2. Search "SnippetSync"</div>
               <div className="pl-4">3. Click Install</div>
             </div>
+
+            <div className="bg-gradient-to-br from-[#B9FF66] to-[#a3e655] border-2 border-gray-900 rounded-xl p-6 shadow-[4px_4px_0_#191A23]">
+              <h3 className="font-bold text-xl text-gray-900 mb-2">Direct VSIX Download</h3>
+              <p className="text-gray-900 mb-4 font-semibold text-sm sm:text-base">
+                Alternatively, you can download the packaged extension directly and install it manually in VS Code:
+              </p>
+              <a 
+                href="https://github.com/deepnav4/snippetSync/blob/main/vscode-extension/snippet-sync-1.0.0.vsix" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block px-5 py-2.5 bg-gray-900 text-white font-bold text-sm sm:text-base rounded-lg hover:bg-gray-800 transition-colors border-2 border-gray-900"
+              >
+                Download VSIX Package
+              </a>
+            </div>
           </div>
         </div>
 
